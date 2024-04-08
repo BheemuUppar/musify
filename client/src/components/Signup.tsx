@@ -2,21 +2,23 @@ import axios from "axios";
 import logo from "../assets/images/icon.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { environment } from "../assets/environment";
+import { useNavigate , Link } from "react-router-dom";
+
 
 function Signup() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isDirty, isValid },
-  } = useForm();
+  const navigate = useNavigate();
+  const { register,  handleSubmit, watch, formState: { errors, isDirty, isValid },} = useForm();
+ 
   const onSubmit: SubmitHandler<any> = (data) => {
     delete data["cnf-password"];
     registerUser(data);
   };
-   function registerUser(payload: any) {
+  function registerUser(payload: any) {
     axios.post(`${environment.baseUrl}/auth/signup`, payload).then((res) => {
-     alert(res.data.message)
+      alert(res.data.message);
+      if (res.data.message === "user registered successfully") {
+        navigate('/signin')
+      }
     });
   }
 
@@ -60,6 +62,7 @@ function Signup() {
             Sign in
           </button>
         </form>
+        <Link to='/signin'>click here</Link>
       </div>
     </div>
   );

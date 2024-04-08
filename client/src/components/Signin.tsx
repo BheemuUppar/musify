@@ -1,15 +1,16 @@
-import { useEffect } from "react";
 import logo from "../assets/images/icon.png";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { environment } from "../assets/environment";
+import { Link, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { isAuthenticatedAtom } from "../store/authState";
+
 function Signin() {
   const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isDirty, isValid, isSubmitting },
-  } = useForm();
+    register,  handleSubmit, watch,  formState: { errors, isDirty, isValid, isSubmitting }, } = useForm();
+  const setAuthState = useSetRecoilState(isAuthenticatedAtom);
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<any> = (data) => {
     login(data);
@@ -18,6 +19,8 @@ function Signin() {
   async function login(payload: any) {
     axios.post(`${environment.baseUrl}/auth/signin`, payload).then((res) => {
       alert(res.data.message);
+      setAuthState(true);
+      navigate('/home')
     });
   }
 
@@ -55,6 +58,7 @@ function Signin() {
             Login
           </button>
         </form>
+        <Link to="/signup">click here to register</Link>
       </div>
     </div>
   );
