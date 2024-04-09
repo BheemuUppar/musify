@@ -22,10 +22,10 @@ const routes = [
     path: "/home",
     element: <PrivateRoute element={<Home />} />,
     subroutes: [
-      <Route path="" element={<HomePage />}></Route>,
-      <Route path="search" element={<Search />}></Route>,
-      <Route path="album/:id" element={<ViewAlbum />}></Route>,
-      <Route path="playlist/:id" element={<ViewPlaylist />}></Route>,
+      <Route key={1} path="" element={<HomePage />}></Route>,
+      <Route  key={2} path="search" element={<Search />}></Route>,
+      <Route key={3}  path="album/:id" element={<ViewAlbum />}></Route>,
+      <Route  key={4} path="playlist/:id" element={<ViewPlaylist />}></Route>,
     ],
   },
   {
