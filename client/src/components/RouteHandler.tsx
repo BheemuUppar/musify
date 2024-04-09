@@ -4,6 +4,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import Search from "./Search";
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
   {
     path: "/home",
     element: <PrivateRoute element={<Home />} />,
+    subroutes: [
+    <Route path="" element={<h1>HI</h1>}></Route>,
+    <Route path="search" element={<Search />}></Route>,
+  ],
   },
   {
     path: "*",
@@ -25,14 +30,20 @@ const routes = [
 ];
 
 function Routehandler() {
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-         {
-            routes.map((ele)=><Route path={ele.path} key={ele.path} element={ele.element} />)
-         }
+          {routes.map((ele) => {
+            return (
+              <Route path={ele.path} key={ele.path} element={ele.element}>
+                {ele.subroutes &&
+                  ele.subroutes.map((sub: any) => {
+                    return sub;
+                  })}
+              </Route>
+            );
+          })}
         </Routes>
       </BrowserRouter>
     </>

@@ -20,7 +20,8 @@ function Signin() {
     axios.post(`${environment.baseUrl}/auth/signin`, payload).then((res) => {
       alert(res.data.message);
       setAuthState(true);
-      navigate('/home')
+      localStorage.setItem("token", res.data.token)
+      navigate('/home');
     });
   }
 
@@ -29,10 +30,11 @@ function Signin() {
       <div className="form-container w-[20%] min-w-[300px] h-[60%] bg-red-50 flex justify-center items-center flex-col gap-2 rounded   py-5 ">
         <div className="flex items-center justify-between ">
           {/* <h2 className="text-gray-400">Log in</h2> */}
-          <img src={logo} className="h-[50px] w-[50px]" alt="logo" />
+          {/* <img src={logo} className="h-[50px] w-[50px]" alt="logo" /> */}
+          <h1 >Sign In</h1>
         </div>
         <form
-          className="flex flex-col justify-center items-center gap-3"
+          className="flex flex-col justify-center items-center gap-3  text-black "
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
@@ -58,7 +60,7 @@ function Signin() {
             Login
           </button>
         </form>
-        <Link to="/signup">click here to register</Link>
+        <Link to="/signup" className="text-blue-700 underline">click here to register</Link>
       </div>
     </div>
   );

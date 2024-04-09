@@ -27,7 +27,8 @@ function Signup() {
       <div className="form-container w-[20%] min-w-[300px] h-[60%] bg-red-50 flex justify-center items-center flex-col gap-2 rounded   py-5 ">
         <div className="flex items-center justify-between ">
           {/* <h2 className="text-gray-400">Log in</h2> */}
-          <img src={logo} className="h-[50px] w-[50px]" alt="logo" />
+          {/* <img src={logo} className="h-[50px] w-[50px]" alt="logo" /> */}
+          <h1 >Sign Up</h1>
         </div>
         <form
           className="flex flex-col justify-center items-center gap-3 text-black"
@@ -62,7 +63,7 @@ function Signup() {
             Sign in
           </button>
         </form>
-        <Link to='/signin'>click here</Link>
+        <span><Link to='/signin' className="text-blue-500">click here</Link> to signin</span>
       </div>
     </div>
   );
