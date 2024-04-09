@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import Search from "./Search";
 import { HomePage } from "./Home";
 import ViewAlbum from "./ViewAlbum";
+import ViewPlaylist from "./ViewPlayList";
 
 const routes = [
   {
@@ -24,6 +25,7 @@ const routes = [
       <Route path="" element={<HomePage />}></Route>,
       <Route path="search" element={<Search />}></Route>,
       <Route path="album/:id" element={<ViewAlbum />}></Route>,
+      <Route path="playlist/:id" element={<ViewPlaylist />}></Route>,
     ],
   },
   {

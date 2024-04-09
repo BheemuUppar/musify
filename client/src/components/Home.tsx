@@ -8,6 +8,7 @@ import NavContent from "./NavContent";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Album from "./Album";
+import PlaylistCard from "./PlaylistCard";
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
@@ -19,7 +20,7 @@ function Home() {
 
   return (
     <>
-      <div className="flex gap-4 text-red-50 p-2 h-[90vh] ">
+      <div className="flex gap-4 text-red-50 p-2 h-[90vh]  ">
         <div className="flex flex-col gap-4">
           <CardContent>
             <NavContent></NavContent>
@@ -39,18 +40,18 @@ function Home() {
 }
 
 export function HomePage() {
-  const [albums, setAlbumbs] = useState([]);
+  const [playlists, setPlaylist] = useState([]);
   useEffect(() => {
-    fetchAlbumns();
+    fetchPlaylist();
   }, []);
 
-  function fetchAlbumns() {
+  function fetchPlaylist() {
     axios
-      .get("https://saavn.dev/api/search/albums?query=Hollywood")
+      .get("https://saavn.dev/api/search/playlists?query=hits")
       .then(async (data) => {
         // if (data.data.success === true) {
-        await setAlbumbs(data.data.data.results);
-        console.log(albums);
+        await setPlaylist(data.data.data.results);
+        console.log(data.data.data.results);
         // }
       });
   }
@@ -58,12 +59,39 @@ export function HomePage() {
   return (
     <>
       <div className="md:grid grid-cols-5 grid grid-cols-5">
-        {albums.map((album: any) => {
-          return <Album key={album.id} data={album} />;
+        {playlists.map((playlist: any) => {
+          return <PlaylistCard key={playlist.id} playlist={playlist} />;
         })}
       </div>
     </>
   );
 }
+// export function HomePage() {
+//   const [albums, setAlbumbs] = useState([]);
+//   useEffect(() => {
+//     fetchAlbumns();
+//   }, []);
+
+//   function fetchAlbumns() {
+//     axios
+//       .get("https://saavn.dev/api/search/albums?query=Hollywood")
+//       .then(async (data) => {
+//         // if (data.data.success === true) {
+//         await setAlbumbs(data.data.data.results);
+//         console.log(albums);
+//         // }
+//       });
+//   }
+
+//   return (
+//     <>
+//       <div className="md:grid grid-cols-5 grid grid-cols-5">
+//         {albums.map((album: any) => {
+//           return <Album key={album.id} data={album} />;
+//         })}
+//       </div>
+//     </>
+//   );
+// }
 
 export default Home;

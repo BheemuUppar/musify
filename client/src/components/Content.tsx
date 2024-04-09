@@ -3,9 +3,11 @@ import logo from "./../assets/images/logo.png";
 
 function Content() {
   return (
-    <div>
+    <div className="flex flex-col h-full rounded">
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className="grow " style={{overflowY:"auto"}}>
+      <Outlet ></Outlet>
+      </div>
     </div>
   );
 }
