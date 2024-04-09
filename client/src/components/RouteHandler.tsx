@@ -5,6 +5,8 @@ import Signup from "./Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import Search from "./Search";
+import { HomePage } from "./Home";
+import ViewAlbum from "./ViewAlbum";
 
 const routes = [
   {
@@ -19,9 +21,10 @@ const routes = [
     path: "/home",
     element: <PrivateRoute element={<Home />} />,
     subroutes: [
-    <Route path="" element={<h1>HI</h1>}></Route>,
-    <Route path="search" element={<Search />}></Route>,
-  ],
+      <Route path="" element={<HomePage />}></Route>,
+      <Route path="search" element={<Search />}></Route>,
+      <Route path="album/:id" element={<ViewAlbum />}></Route>,
+    ],
   },
   {
     path: "*",
@@ -36,7 +39,7 @@ function Routehandler() {
         <Routes>
           {routes.map((ele) => {
             return (
-              <Route path={ele.path} key={ele.path} element={ele.element}>
+              <Route  path={ele.path} key={ele.path} element={ele.element}>
                 {ele.subroutes &&
                   ele.subroutes.map((sub: any) => {
                     return sub;

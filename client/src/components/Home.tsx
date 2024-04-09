@@ -5,6 +5,9 @@ import CardContent from "./CardContent";
 import Library from "./Library";
 import Content from "./Content";
 import NavContent from "./NavContent";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Album from "./Album";
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
@@ -18,14 +21,46 @@ function Home() {
     <>
       <div className="flex gap-4 text-red-50 p-2 h-[90vh] ">
         <div className="flex flex-col gap-4">
-          <CardContent><NavContent></NavContent></CardContent>
+          <CardContent>
+            <NavContent></NavContent>
+          </CardContent>
           <CardContent>
             <Library></Library>
           </CardContent>
         </div>
         <div className="grow">
-          <CardContent><Content></Content></CardContent>
+          <CardContent>
+            <Content></Content>
+          </CardContent>
         </div>
+      </div>
+    </>
+  );
+}
+
+export function HomePage() {
+  const [albums, setAlbumbs] = useState([]);
+  useEffect(() => {
+    fetchAlbumns();
+  }, []);
+
+  function fetchAlbumns() {
+    axios
+      .get("https://saavn.dev/api/search/albums?query=Hollywood")
+      .then(async (data) => {
+        // if (data.data.success === true) {
+        await setAlbumbs(data.data.data.results);
+        console.log(albums);
+        // }
+      });
+  }
+
+  return (
+    <>
+      <div className="md:grid grid-cols-5 grid grid-cols-5">
+        {albums.map((album: any) => {
+          return <Album key={album.id} data={album} />;
+        })}
       </div>
     </>
   );
