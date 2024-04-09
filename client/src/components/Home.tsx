@@ -16,14 +16,14 @@ function Home() {
 
   return (
     <>
-      <div className="flex gap-4 text-red-50 h-[90vh] border border-red-50">
+      <div className="flex gap-4 text-red-50 p-2 h-[90vh] ">
         <div className="flex flex-col gap-4">
           <CardContent><NavContent></NavContent></CardContent>
           <CardContent>
             <Library></Library>
           </CardContent>
         </div>
-        <div>
+        <div className="grow">
           <CardContent><Content></Content></CardContent>
         </div>
       </div>
