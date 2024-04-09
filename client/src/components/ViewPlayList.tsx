@@ -47,7 +47,7 @@ const ViewPlaylist = React.memo(() => {
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {
-          return <SongCard key={song.id} index={index} song={song} />;
+          return <SongCard key={song.id} index={index+1} song={song} />;
         })}
     </>
   );

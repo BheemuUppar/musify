@@ -1,4 +1,5 @@
 import React from "react";
+import { secondsToMinutesSeconds } from "../utils/utils";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   return (
@@ -21,11 +22,13 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
           <p>{song.album.name}</p>
         </div>
         <div className="w-[10%] px-2">
-          <p>{song.duration}</p>
+          <p>{secondsToMinutesSeconds(song.duration)}</p>
         </div>
       </div>
     </div>
   );
 });
+
+
 
 export default SongCard;
