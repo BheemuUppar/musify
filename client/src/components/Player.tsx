@@ -7,15 +7,16 @@ function Player() {
   const setAudioState = useSetRecoilState(audioStateAtom);
 
   useEffect(() => {
-    let audio = new Audio();
-    
-    audio.src = currentSong.downloadUrl[4].url;
-    setAudioState(audio);
+    if (currentSong) {
+      let audio = new Audio();
+      audio.src = currentSong.downloadUrl[4].url;
+      setAudioState(audio);
+    }
   }, [currentSong]);
 
   return (
     <>
-      <div className="h-[15vh] bg-gray-900 p-2 mx-2 rounded flex justify-around items-center text-white  ">
+{  currentSong &&   <div className="h-[15vh] bg-gray-900 p-2 mx-2 rounded flex justify-around items-center text-white  ">
         <div className="trackinfo flex">
           <img
             className="h-[50px] w-[50px]"
@@ -46,7 +47,7 @@ function Player() {
           </div>
         </div>
         <div className="elements">volume and extra button</div>
-      </div>
+      </div>}
     </>
   );
 }

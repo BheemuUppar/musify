@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { currentSongAtom } from "../store/SongState";
 function PlaylistCard({playlist}:any) {
+
   return (
     <>
      <Link to={"playlist/"+playlist.id}>

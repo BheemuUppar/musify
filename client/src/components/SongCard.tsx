@@ -1,10 +1,17 @@
 import React from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
+import { useSetRecoilState } from "recoil";
+import { currentSongAtom } from "../store/SongState";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
+  const setCurrentSong = useSetRecoilState(currentSongAtom)
   return (
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm">
-      <div className="w-full flex justify-start items-center">
+      <div className="w-full flex justify-start items-center" onClick={
+        ()=>{
+          setCurrentSong(song)
+        }
+      }>
         <p className="p-2 w-[5%]">{index}</p>
         <div className="flex items-center w-[50%] px-2">
           {/* Display song image */}
