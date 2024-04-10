@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Album from "./Album";
 import PlaylistCard from "./PlaylistCard";
+import Player from "./Player";
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
@@ -20,7 +21,7 @@ function Home() {
 
   return (
     <>
-      <div className="flex gap-4 text-red-50 p-2 h-[90vh]  ">
+      <div className="flex gap-4 text-red-50 p-2 h-[80vh]  ">
         <div className="flex flex-col gap-4">
           <CardContent>
             <NavContent></NavContent>
@@ -35,6 +36,7 @@ function Home() {
           </CardContent>
         </div>
       </div>
+     <Player></Player>
     </>
   );
 }

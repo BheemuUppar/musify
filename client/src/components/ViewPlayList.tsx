@@ -37,7 +37,7 @@ const ViewPlaylist = React.memo(() => {
           {playlist.artists &&
             playlist.artists
               .filter((artist: any) => artist.role === "singer")
-              .map((artist: any) => <p key={artist.id}>{artist.name}</p>)}
+              .map((artist: any) => <span key={artist.id}>{artist.name}</span>)}
         </div>
       </div>
       <div className="h-[20%] my-2">
@@ -47,7 +47,7 @@ const ViewPlaylist = React.memo(() => {
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {
-          return <SongCard key={song.id} index={index+1} song={song} />;
+          return <SongCard key={song.id} index={index + 1} song={song} />;
         })}
     </>
   );
