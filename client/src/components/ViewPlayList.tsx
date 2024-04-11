@@ -2,15 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SongCard from "./SongCard";
+import { environment } from "../assets/environment";
 
 const ViewPlaylist = React.memo(() => {
   const [playlist, setPlaylist]: any = useState({});
   const params = useParams();
 
   useEffect(() => {
-    console.log("calling api...");
     axios
-      .get(`https://saavn.dev/api/playlists?id=${params.id}`)
+      .get(`${environment.searchUrl}/playlistById/${params.id}`)
       .then((response) => {
         setPlaylist(response.data.data);
       })

@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config(); // .env config
 const bodyParser = require('body-parser')
 const AuthRouter = require("./src/routes/auth");
+const SearchRouter = require("./src/routes/search")
 const cors = require("cors")
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/auth", AuthRouter );
+app.use("/search", SearchRouter)
 
 app.get("**" , (req ,res)=>{
   res.status(404).send("<h1>404 not found<h1>");

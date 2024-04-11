@@ -10,6 +10,7 @@ import axios from "axios";
 import Album from "./Album";
 import PlaylistCard from "./PlaylistCard";
 import Player from "./Player";
+import { environment } from "../assets/environment";
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
@@ -49,12 +50,10 @@ export function HomePage() {
 
   function fetchPlaylist() {
     axios
-      .get("https://saavn.dev/api/search/playlists?query=hits")
+      .get(`${environment.searchUrl}/playlist/${"punith"}`)
       .then(async (data) => {
-        // if (data.data.success === true) {
-        await setPlaylist(data.data.data.results);
-        console.log(data.data.data.results);
-        // }
+        console.log(data)
+        await setPlaylist(data.data);
       });
   }
 
