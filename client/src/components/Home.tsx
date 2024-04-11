@@ -67,32 +67,6 @@ export function HomePage() {
     </>
   );
 }
-// export function HomePage() {
-//   const [albums, setAlbumbs] = useState([]);
-//   useEffect(() => {
-//     fetchAlbumns();
-//   }, []);
 
-//   function fetchAlbumns() {
-//     axios
-//       .get("https://saavn.dev/api/search/albums?query=Hollywood")
-//       .then(async (data) => {
-//         // if (data.data.success === true) {
-//         await setAlbumbs(data.data.data.results);
-//         console.log(albums);
-//         // }
-//       });
-//   }
-
-//   return (
-//     <>
-//       <div className="md:grid grid-cols-5 grid grid-cols-5">
-//         {albums.map((album: any) => {
-//           return <Album key={album.id} data={album} />;
-//         })}
-//       </div>
-//     </>
-//   );
-// }
 
 export default Home;
