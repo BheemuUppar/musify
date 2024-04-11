@@ -16,44 +16,61 @@ function Player() {
 
   return (
     <>
-{  currentSong &&   <div className="h-[15vh] bg-gray-900 p-2 mx-2 rounded flex justify-around items-center text-white  ">
-        <div className="trackinfo flex">
-          <img
-            className="h-[50px] w-[50px]"
-            src={currentSong.image[2].url}
-            alt=""
-          />
-          <div className="ps-2">
-            <p>{currentSong.name}</p>
-            <p>
-              {currentSong.artists.primary.map((artist: any) => {
-                return <span className="text-gray-400">{artist.name}</span>;
-              })}
-            </p>
+      {currentSong && (
+        <div className="h-[15vh] bg-gray-900 p-2 mx-2 rounded flex justify-around items-center text-white  ">
+          <div className="trackinfo flex">
+            <img
+              className="h-[50px] w-[50px]"
+              src={currentSong.image[2].url}
+              alt=""
+            />
+            <div className="ps-2">
+              <p>{currentSong.name}</p>
+              <p>
+                {currentSong.artists.primary.map((artist: any) => {
+                  return <span className="text-gray-400">{artist.name}</span>;
+                })}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="controls grow mx-10 flex flex-col py-2">
-          <div className="top flex justify-center gap-4 items-center my-2">
-            <PreviousButton />
-            <PlayPauseButton />
-            <NextButton />
-          </div>
-          <div className="sneekbar">
-            <div className="w-full">
-              <div className="bar h-[3px] bg-white relative">
-                <div className="progress h-[3px] w-[3px]  bg-green absolute bg-green-400 left-0"></div>
+          <div className="controls grow mx-10 flex flex-col py-2">
+            <div className="top flex justify-center gap-4 items-center my-2">
+              <PreviousButton />
+              <PlayPauseButton />
+              <NextButton />
+            </div>
+            <div className="sneekbar">
+              <div className="w-full">
+                <div className="bar h-[3px] bg-white relative">
+                  <div className="progress h-[3px] w-[3px]  bg-green absolute bg-green-400 left-0"></div>
+                </div>
               </div>
             </div>
           </div>
+          <div className="elements">volume and extra button</div>
         </div>
-        <div className="elements">volume and extra button</div>
-      </div>}
+      )}
     </>
   );
 }
 const PlayPauseButton = React.memo(() => {
+  const currentSong = useRecoilValue(currentSongAtom);
   const audio = useRecoilValue(audioStateAtom);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    setDefault();
+  }, [currentSong]);
+
+  async function setDefault() {
+    if (audio.pause) {
+      await audio.pause();
+      await setIsPlaying(false);
+      // audio.play();
+      // setIsPlaying(true)
+    }
+  }
+
   return (
     <>
       <button

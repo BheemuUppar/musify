@@ -1,28 +1,41 @@
 import React from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
-import { useSetRecoilState } from "recoil";
-import { currentSongAtom } from "../store/SongState";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { audioStateAtom, currentSongAtom } from "../store/SongState";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
-  const setCurrentSong = useSetRecoilState(currentSongAtom)
+  const setCurrentSong = useSetRecoilState(currentSongAtom);
+  const audioState = useRecoilValue(audioStateAtom);
+
   return (
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm">
-      <div className="w-full flex justify-start items-center" onClick={
-        ()=>{
-          setCurrentSong(song)
-        }
-      }>
+      <div
+        className="w-full flex justify-start items-center"
+        onClick={async () => {
+          //  if(audioState != null){
+          await setCurrentSong(song);
+          audioState.pause();
+          //  }
+        }}
+      >
         <p className="p-2 w-[5%]">{index}</p>
         <div className="flex items-center w-[50%] px-2">
           {/* Display song image */}
-          <img src={song.image[2]?.url} alt="" className="w-16 h-16 rounded-full" />
+          <img
+            src={song.image[2]?.url}
+            alt=""
+            className="w-16 h-16 rounded-full"
+          />
           <div className="ps-2">
             {/* Display song name */}
             <p>{song.name}</p>
             {/* Display artists */}
-            {song.artists && song.artists.all.map((singer: any) => (
-              <span key={singer.id} className="mr-2">{singer.name}</span>
-            ))}
+            {song.artists &&
+              song.artists.all.map((singer: any) => (
+                <span key={singer.id} className="mr-2">
+                  {singer.name}
+                </span>
+              ))}
           </div>
         </div>
         <div className="w-[35%] px-2">
@@ -35,7 +48,5 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
     </div>
   );
 });
-
-
 
 export default SongCard;
