@@ -50,7 +50,7 @@ export function HomePage() {
 
   function fetchPlaylist() {
     axios
-      .get(`${environment.searchUrl}/playlist/${"punith"}`)
+      .get(`${environment.searchUrl}/playlist/${"bollywood"}`)
       .then(async (data) => {
         console.log(data)
         await setPlaylist(data.data);

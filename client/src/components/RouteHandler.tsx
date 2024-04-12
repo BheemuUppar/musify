@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: "/home",
-    element: <PrivateRoute element={<Home />} />,
+    element: <PrivateRoute element={<Home key={"home"}/>} />,
     subroutes: [
       <Route key={1} path="" element={<HomePage />}></Route>,
       <Route  key={2} path="search" element={<Search />}></Route>,

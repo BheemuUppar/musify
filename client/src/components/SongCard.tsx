@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { audioStateAtom, currentSongAtom } from "../store/SongState";
@@ -12,10 +12,10 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
       <div
         className="w-full flex justify-start items-center"
         onClick={async () => {
-          //  if(audioState != null){
           await setCurrentSong(song);
-          audioState.pause();
-          //  }
+          if (audioState != null) {
+            audioState.pause();
+          }
         }}
       >
         <p className="p-2 w-[5%]">{index}</p>
@@ -32,7 +32,7 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
             {/* Display artists */}
             {song.artists &&
               song.artists.all.map((singer: any) => (
-                <span key={singer.id} className="mr-2">
+                <span key={Math.random()} className="mr-2">
                   {singer.name}
                 </span>
               ))}

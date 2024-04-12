@@ -1,18 +1,31 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { audioStateAtom, currentSongAtom } from "../store/SongState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  audioStateAtom,
+  currentSongAtom,
+  currentTimeAtom,
+} from "../store/SongState";
 import React, { useEffect, useState } from "react";
+import { secondsToMinutesSeconds } from "../utils/utils";
 
 function Player() {
   const currentSong = useRecoilValue(currentSongAtom);
   const setAudioState = useSetRecoilState(audioStateAtom);
+  const setCurrentTime = useSetRecoilState(currentTimeAtom);
 
   useEffect(() => {
+    setAudioHandler();
+  }, [currentSong]);
+
+  async function setAudioHandler() {
     if (currentSong) {
       let audio = new Audio();
       audio.src = currentSong.downloadUrl[4].url;
-      setAudioState(audio);
+      await setAudioState(audio);
+      audio.addEventListener("timeupdate", () => {
+        setCurrentTime(audio.currentTime);
+      });
     }
-  }, [currentSong]);
+  }
 
   return (
     <>
@@ -28,7 +41,11 @@ function Player() {
               <p>{currentSong.name}</p>
               <p>
                 {currentSong.artists.primary.map((artist: any) => {
-                  return <span className="text-gray-400">{artist.name}</span>;
+                  return (
+                    <span key={artist.id} className="text-gray-400">
+                      {artist.name}
+                    </span>
+                  );
                 })}
               </p>
             </div>
@@ -39,13 +56,7 @@ function Player() {
               <PlayPauseButton />
               <NextButton />
             </div>
-            <div className="sneekbar">
-              <div className="w-full">
-                <div className="bar h-[3px] bg-white relative">
-                  <div className="progress h-[3px] w-[3px]  bg-green absolute bg-green-400 left-0"></div>
-                </div>
-              </div>
-            </div>
+            <SneekBar />
           </div>
           <div className="elements">volume and extra button</div>
         </div>
@@ -53,6 +64,7 @@ function Player() {
     </>
   );
 }
+
 const PlayPauseButton = React.memo(() => {
   const currentSong = useRecoilValue(currentSongAtom);
   const audio = useRecoilValue(audioStateAtom);
@@ -63,7 +75,7 @@ const PlayPauseButton = React.memo(() => {
   }, [currentSong]);
 
   async function setDefault() {
-    if (audio.pause) {
+    if (audio != undefined && audio != null) {
       await audio.pause();
       await setIsPlaying(false);
       // audio.play();
@@ -155,6 +167,31 @@ function PreviousButton() {
           <path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"></path>
         </svg>
       </button>
+    </>
+  );
+}
+function SneekBar() {
+  const [currentTime, setCurrentTime] = useRecoilState(currentTimeAtom);
+  const audio = useRecoilValue(audioStateAtom);
+
+  useEffect(() => {
+    if (audio) {
+      // console.log(audio.currentTime.);
+    }
+  }, [audio]);
+
+  return (
+    <>
+      <div className="sneekbar">
+        <div className="w-full flex">
+          <span>{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
+          <input className="w-full" type="range" name="" id="" onInput={function(e:any){
+            audio.currentTime = e.target.value
+            setCurrentTime(e.target.value)
+          }} min={0} value={currentTime} max={audio?parseInt(audio.duration):"-:--"} />
+          <span>{audio.duration? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration))):"-:--"}</span>
+        </div>
+      </div>
     </>
   );
 }
