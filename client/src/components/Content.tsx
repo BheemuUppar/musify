@@ -1,9 +1,9 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "./../assets/images/logo.png";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
 import { searchModeAtom, searchTextAtom } from "../store/otherState";
-import { useEffect } from "react";
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function Content() {
   return (
@@ -28,13 +28,23 @@ function Navbar() {
           {/* <Link to="/home">
             <img className=" w-[20%]" src={logo} alt="musify" />
           </Link> */}
+          <span  className="p-1 mx-1 rounded-full bg-black-900">
+            <button disabled={history.state.idx == 0} className="disabled:opacity-75 disabled:cursor-not-allowed"  onClick={() => {
+              history.back();
+            }}><ArrowBackIosNewOutlinedIcon/></button>
+          </span>
+          <span className="p-1 mx-1 rounded-full bg-black-900"  >
+            <button disabled={history.length == history.state.idx} className="disabled:opacity-75 disabled:cursor-not-allowed" onClick={() => {
+              history.forward();  
+            }}><ArrowForwardIosIcon/></button>
+          </span>
           {currentRoute.pathname == "/home/search" && <SearchBox />}
         </div>
         <div className="navlist grow flex justify-end">
           <ul className="flex gap-3">
             {isAuthenticated == false && (
               <li>
-                <Link to="/signup">Signup</Link>{" "}
+                <Link to="/signup">Signup</Link>
               </li>
             )}
             {isAuthenticated == false && (

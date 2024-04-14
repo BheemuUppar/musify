@@ -31,8 +31,11 @@ function Player() {
   return (
     <>
       {currentSong && (
-        <div className="h-[15vh] bg-gray-900 p-2 mx-2 rounded flex justify-around items-center text-white  ">
-          <div className="trackinfo flex">
+        <div className="h-[15vh] bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 ">
+          {/* <div className="border border-white col-span-2">hi</div>
+          <div className="border border-white col-span-2">helo</div>
+          <div className="border border-white col-span-2">goo</div> */}
+          <div className="trackinfo flex col-span-3 items-center">
             <img
               className="h-[50px] w-[50px]"
               src={currentSong.image[2].url}
@@ -51,7 +54,7 @@ function Player() {
               </p>
             </div>
           </div>
-          <div className="controls grow mx-10 flex flex-col py-2">
+          <div className="controls grow mx-10 flex flex-col py-2 col-span-6 justify-center">
             <div className="top flex justify-center gap-4 items-center my-2">
               <PreviousButton />
               <PlayPauseButton />
@@ -59,7 +62,7 @@ function Player() {
             </div>
             <SneekBar />
           </div>
-          <div className="elements">volume and extra button</div>
+          <div className="elements col-span-3">volume and extra button</div>
         </div>
       )}
     </>
