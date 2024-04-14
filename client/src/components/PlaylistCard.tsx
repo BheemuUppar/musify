@@ -4,6 +4,7 @@ function PlaylistCard({playlist}:any) {
 
   return (
     <>
+  
      <Link to={"playlist/"+playlist.id}>
      <div className="card p-2 rounded w-[204px] h-[258px] drop-shadow-md hover:bg-dark-600 ease-in-out group relative">
         <div className="image rounded overflow-hidden">

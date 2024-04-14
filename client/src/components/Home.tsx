@@ -45,6 +45,7 @@ function Home() {
   );
 }
 
+// default page
 export function HomePage() {
   const [playlists, setPlaylist] = useState([]);
   useEffect(() => {
@@ -62,7 +63,7 @@ export function HomePage() {
 
   return (
     <>
-      <div className="md:grid grid-cols-5 grid grid-cols-5">
+      <div className="flex gap-3 flex-wrap">
         {playlists.map((playlist: any) => {
           return <PlaylistCard key={playlist.id} playlist={playlist} />;
         })}

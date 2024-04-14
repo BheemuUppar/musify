@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SongCard from "./SongCard";
 import { environment } from "../assets/environment";
+import PlayButton from "./PlayButton";
 
 const ViewPlaylist = React.memo(() => {
   const [playlist, setPlaylist]: any = useState({});
@@ -41,9 +42,7 @@ const ViewPlaylist = React.memo(() => {
         </div>
       </div>
       <div className="h-[20%] my-2">
-        <button type="button" className="bg-green-400">
-          Play Button
-        </button>
+        <PlayButton/>
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {
