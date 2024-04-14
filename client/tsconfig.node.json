@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["react", "react-dom", "react-transition-group"],
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",

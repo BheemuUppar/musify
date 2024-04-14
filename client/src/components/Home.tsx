@@ -24,12 +24,16 @@ function Home() {
     <>
       <div className="flex gap-4 text-red-50 p-2 h-[80vh]  ">
         <div className="flex flex-col gap-4">
-          <CardContent>
-            <NavContent></NavContent>
-          </CardContent>
-          <CardContent>
-            <Library></Library>
-          </CardContent>
+          <div>
+            <CardContent>
+              <NavContent></NavContent>
+            </CardContent>
+          </div>
+         
+            <CardContent>
+              <Library></Library>
+            </CardContent>
+          
         </div>
         <div className="grow">
           <CardContent>
@@ -37,7 +41,7 @@ function Home() {
           </CardContent>
         </div>
       </div>
-     <Player></Player>
+      <Player></Player>
     </>
   );
 }
@@ -52,7 +56,7 @@ export function HomePage() {
     axios
       .get(`${environment.searchUrl}/playlist/${"bollywood"}`)
       .then(async (data) => {
-        console.log(data)
+        console.log(data);
         await setPlaylist(data.data);
       });
   }
@@ -67,6 +71,5 @@ export function HomePage() {
     </>
   );
 }
-
 
 export default Home;

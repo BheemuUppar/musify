@@ -4,10 +4,10 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import Search from "./Search";
 import { HomePage } from "./Home";
 import ViewAlbum from "./ViewAlbum";
 import ViewPlaylist from "./ViewPlayList";
+import SearchPage from "./SearchPage";
 
 const routes = [
   {
@@ -23,7 +23,7 @@ const routes = [
     element: <PrivateRoute element={<Home key={"home"}/>} />,
     subroutes: [
       <Route key={1} path="" element={<HomePage />}></Route>,
-      <Route  key={2} path="search" element={<Search />}></Route>,
+      <Route  key={2} path="search" element={<SearchPage />}></Route>,
       <Route key={3}  path="album/:id" element={<ViewAlbum />}></Route>,
       <Route  key={4} path="playlist/:id" element={<ViewPlaylist />}></Route>,
     ],

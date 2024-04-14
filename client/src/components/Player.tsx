@@ -21,6 +21,7 @@ function Player() {
       let audio = new Audio();
       audio.src = currentSong.downloadUrl[4].url;
       await setAudioState(audio);
+      await setCurrentTime(audio.currentTime)
       audio.addEventListener("timeupdate", () => {
         setCurrentTime(audio.currentTime);
       });
@@ -78,6 +79,7 @@ const PlayPauseButton = React.memo(() => {
     if (audio != undefined && audio != null) {
       await audio.pause();
       await setIsPlaying(false);
+
       // audio.play();
       // setIsPlaying(true)
     }
@@ -177,6 +179,7 @@ function SneekBar() {
   useEffect(() => {
     if (audio) {
       // console.log(audio.currentTime.);
+      setCurrentTime(audio.currentTime)
     }
   }, [audio]);
 
@@ -189,7 +192,7 @@ function SneekBar() {
             audio.currentTime = e.target.value
             setCurrentTime(e.target.value)
           }} min={0} value={currentTime} max={audio?parseInt(audio.duration):"-:--"} />
-          <span>{audio.duration? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration))):"-:--"}</span>
+          <span>{audio && audio.duration? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration))):"-:--"}</span>
         </div>
       </div>
     </>
