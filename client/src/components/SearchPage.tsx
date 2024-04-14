@@ -50,7 +50,6 @@ function SearchPage() {
     return data.data;
   }
 
-  console.log("search results ", searchResults);
   return (
     <>
       <div className="grid grid-cols-3">
@@ -74,7 +73,6 @@ function SearchPage() {
 }
 
 function TopResultCard({ album, className }: any) {
-  console.log(album);
   return (
     <>
       <h1 className="text-2xl">Top Results</h1>

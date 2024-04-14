@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import SongCard from "./SongCard";
 import { environment } from "../assets/environment";
 import PlayButton from "./PlayButton";
+import ListHeader from "./ListHeader";
 
 const ViewPlaylist = React.memo(() => {
   const [playlist, setPlaylist]: any = useState({});
@@ -22,25 +23,7 @@ const ViewPlaylist = React.memo(() => {
 
   return (
     <>
-      <div className="h-[70%] p-2 bg-gradient-to-b from-green-700 to-green-200 rounded flex justify-start items-center">
-        <div className="image-box h-[200px] w-[200px] float-start ">
-          {playlist.image && playlist.image.length > 0 && (
-            <img
-              className="rounded"
-              src={playlist.image[2]?.url}
-              alt="No image"
-            />
-          )}
-        </div>
-        <div className="info">
-          <p>{playlist.type}</p>
-          <h1 className="text-[4rem]">{playlist.name}</h1>
-          {playlist.artists &&
-            playlist.artists
-              .filter((artist: any) => artist.role === "singer")
-              .map((artist: any) => <span key={artist.id}>{artist.name}</span>)}
-        </div>
-      </div>
+    <ListHeader list={playlist}/>
       <div className="h-[20%] my-2">
         <PlayButton/>
       </div>
@@ -51,5 +34,7 @@ const ViewPlaylist = React.memo(() => {
     </>
   );
 });
+
+
 
 export default ViewPlaylist;
