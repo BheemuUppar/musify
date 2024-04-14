@@ -21,7 +21,7 @@ function Player() {
       let audio = new Audio();
       audio.src = currentSong.downloadUrl[4].url;
       await setAudioState(audio);
-      await setCurrentTime(audio.currentTime)
+      await setCurrentTime(audio.currentTime);
       audio.addEventListener("timeupdate", () => {
         setCurrentTime(audio.currentTime);
       });
@@ -179,20 +179,33 @@ function SneekBar() {
   useEffect(() => {
     if (audio) {
       // console.log(audio.currentTime.);
-      setCurrentTime(audio.currentTime)
+      setCurrentTime(audio.currentTime);
     }
-  }, [audio]);
+  }, [audio, currentTime]);
 
   return (
     <>
       <div className="sneekbar">
         <div className="w-full flex">
           <span>{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
-          <input className="w-full" type="range" name="" id="" onInput={function(e:any){
-            audio.currentTime = e.target.value
-            setCurrentTime(e.target.value)
-          }} min={0} value={currentTime} max={audio?parseInt(audio.duration):"-:--"} />
-          <span>{audio && audio.duration? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration))):"-:--"}</span>
+          <input
+            className="w-full"
+            type="range"
+            name=""
+            id=""
+            onInput={function (e: any) {
+              audio.currentTime = e.target.value;
+              setCurrentTime(e.target.value);
+            }}
+            min={0}
+            value={currentTime}
+            max={audio ? parseInt(audio.duration) : "-:--"}
+          />
+          <span>
+            {audio && audio.duration
+              ? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration)))
+              : "-:--"}
+          </span>
         </div>
       </div>
     </>

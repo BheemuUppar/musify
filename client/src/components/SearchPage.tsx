@@ -58,21 +58,21 @@ function SearchPage() {
       <div>search page</div>
       {searchMode && "search mmode is on"}
       <div className="grid grid-cols-2">
-        <div>
-          {searchResults && (
+        { searchResults && searchResults.albums.length > 0 &&  <div>
+          (
             <TopResultCard
               album={searchResults ? searchResults.albums[0] : null}
             />
-          )}
-        </div>
-        <div>
-          {searchResults &&
-            searchResults.songs.map((song: any, index: number) => {
+          )
+        </div>}
+       {  searchResults && searchResults.songs.length>0  &&  
+       <div>
+           { searchResults.songs.map((song: any, index: number) => {
               if (index < 4) {
                 return <TopSongCard key={song.id} song={song} />;
               }
             })}
-        </div>
+        </div>}
       </div>
     </>
   );
