@@ -28,12 +28,12 @@ function Navbar() {
           {/* <Link to="/home">
             <img className=" w-[20%]" src={logo} alt="musify" />
           </Link> */}
-          <span  className="p-1 mx-1 rounded-full bg-black-900">
+          <span  className="p-1 mx-1 rounded-full bg-black-900 h-[35px] w-[35]">
             <button disabled={history.state.idx == 0} className="disabled:opacity-75 disabled:cursor-not-allowed"  onClick={() => {
               history.back();
             }}><ArrowBackIosNewOutlinedIcon/></button>
           </span>
-          <span className="p-1 mx-1 rounded-full bg-black-900"  >
+          <span className="p-1 mx-1 rounded-full bg-black-900 h-[35px] w-[35]"  >
             <button disabled={history.length == history.state.idx} className="disabled:opacity-75 disabled:cursor-not-allowed" onClick={() => {
               history.forward();  
             }}><ArrowForwardIosIcon/></button>
@@ -80,7 +80,7 @@ function SearchBox() {
     <>
       <div>
         <input
-          className="p-2 bg-transparent border rounded-[30px]"
+          className="p-2 bg-transparent border border-dark-600 rounded-[30px] w-full"
           type="text"
           placeholder="What do you want to play? "
           onInput={(e: any) => {

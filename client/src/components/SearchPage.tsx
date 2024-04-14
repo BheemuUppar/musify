@@ -8,12 +8,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { environment } from "../assets/environment";
 import PlayButton from "./PlayButton";
-import { secondsToMinutesSeconds } from "../utils/utils";
-import { currentSongAtom } from "../store/SongState";
 import AlbumSongCard from "./AlbumSongCard";
 
 function SearchPage() {
-  const [searchMode, setSearchMode] = useRecoilState(searchModeAtom);
   const searchText = useRecoilValue(searchTextAtom);
   const [searchResults, setSearchResults] = useRecoilState(searchResultsAtom);
 

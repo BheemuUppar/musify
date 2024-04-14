@@ -7,7 +7,6 @@ import Content from "./Content";
 import NavContent from "./NavContent";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Album from "./Album";
 import PlaylistCard from "./PlaylistCard";
 import Player from "./Player";
 import { environment } from "../assets/environment";

@@ -10,7 +10,7 @@ const AlbumSongCard = React.memo(({ song }: any) => {
       <div className="flex justify-between p-2 hover:bg-dark-600 rounded">
         <div className="left flex items-center">
           <img
-            className="h-[50px] w-[50px]"
+            className="h-[50px] w-[50px] rounded m-1"
             src={song.image[1].url}
             alt=""
             onClick={() => {
