@@ -10,6 +10,7 @@ import { environment } from "../assets/environment";
 import PlayButton from "./PlayButton";
 import { secondsToMinutesSeconds } from "../utils/utils";
 import { currentSongAtom } from "../store/SongState";
+import AlbumSongCard from "./AlbumSongCard";
 
 function SearchPage() {
   const [searchMode, setSearchMode] = useRecoilState(searchModeAtom);
@@ -66,7 +67,7 @@ function SearchPage() {
        <div>
            { searchResults.songs.map((song: any, index: number) => {
               if (index < 4) {
-                return <TopSongCard key={song.id} song={song} />;
+                return <AlbumSongCard key={song.id} song={song} />;
               }
             })}
         </div>}
@@ -82,39 +83,17 @@ function TopResultCard({ album, className }: any) {
       <h1 className="text-2xl">Top Results</h1>
       <div className="buttonParent   rounded relative group p-6 w-[350px] h-[200px] bg-dark-500 hover:bg-dark-600 transition ease-in duration-300">
         <img className="h-[70px] w-[70px]" src={album.image[1].url} alt="" />
-        <h1>{album.name}</h1>
+        <h1 className="text-2xl">{album.name}</h1>
         <span className="text-gray-500">
           <p>{album.type}</p>
         </span>
-        <div className="hidden absolute bottom-0 right-4 group-hover:block">
+        <div className="hidden absolute bottom-0 right-4 group-hover:block opacity-25 group-hover:-translate-y-[30px] group-hover:opacity-100 transition ease-in duration-500 ">
           <PlayButton />
         </div>
       </div>
     </>
   );
 }
-function TopSongCard({ song }: any) {
-  const setCurrentSong = useSetRecoilState(currentSongAtom);
-  return (
-    <>
-      <div className="flex justify-between p-2">
-        <div className="left flex">
-          <img className="h-[50px] w-[50px]" src={song.image[1].url} alt="" onClick={()=>{
-            setCurrentSong(song)
-          }} />
-          <div>
-            <p>{song.name}</p>
-            {song.artists.primary.map((artist: any) => {
-              return <span key={artist.id}>{artist.name}</span>;
-            })}
-          </div>
-        </div>
-        <div className="right">
-          <span>{secondsToMinutesSeconds(song.duration)}</span>
-        </div>
-      </div>
-    </>
-  );
-}
+
 
 export default SearchPage;
