@@ -53,15 +53,15 @@ function SearchPage() {
   console.log("search results ", searchResults);
   return (
     <>
-      <div className="grid grid-cols-2">
-        { searchResults && searchResults.albums.length > 0 &&  <div className="">
+      <div className="grid grid-cols-3">
+        { searchResults && searchResults.albums.length > 0 &&  <div className="col-span-1">
           
             <TopResultCard
               album={searchResults ? searchResults.albums[0] : null}
             /> </div> 
             }
        {  searchResults && searchResults.songs.length>0  &&  
-       <div>
+       <div className="col-span-2">
            { searchResults.songs.map((song: any, index: number) => {
               if (index < 4) {
                 return <AlbumSongCard key={song.id} song={song} />;
