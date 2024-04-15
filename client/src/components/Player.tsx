@@ -54,7 +54,7 @@ function Player() {
               </p>
             </div>
           </div>
-          <div className="controls grow mx-10 flex flex-col py-2 col-span-6 justify-center">
+          <div className="controls grow mx-10 flex flex-col  col-span-6 justify-center">
             <div className="top flex justify-center gap-4 items-center my-2">
               <PreviousButton />
               <PlayPauseButton />
