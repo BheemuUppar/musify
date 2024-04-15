@@ -204,10 +204,10 @@ function SneekBar() {
             value={currentTime}
             max={audio ? parseInt(audio.duration) : "-:--"}
           />
-          <span>
+          <span className="text-nowrap">
             {audio && audio.duration
               ? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration)))
-              : "-:--"}
+              : "--:--"}
           </span>
         </div>
       </div>
