@@ -5,10 +5,13 @@ import { environment } from "../assets/environment";
 import ListHeader from "./ListHeader";
 import PlayButton from "./PlayButton";
 import AlbumSongCard from "./AlbumSongCard";
+import { useRecoilState } from "recoil";
+import { currentSongsListAtom } from "../store/SongState";
 
 const ViewAlbum = React.memo(() => {
   const [album, setAlbum]:any = useState({});
   const params = useParams();
+  const [currentSongList , setCurrentSongList] = useRecoilState(currentSongsListAtom);
 
   useEffect(() => {
     axios
@@ -23,7 +26,9 @@ const ViewAlbum = React.memo(() => {
     <>
       <div>
         <ListHeader list={album} />
-        <PlayButton/>
+        <PlayButton  clickHandler={async ()=>{
+          await setCurrentSongList({songs:album.songs, currentSongIndex:0})
+        }}/>
         {album && album.songs && album.songs.map((song : any)=>{
           return <AlbumSongCard key={song.id} song={song}/>
         })}
