@@ -2,15 +2,26 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   audioStateAtom,
   currentSongAtom,
+  currentSongsListAtom,
   currentTimeAtom,
 } from "../store/SongState";
 import React, { useEffect, useState } from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
 
 function Player() {
-  const currentSong = useRecoilValue(currentSongAtom);
+  const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const setAudioState = useSetRecoilState(audioStateAtom);
+  const audioState = useRecoilValue(audioStateAtom);
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
+  const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
+  useEffect(() => {
+    console.log("outside if ", currentList)
+    if (currentList.songs.length > 0) {
+      // setAudioState(currentList.songs[currentList.currentSongIndex])
+      setCurrentSong(currentList.songs[currentList.currentSongIndex]);
+      console.log("changing current song")
+    }
+  }, [currentList]);
 
   useEffect(() => {
     setAudioHandler();
@@ -142,9 +153,16 @@ function PauseButton() {
 }
 
 function NextButton() {
+  const [currentSongList, setCurrentList] = useRecoilState(currentSongsListAtom);
+  function getNextSongIndex(){
+    let index = currentSongList.currentSongIndex
+    return index<currentSongList.songs.length? ++index:0
+  }
   return (
     <>
-      <button className="h-[20px] w-[20px]">
+      <button className="h-[20px] w-[20px]" onClick={ function () {
+         setCurrentList({songs:currentSongList.songs, currentSongIndex:getNextSongIndex()})
+      }}>
         <svg
           data-encore-id="icon"
           role="img"
@@ -159,9 +177,16 @@ function NextButton() {
   );
 }
 function PreviousButton() {
+  const [currentSongList, setCurrentList] = useRecoilState(currentSongsListAtom);
+  function getPreviousSongIndex(){
+    let index = currentSongList.currentSongIndex
+    return index > currentSongList.songs.length? --index:0
+  }
   return (
     <>
-      <button className="h-[20px] w-[20px]">
+      <button className="h-[20px] w-[20px]" onClick={ function () {
+         setCurrentList({songs:currentSongList.songs, currentSongIndex:getPreviousSongIndex()})
+      }}>
         <svg
           data-encore-id="icon"
           role="img"
@@ -181,7 +206,6 @@ function SneekBar() {
 
   useEffect(() => {
     if (audio) {
-      // console.log(audio.currentTime.);
       setCurrentTime(audio.currentTime);
     }
   }, [audio, currentTime]);

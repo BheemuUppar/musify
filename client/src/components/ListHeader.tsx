@@ -1,7 +1,5 @@
 function ListHeader({list}:any){
-    console.log('album..', list)
     return <>
-   
       <div className="h-[70%] p-2 bg-gradient-to-b from-green-700 to-green-200 rounded flex justify-start items-center">
             <div className="image-box h-[200px] w-[200px] float-start ">
               {list.image && list.image.length > 0 && (

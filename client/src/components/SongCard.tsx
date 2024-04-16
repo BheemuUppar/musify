@@ -5,17 +5,14 @@ import { audioStateAtom, currentSongAtom } from "../store/SongState";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
-  const audioState = useRecoilValue(audioStateAtom);
 
   return (
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm">
       <div
         className="w-full flex justify-start items-center"
         onClick={async () => {
-          await setCurrentSong(song);
-          if (audioState != null) {
-            audioState.pause();
-          }
+           setCurrentSong(song);
+          
         }}
       >
         <p className="p-2 w-[5%]">{index}</p>
