@@ -264,7 +264,7 @@ function VolumeSlider() {
 
   useEffect(() => {
     audioState.volume = volume;
-  }, [volume]);
+  }, [volume, audioState]);
 
   return (
     <>
