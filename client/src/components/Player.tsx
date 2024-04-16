@@ -4,6 +4,7 @@ import {
   currentSongAtom,
   currentSongsListAtom,
   currentTimeAtom,
+  volumeAtom,
 } from "../store/SongState";
 import React, { useEffect, useState } from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
@@ -15,11 +16,11 @@ function Player() {
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
   useEffect(() => {
-    console.log("outside if ", currentList)
+    console.log("outside if ", currentList);
     if (currentList.songs.length > 0) {
       // setAudioState(currentList.songs[currentList.currentSongIndex])
       setCurrentSong(currentList.songs[currentList.currentSongIndex]);
-      console.log("changing current song")
+      console.log("changing current song");
     }
   }, [currentList]);
 
@@ -73,7 +74,9 @@ function Player() {
             </div>
             <SneekBar />
           </div>
-          <div className="elements col-span-3">volume and extra button</div>
+          <div className="elements col-span-3">
+            <VolumeSlider />
+          </div>
         </div>
       )}
     </>
@@ -153,16 +156,23 @@ function PauseButton() {
 }
 
 function NextButton() {
-  const [currentSongList, setCurrentList] = useRecoilState(currentSongsListAtom);
-  function getNextSongIndex(){
-    let index = currentSongList.currentSongIndex
-    return index<currentSongList.songs.length? ++index:0
+  const [currentSongList, setCurrentList] =
+    useRecoilState(currentSongsListAtom);
+  function getNextSongIndex() {
+    let index = currentSongList.currentSongIndex;
+    return index < currentSongList.songs.length ? ++index : 0;
   }
   return (
     <>
-      <button className="h-[20px] w-[20px]" onClick={ function () {
-         setCurrentList({songs:currentSongList.songs, currentSongIndex:getNextSongIndex()})
-      }}>
+      <button
+        className="h-[20px] w-[20px]"
+        onClick={function () {
+          setCurrentList({
+            songs: currentSongList.songs,
+            currentSongIndex: getNextSongIndex(),
+          });
+        }}
+      >
         <svg
           data-encore-id="icon"
           role="img"
@@ -177,16 +187,23 @@ function NextButton() {
   );
 }
 function PreviousButton() {
-  const [currentSongList, setCurrentList] = useRecoilState(currentSongsListAtom);
-  function getPreviousSongIndex(){
-    let index = currentSongList.currentSongIndex
-    return index > currentSongList.songs.length? --index:0
+  const [currentSongList, setCurrentList] =
+    useRecoilState(currentSongsListAtom);
+  function getPreviousSongIndex() {
+    let index = currentSongList.currentSongIndex;
+    return index > currentSongList.songs.length ? --index : 0;
   }
   return (
     <>
-      <button className="h-[20px] w-[20px]" onClick={ function () {
-         setCurrentList({songs:currentSongList.songs, currentSongIndex:getPreviousSongIndex()})
-      }}>
+      <button
+        className="h-[20px] w-[20px]"
+        onClick={function () {
+          setCurrentList({
+            songs: currentSongList.songs,
+            currentSongIndex: getPreviousSongIndex(),
+          });
+        }}
+      >
         <svg
           data-encore-id="icon"
           role="img"
@@ -235,6 +252,36 @@ function SneekBar() {
           </span>
         </div>
       </div>
+    </>
+  );
+}
+
+function VolumeSlider() {
+  const [volume, setVolume] = useRecoilState(volumeAtom);
+  const [audioState, setAudioState] = useRecoilState(audioStateAtom);
+
+  console.log(volume);
+
+  useEffect(() => {
+    audioState.volume = volume;
+  }, [volume]);
+
+  return (
+    <>
+      <input
+        className="w-full"
+        type="range"
+        name="volume_slider"
+        id="volume_slider"
+        onInput={function (e: any) {
+          let value = parseInt(e.target.value);
+          let temp = value / 100;
+          setVolume(temp);
+        }}
+        min="0"
+        value={volume * 100}
+        max="100"
+      />
     </>
   );
 }
