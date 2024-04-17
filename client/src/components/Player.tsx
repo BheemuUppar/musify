@@ -46,7 +46,7 @@ function Player() {
   return (
     <>
       {currentSong && (
-        <div className="h-[15vh] bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 ">
+        <div className=" bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 ">
           {/* <div className="border border-white col-span-2">hi</div>
           <div className="border border-white col-span-2">helo</div>
           <div className="border border-white col-span-2">goo</div> */}
@@ -75,9 +75,11 @@ function Player() {
               <PlayPauseButton />
               <NextButton />
             </div>
-            <SneekBar />
+           <div>
+           <SneekBar />
+           </div>
           </div>
-          <div className="elements col-span-3">
+          <div className="elements col-span-3 flex items-center">
             <VolumeSlider />
           </div>
         </div>
@@ -241,9 +243,9 @@ function SneekBar() {
   const maxDuration = audio && audio.duration ? parseInt(audio.duration) : 10;
   return (
     <div className="sneekbar">
-      <div className="w-full flex">
-        <span>{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
-        <Box sx={{ width: 300 }}>
+      <div className="w-full flex gap-4 items-center text-[10px]">
+        <span className="pb-[4px]">{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
+        <Box sx={{ width: "100%" }}>
           <Slider
             min={0}
             max={maxDuration}
@@ -267,7 +269,7 @@ function SneekBar() {
               },
             }}/>
         </Box>
-        <span className="text-nowrap">
+        <span className="text-nowrap pb-[4px]">
           {audio && audio.duration
             ? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration)))
             : "--:--"}
