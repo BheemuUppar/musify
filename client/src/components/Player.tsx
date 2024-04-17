@@ -263,6 +263,7 @@ function VolumeSlider() {
   console.log(volume);
 
   useEffect(() => {
+  if(audioState)
     audioState.volume = volume;
   }, [volume, audioState]);
 
