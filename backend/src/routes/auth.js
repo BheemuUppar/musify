@@ -65,7 +65,7 @@ router.post("/signin", async (req, res) => {
       dbResponse.password,
       async (error, result) => {
         if(result){
-         let token = await jwt.sign({email:dbResponse.email} ,process.env.jwtSecretekey, {expiresIn:"30m"} )
+         let token = await jwt.sign({email:dbResponse.email}, process.env.jwtSecretekey, {expiresIn:"30m"} )
          res.status(200).json({message:"success", token:token})
         }
         else{

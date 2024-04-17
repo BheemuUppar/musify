@@ -22,7 +22,7 @@ function Home() {
   return (
     <>
       <div className="flex gap-4 text-red-50 p-2 h-[80vh]  ">
-        <div className="flex flex-col gap-4 w-[25%]">
+        <div className="flex flex-col gap-4 w-[35%]">
           <div>
             <CardContent>
               <NavContent></NavContent>
