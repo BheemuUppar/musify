@@ -2,12 +2,13 @@ import React from "react";
 import { useSetRecoilState } from "recoil";
 import { currentSongAtom } from "../store/SongState";
 import { secondsToMinutesSeconds } from "../utils/utils";
+import BasicMenu from "./shared/BasicMenu";
 
 const AlbumSongCard = React.memo(({ song }: any) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
   return (
     <>
-      <div className="flex justify-between p-2 hover:bg-dark-600 rounded">
+      <div className="group flex justify-between p-2 hover:bg-dark-600 rounded">
         <div className="left flex items-center">
           <img
             className="h-[50px] w-[50px] rounded m-1"
@@ -24,8 +25,13 @@ const AlbumSongCard = React.memo(({ song }: any) => {
             })}
           </div>
         </div>
-        <div className="right flex items-center">
-          <span>{secondsToMinutesSeconds(song.duration)}</span>
+        <div className="flex items-center">
+          <div className="right flex items-center">
+            <span>{secondsToMinutesSeconds(song.duration)}</span>
+          </div>
+          <div className="invisible group-hover:visible">
+            <BasicMenu />
+          </div>
         </div>
       </div>
     </>

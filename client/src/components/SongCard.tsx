@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { audioStateAtom, currentSongAtom } from "../store/SongState";
+import {  useSetRecoilState } from "recoil";
+import {  currentSongAtom } from "../store/SongState";
+import BasicMenu from './shared/BasicMenu'
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
 
   return (
-    <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm">
+    <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm group">
       <div
         className="w-full flex justify-start items-center"
         onClick={async () => {
@@ -40,6 +41,9 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
         </div>
         <div className="w-[10%] px-2">
           <p>{secondsToMinutesSeconds(song.duration)}</p>
+        </div>
+        <div className="invisible group-hover:visible">
+          <BasicMenu/>
         </div>
       </div>
     </div>

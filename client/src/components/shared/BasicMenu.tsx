@@ -15,7 +15,9 @@ export default function BasicMenu() {
   };
 
   return (
-    <div>
+    <div onClick={(e)=>{
+      e.preventDefault()
+    }}>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -34,9 +36,9 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Add to favorite</MenuItem>
+        <MenuItem onClick={handleClose}>Add To Playlist</MenuItem>
+       
       </Menu>
     </div>
   );
