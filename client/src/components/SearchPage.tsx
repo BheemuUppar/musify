@@ -52,21 +52,23 @@ function SearchPage() {
 
   return (
     <>
-      <div className="grid grid-cols-3">
-        { searchResults && searchResults.albums.length > 0 &&  <div className="col-span-1">
-          
+      <div className="grid grid-cols-3 gap-2">
+        {searchResults && searchResults.albums.length > 0 && (
+          <div className="col-span-1 ">
             <TopResultCard
               album={searchResults ? searchResults.albums[0] : null}
-            /> </div> 
-            }
-       {  searchResults && searchResults.songs.length>0  &&  
-       <div className="col-span-2">
-           { searchResults.songs.map((song: any, index: number) => {
+            />{" "}
+          </div>
+        )}
+        {searchResults && searchResults.songs.length > 0 && (
+          <div className="col-span-2 overflow-y-auto">
+            {searchResults.songs.map((song: any, index: number) => {
               if (index < 4) {
                 return <AlbumSongCard key={song.id} song={song} />;
               }
             })}
-        </div>}
+          </div>
+        )}
       </div>
     </>
   );
@@ -76,21 +78,20 @@ function TopResultCard({ album, className }: any) {
   return (
     <>
       <h1 className="text-2xl">Top Results</h1>
-      <div className="buttonParent   rounded relative group p-6 w-[350px] h-[200px] bg-dark-500 hover:bg-dark-600 transition ease-in duration-300">
-    <Link to={"/home/album/"+album.id}>
-        <img className="h-[70px] w-[70px]" src={album.image[1].url} alt="" />
-        <h1 className="text-2xl">{album.name}</h1>
-        <span className="text-gray-500">
-          <p>{album.type}</p>
-        </span>
-        <div className="hidden absolute bottom-0 right-4 group-hover:block opacity-25 group-hover:-translate-y-[30px] group-hover:opacity-100 transition ease-in duration-500 ">
-          <PlayButton />
-        </div>
-      </Link>
+      <div className="buttonParent   rounded relative group p-6  h-[200px] bg-dark-500 hover:bg-dark-600 transition ease-in duration-300">
+        <Link to={"/home/album/" + album.id}>
+          <img className="h-[70px] w-[70px]" src={album.image[1].url} alt="" />
+          <h1 className="text-2xl">{album.name}</h1>
+          <span className="text-gray-500">
+            <p>{album.type}</p>
+          </span>
+          <div className="hidden absolute bottom-0 right-4 group-hover:block opacity-25 group-hover:-translate-y-[30px] group-hover:opacity-100 transition ease-in duration-500 ">
+            <PlayButton />
+          </div>
+        </Link>
       </div>
     </>
   );
 }
-
 
 export default SearchPage;

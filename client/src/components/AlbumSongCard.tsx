@@ -29,7 +29,10 @@ const AlbumSongCard = React.memo(({ song }: any) => {
           <div className="right flex items-center">
             <span>{secondsToMinutesSeconds(song.duration)}</span>
           </div>
-          <div className="invisible group-hover:visible">
+          <div className="invisible group-hover:visible" onClick={(e)=>{
+              e.preventDefault();
+              e.stopPropagation()
+          }}>
             <BasicMenu />
           </div>
         </div>

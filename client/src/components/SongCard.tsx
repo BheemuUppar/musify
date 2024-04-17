@@ -11,10 +11,7 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm group">
       <div
         className="w-full flex justify-start items-center"
-        onClick={async () => {
-           setCurrentSong(song);
-          
-        }}
+        
       >
         <p className="p-2 w-[5%]">{index}</p>
         <div className="flex items-center w-[50%] px-2">
@@ -22,7 +19,9 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
           <img
             src={song.image[2]?.url}
             alt=""
-            className="w-16 h-16 rounded-full"
+            className="w-16 h-16 rounded-full" onClick={async () => {
+              setCurrentSong(song);
+           }}
           />
           <div className="ps-2">
             {/* Display song name */}

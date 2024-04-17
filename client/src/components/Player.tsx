@@ -8,6 +8,11 @@ import {
 } from "../store/SongState";
 import React, { useEffect, useState } from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
+import VolumeDown from "@mui/icons-material/VolumeDown";
+import VolumeUp from "@mui/icons-material/VolumeUp";
 
 function Player() {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
@@ -16,11 +21,9 @@ function Player() {
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
   useEffect(() => {
-    console.log("outside if ", currentList);
     if (currentList.songs.length > 0) {
       // setAudioState(currentList.songs[currentList.currentSongIndex])
       setCurrentSong(currentList.songs[currentList.currentSongIndex]);
-      console.log("changing current song");
     }
   }, [currentList]);
 
@@ -217,73 +220,106 @@ function PreviousButton() {
     </>
   );
 }
+
+
 function SneekBar() {
   const [currentTime, setCurrentTime] = useRecoilState(currentTimeAtom);
   const audio = useRecoilValue(audioStateAtom);
 
-  useEffect(() => {
+  useEffect( () => {
     if (audio) {
-      setCurrentTime(audio.currentTime);
+       setCurrentTime(audio.currentTime);
     }
+    
   }, [audio, currentTime]);
 
+  const handleChange = (event:any, newValue:any) => {
+    audio.currentTime = newValue;
+    setCurrentTime(newValue);
+  };
+
+  const maxDuration = audio && audio.duration ? parseInt(audio.duration) : 10;
   return (
-    <>
-      <div className="sneekbar">
-        <div className="w-full flex">
-          <span>{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
-          <input
-            className="w-full"
-            type="range"
-            name=""
-            id=""
-            onInput={function (e: any) {
-              audio.currentTime = e.target.value;
-              setCurrentTime(e.target.value);
-            }}
+    <div className="sneekbar">
+      <div className="w-full flex">
+        <span>{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
+        <Box sx={{ width: 300 }}>
+          <Slider
             min={0}
+            max={maxDuration}
             value={currentTime}
-            max={audio ? parseInt(audio.duration) : "-:--"}
-          />
-          <span className="text-nowrap">
-            {audio && audio.duration
-              ? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration)))
-              : "--:--"}
-          </span>
-        </div>
+            onChange={handleChange}
+            sx={{
+              color: "#fff",
+              "& .MuiSlider-track": {
+                border: "none",
+              },
+              "& .MuiSlider-thumb": {
+                width: 15,
+                height: 15,
+                backgroundColor: "#fff",
+                "&::before": {
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
+                },
+                "&:hover, &.Mui-focusVisible, &.Mui-active": {
+                  boxShadow: "none",
+                },
+              },
+            }}/>
+        </Box>
+        <span className="text-nowrap">
+          {audio && audio.duration
+            ? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration)))
+            : "--:--"}
+        </span>
       </div>
-    </>
+    </div>
   );
 }
 
 function VolumeSlider() {
   const [volume, setVolume] = useRecoilState(volumeAtom);
-  const [audioState, setAudioState] = useRecoilState(audioStateAtom);
-
-  console.log(volume);
+  const audioState = useRecoilValue(audioStateAtom);
 
   useEffect(() => {
-  if(audioState)
-    audioState.volume = volume;
+    if (audioState) audioState.volume = volume;
   }, [volume, audioState]);
 
+  const handleChange = (event:any, newValue:any) => {
+    setVolume(newValue / 100);
+  };
+
   return (
-    <>
-      <input
-        className="w-full"
-        type="range"
-        name="volume_slider"
-        id="volume_slider"
-        onInput={function (e: any) {
-          let value = parseInt(e.target.value);
-          let temp = value / 100;
-          setVolume(temp);
-        }}
-        min="0"
-        value={volume * 100}
-        max="100"
-      />
-    </>
+    <Box sx={{ width: 200 }}>
+      <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+        <VolumeDown />
+        <Slider
+          aria-label="Volume"
+          value={volume * 100}
+          min={0}
+          max={100}
+          sx={{
+            color: "#fff",
+            "& .MuiSlider-track": {
+              border: "none",
+            },
+            "& .MuiSlider-thumb": {
+              width: 15,
+              height: 15,
+              backgroundColor: "#fff",
+              "&::before": {
+                boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
+              },
+              "&:hover, &.Mui-focusVisible, &.Mui-active": {
+                boxShadow: "none",
+              },
+            },
+          }}
+          onChange={handleChange}
+        />
+        <VolumeUp />
+      </Stack>
+    </Box>
   );
 }
 export default Player;

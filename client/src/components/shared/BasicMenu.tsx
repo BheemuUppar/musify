@@ -18,15 +18,16 @@ export default function BasicMenu() {
     <div onClick={(e)=>{
       e.preventDefault()
     }}>
-      <Button
+      <button className='hover:bg-transparent'
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+     
       >
       <MoreHorizIcon/>
-      </Button>
+      </button>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
