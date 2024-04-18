@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const {searchById} = require("../controller/saavnApi")
 
 // for playlist
 router.get("/playlist/:query", async (req, res) => {
@@ -100,24 +101,5 @@ router.get("/albumsById/:id", async (req, res) => {
  searchById("albums", req, res);
 });
 
-async function searchById(type,req, res){
-  const id = req.params.id;
-  try {
-    const data = await axios.get(
-      `${process.env.savanBaseUrl}/${type}?id=${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    //   .then(async (data) => {
-    res.status(200).json(data.data);
-    //   }).catch(e=>{
 
-    //   });
-  } catch (error) {
-    res.status(500).json({ message: "failed" });
-  }
-}
 module.exports = router;

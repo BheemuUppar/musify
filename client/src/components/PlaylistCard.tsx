@@ -6,10 +6,6 @@ import { currentSongsListAtom } from "../store/SongState";
 function PlaylistCard({ playlist }: any) {
   const [currentSongsList , setCurrentPlayList] = useRecoilState(currentSongsListAtom)
 
-function play(){
-
-}
-
 
 
   return (

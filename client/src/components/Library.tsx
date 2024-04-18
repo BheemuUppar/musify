@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getLibrary } from "../utils/apiutils";
 
 const Library = React.memo(() => {
+
+  useEffect( ()=>{
+     getLibrary().then((data:any)=>{
+      console.log(data)
+     })
+  })
+
   return (
     <>
       <div className="flex justify-between items-center">
         <span className="">
-          <button className="bg-blue-400">toggler</button>
+          <button type="button" className="bg-blue-400">toggler</button>
           <span className="text-nowrap hidden sm:inline-block">
             Your Library
           </span>

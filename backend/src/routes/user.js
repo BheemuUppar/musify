@@ -1,18 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const UserDb = require("../db/User");
+const { getSongsById } = require("../controller/saavnApi");
 
 router.post("/createPlaylist", async (req, res) => {
   let playlistName = req.body.playlistName;
-  let email = req.body.email;
+  let { email, ...playlistData } = req.body;
 
   try {
     // edge case here first we need check whether play list name exist ?
-    let user = await UserDb.findOne({ email: email });
-    if (user[playlistName] == false) {
+    let user = await UserDb.findOne({ email: email }).select("playList");
+    if (
+      user.playList[playlistName] == false ||
+      user.playList[playlistName] == undefined
+    ) {
       let result = await UserDb.findOneAndUpdate(
         { email: email },
-        { $set: { [`playList.${playlistName}`]: [] } }
+        { $push: { playList: { ...playlistData, songs: [] } } }
       );
       res.status(201).json({ message: "playlist created" });
     } else {
@@ -27,14 +31,19 @@ router.post("/createPlaylist", async (req, res) => {
 router.post("/getLibrary", async (req, res) => {
   let email = req.body.email;
   let playList = await UserDb.findOne({ email: email }).select("playList");
-  console.log(playList.playList);
-  res.status(200).json(playList.playList);
+  if (playList) {
+    let results = await formatePlayList(playList.playList);
+    res.status(200).json(results);
+    return;
+  }
+  res.status(400).json({ message: "user not found" });
 });
 
 router.post("/addSongtoPlayList", async (req, res) => {
   let { email, songId, playlistName } = req.body;
   let isUserExistBool = await isUserExist(email);
   let isPlayListExistBool = await isPlaylistExist(email, playlistName);
+  console.log(isUserExistBool, isPlayListExistBool);
 
   try {
     if (isUserExistBool && isPlayListExistBool) {
@@ -47,11 +56,11 @@ router.post("/addSongtoPlayList", async (req, res) => {
         res
           .status(409)
           .json({ message: "song already exist in same playlist" });
-          return
+        return;
       }
       let response = await UserDb.findOneAndUpdate(
-        { email: email },
-        { $push: { [`playList.${playlistName}`]: songId } },
+        { email: email, "playList.name": playlistName },
+        { $push: { "playList.$.songs": songId } },
         { new: true }
       );
 
@@ -73,11 +82,31 @@ router.post("/addSongtoPlayList", async (req, res) => {
   }
 });
 
+async function formatePlayList(playList) {
+  let result = [];
+  let obj;
+  for (const playlist of playList) {
+    let arr = [];
+    for (let id of playlist.songs) {
+      let song = await getSongsById(id);
+      arr.push(song[0]);
+    }
+    playlist.songs = arr;
+    result.push(playlist);
+  }
+  return result;
+}
+
 async function isPlaylistExist(email, playlistName) {
   let playList = await UserDb.findOne({ email: email }).select("playList");
-  console.log(playList);
-  if (playList.playList[playlistName]) {
-    return true;
+  if (playList.playList) {
+    for (let obj of playList.playList) {
+      if (obj.name == playlistName) {
+        console.log(obj.name, playlistName, true);
+        return true;
+      }
+    }
+    return false;
   } else {
     return false;
   }
@@ -93,12 +122,13 @@ async function isUserExist(email) {
 
 async function isSongExistInPlaylist(email, playlistName, songId) {
   let playList = await UserDb.findOne({ email: email }).select("playList");
-
-  if (playList.playList[playlistName].includes(songId)) {
-    return true;
-  } else {
-    return false;
+  for (let playlist of playList.playList) {
+    if(playlist.name == playlistName){
+     return  playlist.songs.includes(songId) ? true:false;
+    }
   }
+  return false
+ 
 }
 
 module.exports = router;
