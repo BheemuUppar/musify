@@ -20,6 +20,9 @@ function Signin() {
     axios.post(`${environment.baseUrl}/auth/signin`, payload).then((res) => {
       alert(res.data.message);
       setAuthState(true);
+
+      localStorage.setItem("username", res.data.username)
+      localStorage.setItem("email", res.data.email)
       localStorage.setItem("token", res.data.token)
       navigate('/home');
     });
