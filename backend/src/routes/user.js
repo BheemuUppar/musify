@@ -16,7 +16,7 @@ router.post("/createPlaylist", async (req, res) => {
     ) {
       let result = await UserDb.findOneAndUpdate(
         { email: email },
-        { $push: { playList: { ...playlistData, songs: [] } } }
+        { $push: { playList: { ...playlistData, songs: [], type:"playlist" } } }
       );
       res.status(201).json({ message: "playlist created" });
     } else {

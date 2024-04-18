@@ -1,27 +1,29 @@
 import React from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
-import {  useSetRecoilState } from "recoil";
-import {  currentSongAtom } from "../store/SongState";
-import BasicMenu from './shared/BasicMenu'
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { currentSongAtom } from "../store/SongState";
+import BasicMenu from "./shared/BasicMenu";
+import { libraryAtom } from "../store/otherState";
+
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
+  
 
+  
   return (
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm group">
-      <div
-        className="w-full flex justify-start items-center"
-        
-      >
+      <div className="w-full flex justify-start items-center">
         <p className="p-2 w-[5%]">{index}</p>
         <div className="flex items-center w-[50%] px-2">
           {/* Display song image */}
           <img
             src={song.image[2]?.url}
             alt=""
-            className="w-16 h-16 rounded-full" onClick={async () => {
+            className="w-16 h-16 rounded-full"
+            onClick={async () => {
               setCurrentSong(song);
-           }}
+            }}
           />
           <div className="ps-2">
             {/* Display song name */}
@@ -42,7 +44,8 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
           <p>{secondsToMinutesSeconds(song.duration)}</p>
         </div>
         <div className="invisible group-hover:visible">
-          <BasicMenu/>
+       
+          <BasicMenu  />
         </div>
       </div>
     </div>
