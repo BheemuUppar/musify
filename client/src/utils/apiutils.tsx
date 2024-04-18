@@ -10,8 +10,19 @@ export async function getLibrary() {
   let email = localStorage.getItem("email");
 
   let res = await axios.post(`${environment.userUrl}/getLibrary`, {
-  email: email
+    email: email,
   });
 
-return res.data
+  return res.data;
+}
+
+export async function addSongtoLibrary(name: string, songId: string) {
+  let response = await axios.post(`${environment.userUrl}/addSongtoPlayList` ,{
+      "email":localStorage.getItem("email"),
+      "playlistName":name,
+      "songId":songId
+  }
+  );
+  console.log(response)
+  return response
 }

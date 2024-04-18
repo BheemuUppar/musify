@@ -45,7 +45,7 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
         </div>
         <div className="invisible group-hover:visible">
        
-          <BasicMenu  />
+          <BasicMenu songId={song.id} />
         </div>
       </div>
     </div>
