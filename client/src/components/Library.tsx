@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import { getLibrary } from "../utils/apiutils";
-import { useRecoilState, useRecoilStateLoadable } from "recoil";
+import {
+  useRecoilState,
+  useRecoilStateLoadable,
+  useSetRecoilState,
+} from "recoil";
 import { libraryAtom } from "../store/otherState";
+import { currentSongsListAtom } from "../store/SongState";
 
 const Library = React.memo(() => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
-
+  const setCurrentSongList = useSetRecoilState(currentSongsListAtom);
   useEffect(() => {
     getLibrary().then((data: any) => {
       setLibrary(data);
@@ -38,6 +43,12 @@ const Library = React.memo(() => {
                   className="flex justify-start items-center gap-2 my-4"
                 >
                   <img
+                    onClick={async () => {
+                      await setCurrentSongList({
+                        songs: playlist.songs,
+                        currentSongIndex: 0,
+                      });
+                    }}
                     className="h-[50px] w-[50px]"
                     src={playlist.songs[0].image[1].url}
                     alt=""
