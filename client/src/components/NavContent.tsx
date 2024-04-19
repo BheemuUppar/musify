@@ -11,13 +11,13 @@ function NavContent() {
     <>
       <div>
         <ul className="left-router-link">
-          <li className={`${leftWidth.size === "small" ? "text-center" : ""} `}>
+          <li className={`${leftWidth.size === "small" ? "text-center" : ""} my-2`}>
             <NavLink  to="/home" >
               <HomeOutlinedIcon fontSize="large" />
               {leftWidth.size == "large" && <span className="">Home</span>}
             </NavLink>
           </li>
-          <li className={`${leftWidth.size == "small" ? "text-center" : ""}`}>
+          <li className={`${leftWidth.size == "small" ? "text-center" : ""} my-2`}>
             <NavLink
               to="/home/search" >
               <SearchOutlinedIcon fontSize="large" />
