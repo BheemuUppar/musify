@@ -17,6 +17,7 @@ export async function getLibrary() {
 }
 
 export async function addSongtoLibrary(name: string, songId: string) {
+  console.log('adding to...',songId)
   let response = await axios.post(`${environment.userUrl}/addSongtoPlayList` ,{
       "email":localStorage.getItem("email"),
       "playlistName":name,

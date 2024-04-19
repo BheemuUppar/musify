@@ -33,7 +33,7 @@ const AlbumSongCard = React.memo(({ song }: any) => {
               e.preventDefault();
               e.stopPropagation()
           }}>
-            <BasicMenu  />
+            <BasicMenu  songId={song.id}/>
           </div>
         </div>
       </div>
