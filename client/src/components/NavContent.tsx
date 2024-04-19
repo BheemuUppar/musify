@@ -1,17 +1,28 @@
 import { NavLink } from "react-router-dom";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { useRecoilValue } from "recoil";
+import { leftPanelWidthAtom } from "../store/otherState";
 
 function NavContent() {
+  const leftWidth = useRecoilValue(leftPanelWidthAtom);
+
   return (
     <>
       <div>
-        <ul>
-          <li>
-            <NavLink to="/home" ><HomeOutlinedIcon/> <span className="md:inline-block hidden">Home</span></NavLink>
+        <ul className="left-router-link">
+          <li className={`${leftWidth.size === "small" ? "text-center" : ""} `}>
+            <NavLink  to="/home" >
+              <HomeOutlinedIcon fontSize="large" />
+              {leftWidth.size == "large" && <span className="">Home</span>}
+            </NavLink>
           </li>
-          <li>
-            <NavLink to="/home/search"  ><SearchOutlinedIcon/> <span className="md:inline-block hidden">Search</span></NavLink>
+          <li className={`${leftWidth.size == "small" ? "text-center" : ""}`}>
+            <NavLink
+              to="/home/search" >
+              <SearchOutlinedIcon fontSize="large" />
+              {leftWidth.size == "large" && <span>Search</span>}
+            </NavLink>
           </li>
         </ul>
       </div>

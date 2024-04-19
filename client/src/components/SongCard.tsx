@@ -8,8 +8,6 @@ import { libraryAtom } from "../store/otherState";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
-  console.log(song)
-
   
   return (
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm group">

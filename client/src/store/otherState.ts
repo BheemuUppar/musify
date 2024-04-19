@@ -21,3 +21,9 @@ export const libraryAtom = atom<any>({
   default:null
 })
 
+export const leftPanelWidthAtom = atom<any>({
+  key:"leftPanelWidthAtom",
+  default:{width:"90px", size:"small"}
+})
+
+
