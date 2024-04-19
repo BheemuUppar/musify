@@ -10,7 +10,7 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
   
   return (
-    <div className="h-[80px] mx-1 border border-gray-900 px-2 py-1 rounded flex items-center my-1 text-sm group">
+    <div className="h-[80px] mx-1 border border-gray-900 px-2 py-3 rounded flex items-center my-1 text-sm group hover:bg-dark-600 ">
       <div className="w-full flex justify-start items-center">
         <p className="p-2 w-[5%]">{index}</p>
         <div className="flex items-center w-[50%] px-2">
@@ -29,7 +29,7 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
             {/* Display artists */}
             {song.artists &&
               song.artists.all.map((singer: any) => (
-                <span key={Math.random()} className="mr-2">
+                <span key={Math.random()} className="mr-2 text-[12px] text-gray-300">
                   {singer.name}
                 </span>
               ))}
