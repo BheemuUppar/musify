@@ -8,6 +8,7 @@ import { HomePage } from "./Home";
 import ViewAlbum from "./ViewAlbum";
 import ViewPlaylist from "./ViewPlayList";
 import SearchPage from "./SearchPage";
+import ViewMyPlaylist from "./ViewMyPlaylist";
 
 const routes = [
   {
@@ -26,6 +27,7 @@ const routes = [
       <Route  key={2} path="search" element={<SearchPage />}></Route>,
       <Route key={3}  path="album/:id" element={<ViewAlbum />}></Route>,
       <Route  key={4} path="playlist/:id" element={<ViewPlaylist />}></Route>,
+      <Route  key={5} path="myPlaylist" element={<ViewMyPlaylist />}></Route>,
     ],
   },
   {

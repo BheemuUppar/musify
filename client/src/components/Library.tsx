@@ -7,10 +7,12 @@ import {
 } from "recoil";
 import { libraryAtom } from "../store/otherState";
 import { currentSongsListAtom } from "../store/SongState";
+import { Link, useNavigate } from "react-router-dom";
 
 const Library = React.memo(() => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
   const setCurrentSongList = useSetRecoilState(currentSongsListAtom);
+  const navigate = useNavigate()
   useEffect(() => {
     getLibrary().then((data: any) => {
       setLibrary(data);
@@ -18,7 +20,7 @@ const Library = React.memo(() => {
   }, []);
 
   return (
-    <>
+    <div >
       <div className="flex justify-between items-center">
         <span className="">
           <button type="button" className="bg-blue-400">
@@ -40,15 +42,18 @@ const Library = React.memo(() => {
               return (
                 <li
                   key={playlist.name}
-                  className="flex justify-start items-center gap-2 my-4"
+                  className="flex justify-start items-center gap-2 my-4 cursor-pointer bg-dark-600 hover:bg-transparent px-2 py-1 border border-gray-800 rounded transition-300"
+                 onClick={()=>{
+                  navigate('myPlaylist', {state:playlist})
+                 }}
                 >
                   <img
-                    onClick={async () => {
-                      await setCurrentSongList({
-                        songs: playlist.songs,
-                        currentSongIndex: 0,
-                      });
-                    }}
+                    // onClick={async () => {
+                    //   await setCurrentSongList({
+                    //     songs: playlist.songs,
+                    //     currentSongIndex: 0,
+                    //   });
+                    // }}
                     className="h-[50px] w-[50px]"
                     src={playlist.songs[0].image[1].url}
                     alt=""
@@ -66,7 +71,7 @@ const Library = React.memo(() => {
             })}
         </ul>
       </ul>
-    </>
+    </div>
   );
 });
 

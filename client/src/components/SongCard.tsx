@@ -8,7 +8,7 @@ import { libraryAtom } from "../store/otherState";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const setCurrentSong = useSetRecoilState(currentSongAtom);
-  
+  console.log(song)
 
   
   return (
