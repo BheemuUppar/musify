@@ -1,9 +1,10 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
 import { searchModeAtom, searchTextAtom } from "../store/otherState";
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { audioStateAtom, currentSongAtom, currentSongsListAtom } from "../store/SongState";
 
 function Content() {
   return (
@@ -20,7 +21,10 @@ function Navbar() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
   const navigate = useNavigate();
   const currentRoute = useLocation();
-  console.log(currentRoute.pathname);
+  const resetPlaylist = useResetRecoilState(currentSongsListAtom);
+  const resetCurrentSong = useResetRecoilState(currentSongAtom);
+  const resetAuth = useResetRecoilState(isAuthenticatedAtom);
+  const resetAudio = useResetRecoilState(audioStateAtom);
   return (
     <>
       <nav className="w-full flex justify-between">
@@ -55,8 +59,12 @@ function Navbar() {
             {isAuthenticated == true && (
               <li>
                 <button
-                  onClick={function () {
+                  onClick={async function () {
                     localStorage.clear();
+                    await  resetPlaylist()
+                    await resetCurrentSong() 
+                    await  resetAuth() 
+                    await resetAudio() 
                     navigate("/signin");
                   }}
                   type="button"
