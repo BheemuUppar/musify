@@ -79,7 +79,7 @@ const Library = React.memo(({ clickHandler }: any) => {
         )}
       </div>
 
-      <div style={{maxHeight: 'calc(80vh - 200px)'}}>
+      <div className="left-playlist">
       <ul className="playlist-wrapper">
           {library &&
             library.map((playlist: any) => {
