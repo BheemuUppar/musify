@@ -79,8 +79,8 @@ const Library = React.memo(({ clickHandler }: any) => {
         )}
       </div>
 
+      <div style={{maxHeight: 'calc(80vh - 200px)'}}>
       <ul className="playlist-wrapper">
-        <ul>
           {library &&
             library.map((playlist: any) => {
               return (
@@ -115,8 +115,8 @@ const Library = React.memo(({ clickHandler }: any) => {
                 </li>
               );
             })}
-        </ul>
       </ul>
+      </div>
     </div>
   );
 });
