@@ -21,6 +21,11 @@ export const volumeAtom = atom<any>({
   key: "volumeAtom",
   default: 0.5,
 });
+// holds volume
+export const isPlayingAtom = atom<any>({
+  key: "isPlayingAtom",
+  default: false,
+});
 
 // holds current playlist or album
 export const currentSongsListAtom = atom<any>({

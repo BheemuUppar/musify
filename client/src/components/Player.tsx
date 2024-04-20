@@ -4,6 +4,7 @@ import {
   currentSongAtom,
   currentSongsListAtom,
   currentTimeAtom,
+  isPlayingAtom,
   volumeAtom,
 } from "../store/SongState";
 import React, { useEffect, useState } from "react";
@@ -91,7 +92,7 @@ function Player() {
 const PlayPauseButton = React.memo(() => {
   const currentSong = useRecoilValue(currentSongAtom);
   const audio = useRecoilValue(audioStateAtom);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingAtom);
 
   useEffect(() => {
     setDefault();

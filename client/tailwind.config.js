@@ -14,6 +14,9 @@ export default {
         },
         black:{
           900:"#000000"
+        },
+        green:{
+          400:"#1ed760",
         }
       }
     },
