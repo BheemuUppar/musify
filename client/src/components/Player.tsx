@@ -23,12 +23,17 @@ function Player() {
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
   useEffect(() => {
     if (currentList.songs.length > 0) {
-      // setAudioState(currentList.songs[currentList.currentSongIndex])
+      if(audioState){
+        audioState.pause()
+       }
       setCurrentSong(currentList.songs[currentList.currentSongIndex]);
     }
   }, [currentList]);
 
   useEffect(() => {
+   if(audioState){
+    audioState.pause()
+   }
     setAudioHandler();
   }, [currentSong]);
 
@@ -96,13 +101,14 @@ const PlayPauseButton = React.memo(() => {
 
   useEffect(() => {
     setDefault();
-  }, [currentSong]);
+  }, [currentSong, audio]);
 
   async function setDefault() {
+  debugger
     if (audio != undefined && audio != null) {
-      await audio.pause();
-      await setIsPlaying(false);
-
+      await audio.play();
+      await setIsPlaying(true);
+console.log(currentSong)
       // audio.play();
       // setIsPlaying(true)
     }

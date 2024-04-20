@@ -5,13 +5,13 @@ import SongCard from "./SongCard";
 import { environment } from "../assets/environment";
 import PlayButton from "./PlayButton";
 import ListHeader from "./ListHeader";
-import { useRecoilState } from "recoil";
-import { currentSongsListAtom } from "../store/SongState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { audioStateAtom, currentSongsListAtom } from "../store/SongState";
 
 const ViewPlaylist = React.memo(() => {
   const [playlist, setPlaylist]: any = useState({});
   const params = useParams();
-  const [songsList , setSongsList] = useRecoilState(currentSongsListAtom);
+  const [songsList, setSongsList] = useRecoilState(currentSongsListAtom);
 
   useEffect(() => {
     axios
@@ -24,15 +24,15 @@ const ViewPlaylist = React.memo(() => {
       });
   }, []);
 
-
-
   return (
     <>
-    <ListHeader list={playlist}/>
+      <ListHeader list={playlist} />
       <div className="h-[20%] my-2">
-        <PlayButton clickHandler={async ()=>{
-          await setSongsList({songs:playlist.songs, currentSongIndex:0})
-        }}/>
+        <PlayButton
+          clickHandler={async () => {
+            await setSongsList({ songs: playlist.songs, currentSongIndex: 0 });
+          }}
+        />
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {
@@ -41,7 +41,5 @@ const ViewPlaylist = React.memo(() => {
     </>
   );
 });
-
-
 
 export default ViewPlaylist;
