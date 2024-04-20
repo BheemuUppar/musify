@@ -67,7 +67,7 @@ function LeftView() {
 
   function onToggle() {
     if (leftWidth.size == "small") {
-      setLeftWidth({width:"300px", size:"large"});
+      setLeftWidth({width:"360px", size:"large"});
     } else {
       setLeftWidth({width:"90px", size:"small"});
     }

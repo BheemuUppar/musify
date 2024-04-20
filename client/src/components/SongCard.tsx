@@ -3,7 +3,6 @@ import { secondsToMinutesSeconds } from "../utils/utils";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { currentSongAtom } from "../store/SongState";
 import BasicMenu from "./shared/BasicMenu";
-import { libraryAtom } from "../store/otherState";
 
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
