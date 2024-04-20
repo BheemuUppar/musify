@@ -17,9 +17,11 @@ function ViewMyPlaylist() {
         }}></PlayButton>
 
        <div>
-       {state.songs.map((song:any, index:number)=>{
+       {state.songs.length > 0 &&  state.songs.map((song:any, index:number)=>{
             return <SongCard  key={song.id} index={index} song={song}/>
         })}
+        { state.songs.length == 0 && <h4>No songs available</h4>
+        }
        </div>
     </>
   );

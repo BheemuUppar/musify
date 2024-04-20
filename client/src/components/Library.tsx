@@ -3,8 +3,8 @@ import { createPlaylist, getLibrary } from "../utils/apiutils";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { leftPanelWidthAtom, libraryAtom } from "../store/otherState";
 import { useNavigate } from "react-router-dom";
-import DialogModal from "./shared/DialogModal";
 import AddIcon from "@mui/icons-material/Add";
+import playlistImage from '../assets/images/playlist.png'
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -99,7 +99,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                     //   });
                     // }}
                     className="h-[50px] w-[50px]"
-                    src={ playlist.songs.length>0? playlist.songs[0].image[1].url :""}
+                    src={ playlist.songs.length>0? playlist.songs[0].image[1].url : playlistImage}
                     alt=""
                   />
                   {leftWidth.size == "large" && (
