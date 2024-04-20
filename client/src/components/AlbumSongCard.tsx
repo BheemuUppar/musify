@@ -1,15 +1,24 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
-import { currentSongAtom } from "../store/SongState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { currentSongAtom, isPlayingAtom } from "../store/SongState";
 import { secondsToMinutesSeconds } from "../utils/utils";
 import BasicMenu from "./shared/BasicMenu";
+import equilizerImage from "../assets/images/equaliser-animated-green.gif";
 
 const AlbumSongCard = React.memo(({ song }: any) => {
-  const setCurrentSong = useSetRecoilState(currentSongAtom);
+  const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
+  const isPlaying = useRecoilValue(isPlayingAtom)
   return (
     <>
       <div className="group flex justify-between p-2 hover:bg-dark-600 rounded">
         <div className="left flex items-center">
+        {/* {isPlaying && currentSong && song.id == currentSong.id ? ( */}
+            <img
+              className={`${isPlaying && currentSong && song.id == currentSong.id ? "visible":"invisible"} h-[20px] w-[20px] group-hover:block` }
+              src={equilizerImage}
+              alt=""
+            />
+          {/* // )  */}
           <img
             className="h-[50px] w-[50px] rounded m-1"
             src={song.image[1].url}

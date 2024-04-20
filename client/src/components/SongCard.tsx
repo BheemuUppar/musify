@@ -14,8 +14,6 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
     <div className="h-[80px] mx-1 border border-gray-900 px-2 py-3 rounded flex items-center my-1 text-sm group hover:bg-dark-600 ">
       <div className="w-full flex justify-start items-center">
         <div className="group flex">
-          {/* <p className="p-2 w-[5%] group-hover:invisible ">
-            </p> */}
           {isPlaying && currentSong && song.id == currentSong.id ? (
             <img
               className="h-[20px] w-[20px] group-hover:block"
