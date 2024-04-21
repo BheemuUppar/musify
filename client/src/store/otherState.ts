@@ -15,15 +15,17 @@ export const searchResultsAtom = atom<any>({
   default: null,
 });
 
-
 export const libraryAtom = atom<any>({
-  key:"libraryAtom",
-  default:null
-})
+  key: "libraryAtom",
+  default: null,
+});
 
 export const leftPanelWidthAtom = atom<any>({
-  key:"leftPanelWidthAtom",
-  default:{width:"90px", size:"small"}
-})
+  key: "leftPanelWidthAtom",
+  default: { width: "90px", size: "small" },
+});
 
-
+export const songInfoOpenAtom = atom({
+  key: "songInfoOpenAtom",
+  default: true,
+});

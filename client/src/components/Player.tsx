@@ -14,6 +14,7 @@ import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
+import { songInfoOpenAtom } from "../store/otherState";
 
 function Player() {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
@@ -21,6 +22,8 @@ function Player() {
   const audioState = useRecoilValue(audioStateAtom);
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
+  const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
+
   useEffect(() => {
     if (currentList.songs.length > 0) {
       if(audioState){
@@ -53,9 +56,6 @@ function Player() {
     <>
       {currentSong && (
         <div className=" bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 ">
-          {/* <div className="border border-white col-span-2">hi</div>
-          <div className="border border-white col-span-2">helo</div>
-          <div className="border border-white col-span-2">goo</div> */}
           <div className="trackinfo flex col-span-3 items-center">
             <img
               className="h-[50px] w-[50px]"
@@ -87,6 +87,13 @@ function Player() {
           </div>
           <div className="elements col-span-3 flex items-center">
             <VolumeSlider />
+            <button className="bg-green-400" onClick={()=>{
+              if(songInfoOpen){
+                setSongInfoOpen(false)
+              }else{
+                setSongInfoOpen(true)
+              }
+            }}>song info</button>
           </div>
         </div>
       )}

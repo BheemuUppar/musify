@@ -10,11 +10,13 @@ import axios from "axios";
 import PlaylistCard from "./PlaylistCard";
 import Player from "./Player";
 import { environment } from "../assets/environment";
-import { leftPanelWidthAtom } from "../store/otherState";
+import { leftPanelWidthAtom, songInfoOpenAtom } from "../store/otherState";
+import SongInfo from "./SongInfo";
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
   const navigate = useNavigate();
+  const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
 
   if (isAuthenticated == false) {
     navigate("/auth/signin");
@@ -27,6 +29,11 @@ function Home() {
         <div className="grow">
           <CardContent>
             <Content></Content>
+          </CardContent>
+        </div>
+        <div className={`${songInfoOpen?"songInfoOpen":"songInfoClose"} `}>
+          <CardContent>
+            <SongInfo />
           </CardContent>
         </div>
       </div>
@@ -67,14 +74,21 @@ function LeftView() {
 
   function onToggle() {
     if (leftWidth.size == "small") {
-      setLeftWidth({width:"360px", size:"large"});
+      setLeftWidth({ width: "360px", size: "large" });
     } else {
-      setLeftWidth({width:"90px", size:"small"});
+      setLeftWidth({ width: "90px", size: "small" });
     }
   }
   return (
     <>
-      <div className="flex flex-col gap-4" style={{ width: leftWidth.width , maxWidth: leftWidth.width, minWidth: leftWidth.width  }}>
+      <div
+        className="flex flex-col gap-4"
+        style={{
+          width: leftWidth.width,
+          maxWidth: leftWidth.width,
+          minWidth: leftWidth.width,
+        }}
+      >
         <div>
           <CardContent>
             <NavContent></NavContent>

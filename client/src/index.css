@@ -34,3 +34,12 @@ body{
   ::-webkit-scrollbar-thumb:hover {
     background: #9b9b9b; 
   }
+
+  .songInfoOpen{
+    max-width: 400px;
+    width: 50%;
+  }
+  .songInfoClose{
+    max-width: 0px;
+    width: 0px;
+  }
