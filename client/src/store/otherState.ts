@@ -27,5 +27,5 @@ export const leftPanelWidthAtom = atom<any>({
 
 export const songInfoOpenAtom = atom({
   key: "songInfoOpenAtom",
-  default: true,
+  default: false,
 });
