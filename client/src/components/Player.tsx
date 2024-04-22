@@ -7,6 +7,7 @@ import {
   isPlayingAtom,
   volumeAtom,
 } from "../store/SongState";
+import InfoIcon from '@mui/icons-material/Info';
 import React, { useEffect, useState } from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
 import Box from "@mui/material/Box";
@@ -26,17 +27,17 @@ function Player() {
 
   useEffect(() => {
     if (currentList.songs.length > 0) {
-      if(audioState){
-        audioState.pause()
-       }
+      if (audioState) {
+        audioState.pause();
+      }
       setCurrentSong(currentList.songs[currentList.currentSongIndex]);
     }
   }, [currentList]);
 
   useEffect(() => {
-   if(audioState){
-    audioState.pause()
-   }
+    if (audioState) {
+      audioState.pause();
+    }
     setAudioHandler();
   }, [currentSong]);
 
@@ -81,19 +82,13 @@ function Player() {
               <PlayPauseButton />
               <NextButton />
             </div>
-           <div>
-           <SneekBar />
-           </div>
+            <div>
+              <SneekBar />
+            </div>
           </div>
           <div className="elements col-span-3 flex items-center">
             <VolumeSlider />
-            <button className="bg-green-400" onClick={()=>{
-              if(songInfoOpen){
-                setSongInfoOpen(false)
-              }else{
-                setSongInfoOpen(true)
-              }
-            }}>song info</button>
+            <SongInfoButton />
           </div>
         </div>
       )}
@@ -111,11 +106,10 @@ const PlayPauseButton = React.memo(() => {
   }, [currentSong, audio]);
 
   async function setDefault() {
-  debugger
     if (audio != undefined && audio != null) {
       await audio.play();
       await setIsPlaying(true);
-console.log(currentSong)
+      console.log(currentSong);
       // audio.play();
       // setIsPlaying(true)
     }
@@ -237,19 +231,17 @@ function PreviousButton() {
   );
 }
 
-
 function SneekBar() {
   const [currentTime, setCurrentTime] = useRecoilState(currentTimeAtom);
   const audio = useRecoilValue(audioStateAtom);
 
-  useEffect( () => {
+  useEffect(() => {
     if (audio) {
-       setCurrentTime(audio.currentTime);
+      setCurrentTime(audio.currentTime);
     }
-    
   }, [audio, currentTime]);
 
-  const handleChange = (event:any, newValue:any) => {
+  const handleChange = (event: any, newValue: any) => {
     audio.currentTime = newValue;
     setCurrentTime(newValue);
   };
@@ -258,7 +250,9 @@ function SneekBar() {
   return (
     <div className="sneekbar">
       <div className="w-full flex gap-4 items-center text-[10px]">
-        <span className="pb-[4px]">{secondsToMinutesSeconds(Math.floor(currentTime))}</span>
+        <span className="pb-[4px]">
+          {secondsToMinutesSeconds(Math.floor(currentTime))}
+        </span>
         <Box sx={{ width: "100%" }}>
           <Slider
             min={0}
@@ -281,7 +275,8 @@ function SneekBar() {
                   boxShadow: "none",
                 },
               },
-            }}/>
+            }}
+          />
         </Box>
         <span className="text-nowrap pb-[4px]">
           {audio && audio.duration
@@ -301,7 +296,7 @@ function VolumeSlider() {
     if (audioState) audioState.volume = volume;
   }, [volume, audioState]);
 
-  const handleChange = (event:any, newValue:any) => {
+  const handleChange = (event: any, newValue: any) => {
     setVolume(newValue / 100);
   };
 
@@ -336,6 +331,19 @@ function VolumeSlider() {
         <VolumeUp />
       </Stack>
     </Box>
+  );
+}
+
+function SongInfoButton() {
+  const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
+  return (
+    <>
+      <button onClick={async ()=>{
+        setSongInfoOpen(!songInfoOpen)
+      }}>
+        <InfoIcon/>
+      </button>
+    </>
   );
 }
 export default Player;
