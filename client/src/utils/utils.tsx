@@ -9,4 +9,15 @@ function secondsToMinutesSeconds(seconds:number) {
   return formattedTime;
 }
 
-export  {secondsToMinutesSeconds};
+function groupDataByArtist(data:any[]) {
+  return data.reduce((acc, curr) => {
+    if (acc[curr.name]) {
+      acc[curr.name].push(curr);
+    } else {
+      acc[curr.name] = [curr];
+    }
+    return acc;
+  }, {});
+}
+
+export  {secondsToMinutesSeconds, groupDataByArtist};

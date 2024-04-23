@@ -24,14 +24,14 @@ function Home() {
 
   return (
     <>
-      <div className="flex gap-4 text-red-50 p-2 h-[80vh]">
+      <div className="flex gap-4 text-red-50 p-2 h-[80vh] max-h-[80vh]">
         <LeftView />
         <div className="grow">
           <CardContent>
             <Content></Content>
           </CardContent>
         </div>
-        <div className={`${songInfoOpen?"songInfoOpen":"songInfoClose"} `}>
+        <div className={`${songInfoOpen?"songInfoOpen block":"songInfoClose hidden"} `} style={{maxHeight:"80vh"}} >
           <CardContent>
             <SongInfo />
           </CardContent>
