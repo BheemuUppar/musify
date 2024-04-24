@@ -29,6 +29,7 @@ export async function createPlaylist(name: string) {
     .post(`${environment.userUrl}/createPlaylist`, {
       email: localStorage.getItem("email"),
       name: name,
+      username:localStorage.getItem("username"),
       collaborative:true
     })
     .catch((err) => {

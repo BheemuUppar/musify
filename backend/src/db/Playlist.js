@@ -6,6 +6,8 @@ const PlaylistSchema = mongoose.Schema({
   songs: Array,
   type: String,
   collaborative:Boolean,
+  email:String,
+  username:String,
 });
 
 const Playlist = mongoose.model("Playlist", PlaylistSchema);

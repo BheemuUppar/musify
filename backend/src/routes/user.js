@@ -6,10 +6,10 @@ const { getSongsById } = require("../controller/saavnApi");
 
 router.post("/createPlaylist", async (req, res) => {
   let playlistName = req.body.playlistName;
-  let { email, ...playlistData } = req.body;
+  let {username, email, ...playlistData } = req.body;
 
   try {
-    let createdPlaylist = await Playlist.create({...playlistData, songs: [], type:"playlist" ,  image:[{"url":null}]})
+    let createdPlaylist = await Playlist.create({email, username, ...playlistData, songs: [], type:"playlist" ,  image:[{"url":null}]})
     // edge case here first we need check whether play list name exist ?
     let user = await UserDb.findOne({ email: email }).select("playList");
     if ( user) {
