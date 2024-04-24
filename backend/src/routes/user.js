@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserDb = require("../db/User");
+const Playlist = require("../db/Playlist");
 const { getSongsById } = require("../controller/saavnApi");
 
 router.post("/createPlaylist", async (req, res) => {
@@ -8,19 +9,17 @@ router.post("/createPlaylist", async (req, res) => {
   let { email, ...playlistData } = req.body;
 
   try {
+    let createdPlaylist = await Playlist.create({...playlistData, songs: [], type:"playlist" ,  image:[{"url":null}]})
     // edge case here first we need check whether play list name exist ?
     let user = await UserDb.findOne({ email: email }).select("playList");
-    if (
-      user.playList[playlistName] == false ||
-      user.playList[playlistName] == undefined
-    ) {
+    if ( user) {
       let result = await UserDb.findOneAndUpdate(
         { email: email },
-        { $push: { playList: { ...playlistData, songs: [], type:"playlist" ,  image:[{"url":null}]} } }
+        { $push: { playList: createdPlaylist._id } }
       );
       res.status(201).json({ message: "playlist created" });
     } else {
-      res.status(200).json({ message: "playlist with same name exist" });
+      res.status(200).json({ message: "playlist with same name exist"});
     }
   } catch (error) {
     console.error(error);
@@ -29,27 +28,34 @@ router.post("/createPlaylist", async (req, res) => {
 });
 
 router.post("/getLibrary", async (req, res) => {
+ try{
   let email = req.body.email;
   let playList = await UserDb.findOne({ email: email }).select("playList");
+   let list = playList.playList;
+   console.log(list)
   if (playList) {
-    let results = await formatePlayList(playList.playList);
+    let results = await Playlist.find({ _id: { $in: list } });
+    // let results = await formatePlayList(playList.playList);
     res.status(200).json(results);
     return;
   }
   res.status(400).json({ message: "user not found" });
+ }catch(err){
+  res.status(500).json({ message: "Internal Server Error" });
+ }
 });
 
 router.post("/addSongtoPlayList", async (req, res) => {
-  let { email, songId, playlistName } = req.body;
+  let { email, songId, playlistId } = req.body;
   let isUserExistBool = await isUserExist(email);
-  let isPlayListExistBool = await isPlaylistExist(email, playlistName);
+  let isPlayListExistBool = await isPlaylistExist(email, playlistId);
   console.log(isUserExistBool, isPlayListExistBool);
 
   try {
     if (isUserExistBool && isPlayListExistBool) {
       let isSongExist = await isSongExistInPlaylist(
         email,
-        playlistName,
+        playlistId,
         songId
       );
       if (isSongExist) {
@@ -58,7 +64,7 @@ router.post("/addSongtoPlayList", async (req, res) => {
           .json({ message: "song already exist in same playlist" });
         return;
       }
-      let response = await UserDb.findOneAndUpdate(
+      let response = await Playlist.findOneAndUpdate(
         { email: email, "playList.name": playlistName },
         { $push: { "playList.$.songs": songId } },
         { new: true }
@@ -84,15 +90,19 @@ router.post("/addSongtoPlayList", async (req, res) => {
 
 async function formatePlayList(playList) {
   let result = [];
+  console.log(playList)
   let obj;
-  for (const playlist of playList) {
-    let arr = [];
-    for (let id of playlist.songs) {
-      let song = await getSongsById(id);
-      arr.push(song[0]);
+  if(false){
+
+    for (const playlist of playList) {
+      let arr = [];
+      for (let id of playlist.songs) {
+        let song = await getSongsById(id);
+        arr.push(song[0]);
+      }
+      playlist.songs = arr;
+      result.push(playlist);
     }
-    playlist.songs = arr;
-    result.push(playlist);
   }
   return result;
 }
@@ -120,10 +130,10 @@ async function isUserExist(email) {
   }
 }
 
-async function isSongExistInPlaylist(email, playlistName, songId) {
+async function isSongExistInPlaylist(email, playlistId, songId) {
   let playList = await UserDb.findOne({ email: email }).select("playList");
   for (let playlist of playList.playList) {
-    if(playlist.name == playlistName){
+    if(playlist._id == playlistId){
      return  playlist.songs.includes(songId) ? true:false;
     }
   }

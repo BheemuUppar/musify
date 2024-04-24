@@ -104,9 +104,7 @@ function NextSong(){
     console.log(currentList.songs[nextIndex])
   }, [currentList])
   return <div>
-  {nextSong && <AlbumSongCard song={nextSong}/>
-    
-  }
+  {/* {nextSong && <AlbumSongCard song={nextSong}/>} */}
   </div>
 }
 
