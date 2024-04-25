@@ -16,21 +16,21 @@ export async function getLibrary() {
   return res.data;
 }
 
-export async function addSongtoLibrary(name: string, songId: string) {
+export async function addSongtoLibrary(id: string, songId: string) {
   let response = await axios.post(`${environment.userUrl}/addSongtoPlayList`, {
     email: localStorage.getItem("email"),
-    playlistName: name,
+    playlistId: id,
     songId: songId,
   });
   return response;
 }
-export async function createPlaylist(name: string) {
+export async function createPlaylist(name: string, isCollaborative:boolean) {
   let response = await axios
     .post(`${environment.userUrl}/createPlaylist`, {
       email: localStorage.getItem("email"),
       name: name,
       username:localStorage.getItem("username"),
-      collaborative:true
+      collaborative:isCollaborative
     })
     .catch((err) => {
       //alert error here

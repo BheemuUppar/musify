@@ -4,9 +4,7 @@ import { songInfoOpenAtom } from "../store/otherState";
 import CloseIcon from "@mui/icons-material/Close";
 import CardContent from "./CardContent";
 import { groupDataByArtist } from "../utils/utils";
-import SongCard from "./SongCard";
 import { useEffect } from "react";
-import AlbumSongCard from "./AlbumSongCard";
 
 function SongInfo() {
   const currentSong = useRecoilValue(currentSongAtom);
@@ -76,13 +74,13 @@ function ArtistList({ data }: any) {
     <div className="bg-dark-600 p-2 rounded ">
       {arr.map((artist) => {
         return (
-            <div className="my-3 ">
-              <h2 className="text-lg" key={artist}>
+            <div className="my-3 "  key={artist}>
+              <h2 className="text-lg">
                 {artist}
               </h2>
               {groupedObject[artist].map((obj: any) => {
                 return (
-                  <span className="text-md text-gray-400 mr-3" key={obj.name}>
+                  <span className="text-md text-gray-400 mr-3" key={obj.name+obj.role}>
                     {obj.role}
                   </span>
                 );
@@ -101,7 +99,6 @@ function NextSong(){
   useEffect(()=>{
     nextIndex = parseInt(JSON.stringify(currentList.currentSongIndex + 1));
     nextSong = currentList.songs[nextIndex] ;
-    console.log(currentList.songs[nextIndex])
   }, [currentList])
   return <div>
   {/* {nextSong && <AlbumSongCard song={nextSong}/>} */}

@@ -20,8 +20,8 @@ export default function BasicMenu({ songId }: any) {
     setAnchorEl(null);
   };
 
-  async function addSongtoLibraryHandler(playListName: string, songId: any) {
-   await  addSongtoLibrary(playListName , songId);
+  async function addSongtoLibraryHandler(id: string, songId: any) {
+   await  addSongtoLibrary(id , songId);
    getLibrary().then((data: any) => {
     setLibrary(data);
   });
@@ -59,7 +59,7 @@ export default function BasicMenu({ songId }: any) {
             return (
               <MenuItem
                 onClickCapture={(e: any) => {
-                  addSongtoLibraryHandler(ele.name , songId)
+                  addSongtoLibraryHandler(ele._id , songId)
                 }}
                 key={ele.name}
                 onClick={handleClose}

@@ -5,6 +5,7 @@ import { leftPanelWidthAtom, libraryAtom } from "../store/otherState";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import playlistImage from '../assets/images/playlist.png'
+import DialogModal from "./shared/DialogModal";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -21,8 +22,8 @@ const Library = React.memo(({ clickHandler }: any) => {
       setLibrary(data);
     });
   }
-  const createPlayList = async () => {
-    let response:any = await createPlaylist(inputPlaylistName);
+  const createPlayList = async (isCollaborative:boolean) => {
+    let response:any = await createPlaylist(inputPlaylistName, isCollaborative);
     alert(response.data.message);
     fethcLibrary()
   };
@@ -69,12 +70,12 @@ const Library = React.memo(({ clickHandler }: any) => {
                 disabled={inputPlaylistName == ""}
                 className="disabled:cursor-not-allowed"
                 type="button"
-                onClick={createPlayList}
+                // onClick={createPlayList}
               >
-                <AddIcon></AddIcon>
+                <DialogModal clickHandler={createPlayList}/>
+                {/* <AddIcon></AddIcon> */}
               </button>
             </span>
-            {/* <DialogModal/> */}
           </div>
         )}
       </div>
@@ -92,12 +93,6 @@ const Library = React.memo(({ clickHandler }: any) => {
                   }}
                 >
                   <img
-                    // onClick={async () => {
-                    //   await setCurrentSongList({
-                    //     songs: playlist.songs,
-                    //     currentSongIndex: 0,
-                    //   });
-                    // }}
                     className="h-[50px] w-[50px]"
                     src={ playlist.songs.length>0? playlist.songs[0].image[1].url : playlistImage}
                     alt=""

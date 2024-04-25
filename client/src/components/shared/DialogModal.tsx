@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from '@mui/icons-material/Add';
 
-function DialogModal() {
+function DialogModal({clickHandler}:any) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -29,17 +29,23 @@ function DialogModal() {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        {"Use Google's location service?"}
+       make this playlist collaborative
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
+          Do You want to make this Playlist as collaborative.
+          By clicking on Agree others able to modify the playlist
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={()=>{
+          handleClose();
+          clickHandler(false)
+        }}>Disagree</Button>
+        <Button onClick={()=>{
+          handleClose();
+          clickHandler(true)
+        }} autoFocus>
           Agree
         </Button>
       </DialogActions>
