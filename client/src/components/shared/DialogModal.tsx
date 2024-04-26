@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from '@mui/icons-material/Add';
 
-function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clickHandler}:any) {
+function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clickHandler, playlistId}:any) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (e:any) => {
@@ -48,9 +48,12 @@ function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clic
           NoClickHandler()
         }}>Disagree</Button>
         <Button onClick={()=>{
-
           handleClose();
-          confirmHandler()
+          if(playlistId){
+            confirmHandler(playlistId)
+          }else{
+            confirmHandler()
+          }
         }} autoFocus>
           Agree
         </Button>

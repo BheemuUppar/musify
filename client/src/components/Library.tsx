@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createPlaylist, getLibrary } from "../utils/apiutils";
+import { createPlaylist, getLibrary, removePlaylist } from "../utils/apiutils";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { leftPanelWidthAtom, libraryAtom } from "../store/otherState";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import playlistImage from "../assets/images/playlist.png";
 import DialogModal from "./shared/DialogModal";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { AxiosResponse } from "axios";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -36,9 +37,10 @@ const Library = React.memo(({ clickHandler }: any) => {
     fethcLibrary();
   };
 
-  const onDeleteConfirm = async (e: Event) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const onDeleteConfirm = async (playlistId:string) => {
+    let response : any = await removePlaylist(playlistId);
+    alert(response.data.message);
+    fethcLibrary()
   };
 
 
@@ -158,6 +160,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                                 style={{ color: "#e75858" }}
                               />
                             }
+                            playlistId={playlist._id}
                             title="Detele Playlist"
                             confirmHandler={onDeleteConfirm}
                             NoClickHandler={()=>{

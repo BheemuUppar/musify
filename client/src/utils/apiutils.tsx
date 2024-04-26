@@ -38,3 +38,16 @@ export async function createPlaylist(name: string, isCollaborative:boolean) {
     });
   return response;
 }
+
+export async function removePlaylist(playlistId:string){
+  let response = await axios
+  .post(`${environment.userUrl}/deletePlaylist`, {
+    email: localStorage.getItem("email"),
+    playlistId: playlistId,
+    })
+  .catch((err) => {
+    //alert error here
+    console.log(err);
+  });
+return response;
+}

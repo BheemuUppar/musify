@@ -115,6 +115,24 @@ router.post("/addSongtoPlayList", async (req, res) => {
   //   });
   // }
 });
+router.post("/deletePlaylist", async (req, res)=>{
+let email = req.body.email;
+let playlistId = req.body.playlistId;
+
+try{
+  let response = await UserDb.findOneAndUpdate({email:email}, {$pull:{'playList':playlistId}});
+  if(response){
+    res.status(200).json({message:"playlist deleted successfully"})
+  }
+  else{
+    throw Error;
+  }
+}catch(err){
+  res.status(500).json({message:"failed to delete Playlist, try again later"})
+}
+
+
+})
 
 async function formatePlayList(playlists) {
   let result = [];
@@ -128,7 +146,6 @@ async function formatePlayList(playlists) {
           arr.push(song[0]);
         }
         playlist.songs = arr;
-        console.log('each playlist ',playlist)
         result.push(playlist);
       }
       return result;

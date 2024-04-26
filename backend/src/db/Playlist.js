@@ -12,9 +12,9 @@ const PlaylistSchema = mongoose.Schema({
 
 const Playlist = mongoose.model("Playlist", PlaylistSchema);
 // Middleware to remove playlist references from users when a playlist is deleted
-PlaylistSchema.pre('remove', function(next) {
-    const playlistId = this._id;
-    // Remove references to deleted playlist from all users
-    User.updateMany({}, { $pull: { playlists: playlistId } }, next);
-  });
+// PlaylistSchema.pre('remove', function(next) {
+//     const playlistId = this._id;
+//     // Remove references to deleted playlist from all users
+//     User.updateMany({}, { $pull: { playlists: playlistId } }, next);
+//   });
 module.exports = Playlist
