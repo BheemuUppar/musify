@@ -8,6 +8,7 @@ import equilizerImage from "../assets/images/equaliser-animated-green.gif";
 
 const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
+  
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingAtom);
 
   return (
