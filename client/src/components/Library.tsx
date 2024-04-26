@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import playlistImage from "../assets/images/playlist.png";
 import DialogModal from "./shared/DialogModal";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import Tooltip from '@mui/material/Tooltip'
+import Tooltip from "@mui/material/Tooltip";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -19,11 +19,13 @@ const Library = React.memo(({ clickHandler }: any) => {
   useEffect(() => {
     fethcLibrary();
   }, []);
+
   function fethcLibrary() {
     getLibrary().then((data: any) => {
       setLibrary(data);
     });
   }
+
   // confirm handler to create playlist with collaborative
   const confirmHandler = async () => {
     let response: any = await createPlaylist(inputPlaylistName, true);
@@ -37,21 +39,11 @@ const Library = React.memo(({ clickHandler }: any) => {
     fethcLibrary();
   };
 
-  const onDeleteConfirm = async (playlistId:string) => {
-    let response : any = await removePlaylist(playlistId);
+  const onDeleteConfirm = async (playlistId: string) => {
+    let response: any = await removePlaylist(playlistId);
     alert(response.data.message);
-    fethcLibrary()
+    fethcLibrary();
   };
-
-
-  // const createPlayList = async (isCollaborative: boolean) => {
-  //   let response: any = await createPlaylist(
-  //     inputPlaylistName,
-  //     isCollaborative
-  //   );
-  //   alert(response.data.message);
-  //   fethcLibrary();
-  // };
 
   return (
     <div>
@@ -97,9 +89,12 @@ const Library = React.memo(({ clickHandler }: any) => {
                 type="button"
                 // onClick={createPlayList}
               >
-                
                 <DialogModal
-                  icon={<Tooltip title="create playlist"><AddIcon /></Tooltip> }
+                  icon={
+                    <Tooltip title="create playlist">
+                      <AddIcon />
+                    </Tooltip>
+                  }
                   title="make this library to collaborative"
                   confirmHandler={confirmHandler}
                   NoClickHandler={noClickHandler}
@@ -121,7 +116,7 @@ const Library = React.memo(({ clickHandler }: any) => {
               return (
                 <li
                   key={playlist.name}
-                  className=" my-4 cursor-pointer bg-dark-600 hover:bg-transparent px-2 py-1 border border-gray-800 rounded transition-300"
+                  className=" my-4 cursor-pointer bg-dark-600 hover:bg-transparent px-2 py-1 border border-gray-800 rounded transition-300 group"
                   onClick={() => {
                     navigate("myPlaylist", { state: playlist });
                   }}
@@ -129,21 +124,39 @@ const Library = React.memo(({ clickHandler }: any) => {
                   <div>
                     <div className="flex gap-2">
                       <div>
-                        <img
-                          className="h-[50px] w-[50px]"
-                          src={
-                            playlist.image[0].url? playlist.image[0].url:
-                            playlist.songs.length > 0
-                              ? playlist.songs[0].image[1].url
-                              : playlistImage
-                          }
-                          alt=""
-                        />
+                        {leftWidth.size == "small" && (
+                          <Tooltip title={playlist.name} placement="right" arrow >
+                            <img
+                              className="h-[50px] w-[50px]"
+                              src={
+                                playlist.image[0].url
+                                  ? playlist.image[0].url
+                                  : playlist.songs.length > 0
+                                  ? playlist.songs[0].image[1].url
+                                  : playlistImage
+                              }
+                              alt=""
+                            />
+                          </Tooltip>
+                        )}
+                        {leftWidth.size == "large" && (
+                          <img
+                            className="h-[50px] w-[50px]"
+                            src={
+                              playlist.image[0].url
+                                ? playlist.image[0].url
+                                : playlist.songs.length > 0
+                                ? playlist.songs[0].image[1].url
+                                : playlistImage
+                            }
+                            alt=""
+                          />
+                        )}
                       </div>
                       {leftWidth.size == "large" && (
                         <div className="flex grow justify-between">
                           <div>
-                            <h3 className="hidden sm:inline-block text-xl">
+                            <h3 className=" sm:inline-block text-xl">
                               {playlist.name}
                             </h3>
                             <br />
@@ -156,21 +169,24 @@ const Library = React.memo(({ clickHandler }: any) => {
                         }} >
                         <RemoveCircleOutlineIcon style={{ color: '#e75858' }}></RemoveCircleOutlineIcon>
                         </button> */}
-                        
+
                           <DialogModal
+                            className="invisible group-hover:visible  "
                             icon={
-                              <Tooltip title="remove"><RemoveCircleOutlineIcon
-                              style={{ color: "#e75858" }}
-                            /></Tooltip>
+                              <Tooltip title="remove">
+                                <RemoveCircleOutlineIcon
+                                  style={{ color: "#e75858" }}
+                                />
+                              </Tooltip>
                             }
                             playlistId={playlist._id}
                             title="Detele Playlist"
                             confirmHandler={onDeleteConfirm}
-                            NoClickHandler={()=>{
-                              alert("delete cancled")
+                            NoClickHandler={() => {
+                              alert("delete cancled");
                             }}
                           >
-                           Are You Sure want to delete This playlist
+                            Are You Sure want to delete This playlist
                           </DialogModal>
                         </div>
                       )}

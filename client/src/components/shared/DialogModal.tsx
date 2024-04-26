@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from '@mui/icons-material/Add';
 
-function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clickHandler, playlistId}:any) {
+function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clickHandler, playlistId , className}:any) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (e:any) => {
@@ -21,7 +21,7 @@ function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clic
   };
 
   return <>
-    <button  onClick={handleClickOpen}>
+    <button className={className} onClick={handleClickOpen}>
       {icon}
     </button>
     <Dialog
