@@ -53,3 +53,10 @@ export async function removePlaylist(playlistId:string){
   });
 return response;
 }
+
+
+export async function getCollaborationPlaylist(){
+  let email = localStorage.getItem('email');
+  let response = await axios.post(`${environment.searchUrl}/collaborationPlaylists`, {email:email});
+  return response;
+}

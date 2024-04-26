@@ -4,10 +4,11 @@ import PlayButton from "./PlayButton";
 import { useSetRecoilState } from "recoil";
 import { currentSongsListAtom } from "../store/SongState";
 import SongCard from "./SongCard";
+
 function ViewMyPlaylist() {
   const { state } = useLocation();
   const setCurrentPlayList = useSetRecoilState(currentSongsListAtom);
-
+ console.log(state)
   return (
     <>
       {/* <pre>{JSON.stringify(state)}</pre> */}

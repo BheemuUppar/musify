@@ -115,6 +115,7 @@ router.post("/addSongtoPlayList", async (req, res) => {
   //   });
   // }
 });
+
 router.post("/deletePlaylist", async (req, res)=>{
 let email = req.body.email;
 let playlistId = req.body.playlistId;
@@ -130,8 +131,6 @@ try{
 }catch(err){
   res.status(500).json({message:"failed to delete Playlist, try again later"})
 }
-
-
 })
 
 async function formatePlayList(playlists) {
@@ -157,36 +156,38 @@ async function formatePlayList(playlists) {
 
 
 
-async function isPlaylistExist(email, playlistName) {
-  let playList = await Playlist.findOne({ email: email });
-  if (playList.name == playlistName) {
-    // for (let obj of playList.playList) {
-    //   if (obj.name == playlistName) {
-    //     return true;
-    //   }
-    // }
-    return true;
-  } else {
-    return false;
-  }
-}
-async function isUserExist(email) {
-  let playList = await UserDb.findOne({ email: email });
-  if (playList) {
-    return true;
-  } else {
-    return false;
-  }
-}
+// async function isPlaylistExist(email, playlistName) {
+//   let playList = await Playlist.findOne({ email: email });
+//   if (playList.name == playlistName) {
+//     // for (let obj of playList.playList) {
+//     //   if (obj.name == playlistName) {
+//     //     return true;
+//     //   }
+//     // }
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
+// async function isUserExist(email) {
+//   let playList = await UserDb.findOne({ email: email });
+//   if (playList) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
-async function isSongExistInPlaylist(email, playlistId, songId) {
-  let playList = await UserDb.findOne({ email: email }).select("playList");
-  for (let playlist of playList.playList) {
-    if (playlist._id == playlistId) {
-      return playlist.songs.includes(songId) ? true : false;
-    }
-  }
-  return false;
-}
+// async function isSongExistInPlaylist(email, playlistId, songId) {
+//   let playList = await UserDb.findOne({ email: email }).select("playList");
+//   for (let playlist of playList.playList) {
+//     if (playlist._id == playlistId) {
+//       return playlist.songs.includes(songId) ? true : false;
+//     }
+//   }
+//   return false;
+// }
+
+
 
 module.exports = router;
