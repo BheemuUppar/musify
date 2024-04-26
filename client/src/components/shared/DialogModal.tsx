@@ -29,32 +29,35 @@ function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clic
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+     
     >
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle id="alert-dialog-title"  style={{color: 'white', background: '#121212'}}>
        {title}
       </DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {/* Do You want to make this Playlist as collaborative.
-          By clicking on Agree others able to modify the playlist */}
+      <DialogContent style={{color: 'white', background: '#121212'}} >
+        <DialogContentText id="alert-dialog-description" style={{color: 'white', background: '#121212'}}>
           {children}
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={(e)=>{
+      <DialogActions  style={{color: 'white', background: '#121212'}}>
+        <Button 
+        onClick={(e)=>{
           e.preventDefault();
           e.stopPropagation()
           handleClose();
           NoClickHandler()
-        }}>Disagree</Button>
-        <Button onClick={()=>{
+        }}
+        >Disagree</Button>
+        <Button
+        onClick={()=>{
           handleClose();
           if(playlistId){
             confirmHandler(playlistId)
           }else{
             confirmHandler()
           }
-        }} autoFocus>
+        }} autoFocus
+        >
           Agree
         </Button>
       </DialogActions>
