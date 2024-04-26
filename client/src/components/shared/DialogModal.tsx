@@ -7,10 +7,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from '@mui/icons-material/Add';
 
-function DialogModal({clickHandler}:any) {
+function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clickHandler}:any) {
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e:any) => {
+    e.preventDefault();
+    e.stopPropagation();
     setOpen(true);
   };
 
@@ -20,7 +22,7 @@ function DialogModal({clickHandler}:any) {
 
   return <>
     <Button  onClick={handleClickOpen}>
-      <AddIcon></AddIcon>
+      {icon}
     </Button>
     <Dialog
       open={open}
@@ -29,22 +31,26 @@ function DialogModal({clickHandler}:any) {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-       make this playlist collaborative
+       {title}
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Do You want to make this Playlist as collaborative.
-          By clicking on Agree others able to modify the playlist
+          {/* Do You want to make this Playlist as collaborative.
+          By clicking on Agree others able to modify the playlist */}
+          {children}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={()=>{
+        <Button onClick={(e)=>{
+          e.preventDefault();
+          e.stopPropagation()
           handleClose();
-          clickHandler(false)
+          NoClickHandler()
         }}>Disagree</Button>
         <Button onClick={()=>{
+
           handleClose();
-          clickHandler(true)
+          confirmHandler()
         }} autoFocus>
           Agree
         </Button>

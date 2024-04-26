@@ -4,8 +4,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { leftPanelWidthAtom, libraryAtom } from "../store/otherState";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import playlistImage from '../assets/images/playlist.png'
+import playlistImage from "../assets/images/playlist.png";
 import DialogModal from "./shared/DialogModal";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -13,20 +14,42 @@ const Library = React.memo(({ clickHandler }: any) => {
   const navigate = useNavigate();
   const leftWidth = useRecoilValue(leftPanelWidthAtom);
   const [inputPlaylistName, setPlaylistName] = useState("");
-  
+
   useEffect(() => {
-    fethcLibrary()
+    fethcLibrary();
   }, []);
-  function fethcLibrary(){
+  function fethcLibrary() {
     getLibrary().then((data: any) => {
       setLibrary(data);
     });
   }
-  const createPlayList = async (isCollaborative:boolean) => {
-    let response:any = await createPlaylist(inputPlaylistName, isCollaborative);
+  // confirm handler to create playlist with collaborative
+  const confirmHandler = async () => {
+    let response: any = await createPlaylist(inputPlaylistName, true);
     alert(response.data.message);
-    fethcLibrary()
+    fethcLibrary();
   };
+  // create a playlist without collaboration
+  const noClickHandler = async () => {
+    let response: any = await createPlaylist(inputPlaylistName, false);
+    alert(response.data.message);
+    fethcLibrary();
+  };
+
+  const onDeleteConfirm = async (e: Event) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+
+  // const createPlayList = async (isCollaborative: boolean) => {
+  //   let response: any = await createPlaylist(
+  //     inputPlaylistName,
+  //     isCollaborative
+  //   );
+  //   alert(response.data.message);
+  //   fethcLibrary();
+  // };
 
   return (
     <div>
@@ -72,7 +95,15 @@ const Library = React.memo(({ clickHandler }: any) => {
                 type="button"
                 // onClick={createPlayList}
               >
-                <DialogModal clickHandler={createPlayList}/>
+                <DialogModal
+                  icon={<AddIcon />}
+                  title="make this library to collaborative"
+                  confirmHandler={confirmHandler}
+                  NoClickHandler={noClickHandler}
+                >
+                  Do You want to make this Playlist as collaborative. By
+                  clicking on Agree others able to modify the playlist
+                </DialogModal>
                 {/* <AddIcon></AddIcon> */}
               </button>
             </span>
@@ -81,36 +112,68 @@ const Library = React.memo(({ clickHandler }: any) => {
       </div>
 
       <div className="left-playlist">
-      <ul className="playlist-wrapper">
+        <ul className="playlist-wrapper">
           {library &&
             library.map((playlist: any) => {
               return (
                 <li
                   key={playlist.name}
-                  className="flex justify-start items-center gap-2 my-4 cursor-pointer bg-dark-600 hover:bg-transparent px-2 py-1 border border-gray-800 rounded transition-300"
+                  className=" my-4 cursor-pointer bg-dark-600 hover:bg-transparent px-2 py-1 border border-gray-800 rounded transition-300"
                   onClick={() => {
                     navigate("myPlaylist", { state: playlist });
                   }}
                 >
-                  <img
-                    className="h-[50px] w-[50px]"
-                    src={ playlist.songs.length>0? playlist.songs[0].image[1].url : playlistImage}
-                    alt=""
-                  />
-                  {leftWidth.size == "large" && (
-                    <div>
-                      <h3 className="hidden sm:inline-block text-xl">
-                        {playlist.name}
-                      </h3>
-                      <br />
-                      <span>{playlist.type}</span>
-                      <span>{playlist.songs.length} songs</span>
+                  <div>
+                    <div className="flex gap-2">
+                      <div>
+                        <img
+                          className="h-[50px] w-[50px]"
+                          src={
+                            playlist.songs.length > 0
+                              ? playlist.songs[0].image[1].url
+                              : playlistImage
+                          }
+                          alt=""
+                        />
+                      </div>
+                      {leftWidth.size == "large" && (
+                        <div className="flex grow justify-between">
+                          <div>
+                            <h3 className="hidden sm:inline-block text-xl">
+                              {playlist.name}
+                            </h3>
+                            <br />
+                            <span>{playlist.type}</span>
+                            <span>{playlist.songs.length} songs</span>
+                          </div>
+                          {/* <button onClick={(e)=>{
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }} >
+                        <RemoveCircleOutlineIcon style={{ color: '#e75858' }}></RemoveCircleOutlineIcon>
+                        </button> */}
+                          <DialogModal
+                            icon={
+                              <RemoveCircleOutlineIcon
+                                style={{ color: "#e75858" }}
+                              />
+                            }
+                            title="Detele Playlist"
+                            confirmHandler={onDeleteConfirm}
+                            NoClickHandler={()=>{
+                              alert("delete cancled")
+                            }}
+                          >
+                           Are You Sure want to delete This playlist
+                          </DialogModal>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </li>
               );
             })}
-      </ul>
+        </ul>
       </div>
     </div>
   );
