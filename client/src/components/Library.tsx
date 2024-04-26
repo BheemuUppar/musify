@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import playlistImage from "../assets/images/playlist.png";
 import DialogModal from "./shared/DialogModal";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { AxiosResponse } from "axios";
+import Tooltip from '@mui/material/Tooltip'
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -97,8 +97,9 @@ const Library = React.memo(({ clickHandler }: any) => {
                 type="button"
                 // onClick={createPlayList}
               >
+                
                 <DialogModal
-                  icon={<AddIcon />}
+                  icon={<Tooltip title="create playlist"><AddIcon /></Tooltip> }
                   title="make this library to collaborative"
                   confirmHandler={confirmHandler}
                   NoClickHandler={noClickHandler}
@@ -131,6 +132,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                         <img
                           className="h-[50px] w-[50px]"
                           src={
+                            playlist.image[0].url? playlist.image[0].url:
                             playlist.songs.length > 0
                               ? playlist.songs[0].image[1].url
                               : playlistImage
@@ -154,11 +156,12 @@ const Library = React.memo(({ clickHandler }: any) => {
                         }} >
                         <RemoveCircleOutlineIcon style={{ color: '#e75858' }}></RemoveCircleOutlineIcon>
                         </button> */}
+                        
                           <DialogModal
                             icon={
-                              <RemoveCircleOutlineIcon
-                                style={{ color: "#e75858" }}
-                              />
+                              <Tooltip title="remove"><RemoveCircleOutlineIcon
+                              style={{ color: "#e75858" }}
+                            /></Tooltip>
                             }
                             playlistId={playlist._id}
                             title="Detele Playlist"

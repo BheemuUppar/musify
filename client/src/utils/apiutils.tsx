@@ -24,13 +24,15 @@ export async function addSongtoLibrary(id: string, songId: string) {
   });
   return response;
 }
-export async function createPlaylist(name: string, isCollaborative:boolean) {
+export async function createPlaylist(name: string, isCollaborative:boolean, image?:any, songs?:string[]) {
   let response = await axios
     .post(`${environment.userUrl}/createPlaylist`, {
       email: localStorage.getItem("email"),
       name: name,
       username:localStorage.getItem("username"),
-      collaborative:isCollaborative
+      collaborative:isCollaborative,
+      image,
+      songs
     })
     .catch((err) => {
       //alert error here

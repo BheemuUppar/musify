@@ -21,9 +21,9 @@ function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clic
   };
 
   return <>
-    <Button  onClick={handleClickOpen}>
+    <button  onClick={handleClickOpen}>
       {icon}
-    </Button>
+    </button>
     <Dialog
       open={open}
       onClose={handleClose}
