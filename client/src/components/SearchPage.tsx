@@ -114,6 +114,8 @@ function CollaborationWrapper() {
       {collaborationPlaylist.map((playlist:any)=>{
         return <CollaborationPlaylistCard key={playlist._id}  playlist={playlist} />
       })}
+      
+       
       </div>
     </div>
   );

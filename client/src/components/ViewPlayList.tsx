@@ -9,14 +9,14 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { audioStateAtom, currentSongsListAtom } from "../store/SongState";
 import { createPlaylist, getLibrary } from "../utils/apiutils";
 import { libraryAtom } from "../store/otherState";
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
 
 const ViewPlaylist = React.memo(() => {
   const [playlist, setPlaylist]: any = useState({});
   const params = useParams();
   const [songsList, setSongsList] = useRecoilState(currentSongsListAtom);
-  const setLibrary = useSetRecoilState(libraryAtom)
+  const setLibrary = useSetRecoilState(libraryAtom);
 
   useEffect(() => {
     axios
@@ -28,18 +28,22 @@ const ViewPlaylist = React.memo(() => {
         console.error("Error fetching playlist:", error);
       });
   }, []);
-      const addToMyPlaylist = async () => {
-        let arrOfId = playlist.songs.map((song:any)=>{
-          return song.id;
-        })
-      
-        let response :any = await createPlaylist(playlist.name, false , playlist.image, arrOfId );
-        alert(response.data.message)
-        getLibrary().then((data: any) => {
-          setLibrary(data);
-        });
+  const addToMyPlaylist = async () => {
+    let arrOfId = playlist.songs.map((song: any) => {
+      return song.id;
+    });
 
-      };
+    let response: any = await createPlaylist(
+      playlist.name,
+      false,
+      playlist.image,
+      arrOfId
+    );
+    alert(response.data.message);
+    getLibrary().then((data: any) => {
+      setLibrary(data);
+    });
+  };
   return (
     <>
       <ListHeader list={playlist} />
@@ -50,10 +54,9 @@ const ViewPlaylist = React.memo(() => {
           }}
         />
         <Tooltip title="add to your playlist">
-
-        <button onClick={addToMyPlaylist}>
-        <ControlPointIcon />
-        </button>
+          <button onClick={addToMyPlaylist}>
+            <ControlPointIcon />
+          </button>
         </Tooltip>
       </div>
       {playlist.songs &&

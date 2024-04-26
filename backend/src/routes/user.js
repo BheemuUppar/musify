@@ -154,6 +154,17 @@ async function formatePlayList(playlists) {
   }
 }
 
+router.post('/collaboratePlaylist', async (req, res)=>{
+  let {email, playlistId} = req.body;
+
+  let result = await UserDb.findOneAndUpdate(
+    { email: email },
+    { $push: { playList: playlistId} }
+  );
+  res.status(201).json({ message: "playlist added to your library" });
+
+
+})
 
 
 // async function isPlaylistExist(email, playlistName) {
