@@ -1,5 +1,6 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
+  libraryAtom,
   searchModeAtom,
   searchResultsAtom,
   searchTextAtom,
@@ -13,10 +14,12 @@ import { Link, useNavigate } from "react-router-dom";
 import PlaylistCard from "./PlaylistCard";
 import { getCollaborationPlaylist } from "../utils/apiutils";
 import playlistImage from "../assets/images/playlist.png";
+import { currentSongsListAtom } from "../store/SongState";
 
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);
   const [searchResults, setSearchResults] = useRecoilState(searchResultsAtom);
+  const [currentSongList, setCurrentSongList] = useRecoilState(currentSongsListAtom);
 
   useEffect(() => {
     searchHandler();
@@ -52,22 +55,27 @@ function SearchPage() {
     );
     return data.data;
   }
-
+  const setCurrentlist = async (index:number)=>{
+    await setCurrentSongList({
+      songs: searchResults.songs,
+      currentSongIndex: index,
+    });
+  }
   return (
     <>
       <div className="grid grid-cols-3 gap-2">
         {searchResults && searchResults.albums.length > 0 && (
           <div className="col-span-1 ">
-            <TopResultCard
+            <TopResultCard setCurrentlist={setCurrentlist}
               album={searchResults ? searchResults.albums[0] : null}
-            />{" "}
+            />
           </div>
         )}
         {searchResults && searchResults.songs.length > 0 && (
           <div className="col-span-2 overflow-y-auto">
             {searchResults.songs.map((song: any, index: number) => {
               if (index < 4) {
-                return <AlbumSongCard key={song.id} song={song} />;
+                return <AlbumSongCard setCurrentlist={setCurrentlist} key={song.id} song={song} />;
               }
             })}
           </div>
@@ -79,7 +87,7 @@ function SearchPage() {
   );
 }
 
-function TopResultCard({ album, className }: any) {
+function TopResultCard({ album, className, setCurrentlist }: any) {
   return (
     <>
       <h1 className="text-2xl">Top Results</h1>
@@ -91,7 +99,11 @@ function TopResultCard({ album, className }: any) {
             <p>{album.type}</p>
           </span>
           <div className="hidden absolute bottom-0 right-4 group-hover:block opacity-25 group-hover:-translate-y-[30px] group-hover:opacity-100 transition ease-in duration-500 ">
-            <PlayButton />
+            <PlayButton clickHandler={async (e:any)=>{
+            e.stopPropagation();
+            e.preventDefault();
+           await setCurrentlist(0);
+            }}/>
           </div>
         </Link>
       </div>

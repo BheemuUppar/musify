@@ -15,8 +15,7 @@ import Tooltip from "@mui/material/Tooltip";
 const ViewAlbum = React.memo(() => {
   const [album, setAlbum]: any = useState({});
   const params = useParams();
-  const [currentSongList, setCurrentSongList] =
-    useRecoilState(currentSongsListAtom);
+  const [currentSongList, setCurrentSongList] = useRecoilState(currentSongsListAtom);
   const setLibrary = useSetRecoilState(libraryAtom);
   useEffect(() => {
     axios
