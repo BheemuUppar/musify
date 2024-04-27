@@ -51,7 +51,7 @@ const ViewAlbum = React.memo(() => {
     <>
       <div>
         <ListHeader list={album} />
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 px-2 " style={{height:'100px'}} >
           <PlayButton
             clickHandler={async () => {
               await setCurrentSongList({
@@ -69,7 +69,7 @@ const ViewAlbum = React.memo(() => {
         {album &&
           album.songs &&
           album.songs.map((song: any, index:number) => {
-            return <AlbumSongCard index={index} setCurrentlist={setCurrentlist} key={song.id} song={song} />;
+            return <AlbumSongCard  index={index} setCurrentlist={setCurrentlist} key={song.id} song={song} />;
           })}
       </div>
     </>

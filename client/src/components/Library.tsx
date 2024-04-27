@@ -123,7 +123,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                 >
                   <div>
                     <div className="flex gap-2">
-                      <div>
+                      <div className="flex items-center">
                         {leftWidth.size == "small" && (
                           <Tooltip title={playlist.name} placement="right" arrow >
                             <img
@@ -141,7 +141,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                         )}
                         {leftWidth.size == "large" && (
                           <img
-                            className="h-[50px] w-[50px]"
+                            className="h-[50px] w-[50px] min-h-[50px] min-w-[50px]"
                             src={
                               playlist.image[0].url
                                 ? playlist.image[0].url
@@ -156,12 +156,12 @@ const Library = React.memo(({ clickHandler }: any) => {
                       {leftWidth.size == "large" && (
                         <div className="flex grow justify-between">
                           <div>
-                            <h3 className=" sm:inline-block text-xl">
+                            <h3 className="sm:inline-block text-xl ">
                               {playlist.name}
                             </h3>
                             <br />
-                            <span>{playlist.type}</span>
-                            <span>{playlist.songs.length} songs</span>
+                            <span className="text-gray-400">{playlist.type} :</span>
+                            <span className="text-gray-400"> &nbsp;{playlist.songs.length} songs</span>
                           </div>
                           {/* <button onClick={(e)=>{
                             e.preventDefault();

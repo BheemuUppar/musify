@@ -5,6 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CardContent from "./CardContent";
 import { groupDataByArtist } from "../utils/utils";
 import { useEffect } from "react";
+import AlbumSongCard from "./AlbumSongCard";
 
 function SongInfo() {
   const currentSong = useRecoilValue(currentSongAtom);
@@ -86,22 +87,31 @@ function ArtistList({ data }: any) {
                 );
               })}
             </div>
+
         );
       })}
+      
     </div>
   );
 }
 
 function NextSong(){
-  const currentList  = useRecoilValue(currentSongsListAtom);
-  let nextIndex = 0 ;
-  let nextSong;
+  const [currentList, setCurrentList]  = useRecoilState(currentSongsListAtom);
+  
+  // let nextIndex = 0 ;
   useEffect(()=>{
-    nextIndex = parseInt(JSON.stringify(currentList.currentSongIndex + 1));
-    nextSong = currentList.songs[nextIndex] ;
+    console.log(currentList.songs[currentList.currentSongIndex + 1])
   }, [currentList])
   return <div>
-  {/* {nextSong && <AlbumSongCard song={nextSong}/>} */}
+    
+  {currentList.songs.length>0 && <AlbumSongCard clickHandler={()=>{
+      setCurrentList({
+        songs: currentList.songs,
+        currentSongIndex: currentList.currentSongIndex + 1,
+      });
+  }
+
+  } song={currentList.songs[currentList.currentSongIndex + 1]} index={currentList.currentSongIndex+1} />}
   </div>
 }
 

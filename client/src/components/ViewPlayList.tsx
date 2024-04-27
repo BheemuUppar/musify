@@ -53,7 +53,7 @@ const setCurrentlist = async (index:number)=>{
   return (
     <>
       <ListHeader list={playlist} />
-      <div className="h-[20%] my-2 flex items-center gap-4">
+      <div className=" my-2 flex items-center gap-4 px-2" style={{height:'100px'}}>
         <PlayButton
           clickHandler={ () => {
             setCurrentlist(0)

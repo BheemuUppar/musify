@@ -21,18 +21,21 @@ function ViewMyPlaylist() {
       setLibrary(data);
     });
   };
+  const setCurrentlist = async (index:number)=>{
+     setCurrentPlayList({
+      songs: state.songs,
+      currentSongIndex: index,
+    });
+  }
 
   return (
     <>
       {/* <pre>{JSON.stringify(state)}</pre> */}
       <ListHeader list={state}></ListHeader>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 px-2" style={{height:'100px'}}>
         <PlayButton
-          clickHandler={async () => {
-            await setCurrentPlayList({
-              songs: state.songs,
-              currentSongIndex: 0,
-            });
+          clickHandler={ () => {
+          setCurrentlist(0)
           }}
         ></PlayButton>
         <Tooltip title="add to your playlist">
@@ -43,9 +46,10 @@ function ViewMyPlaylist() {
       </div>
 
       <div>
+        <div></div>
         {state.songs.length > 0 &&
           state.songs.map((song: any, index: number) => {
-            return <SongCard key={song.id} index={index} song={song} />;
+            return <SongCard setCurrentlist={setCurrentlist} key={song.id} index={index} song={song} />;
           })}
         {state.songs.length == 0 && <h4>No songs available</h4>}
       </div>

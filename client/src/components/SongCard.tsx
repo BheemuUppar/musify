@@ -22,13 +22,12 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
               alt=""
             />
           ) : (
-            <div className="relative w-[25px]">
+            <div className="relative w-[25px] " style={{marginBottom:"15px"}}>
               <div className="group-hover:invisible absolute left-2 w-[25px]" > {index}</div>
               <div
                 className=" invisible group-hover:visible absolute left-0 w-[25px]"
                 onClick={async () => {
                   setCurrentlist(index-1)
-                  // await setCurrentSong(song);
                 }}
               >
                 <PlayArrowIcon />

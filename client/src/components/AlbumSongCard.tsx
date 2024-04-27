@@ -30,7 +30,7 @@ const AlbumSongCard = React.memo(({ song , index, setCurrentlist}: any) => {
           <div>
             <p>{song.name}</p>
             {song.artists.primary.map((artist: any) => {
-              return <span key={artist.id}>{artist.name}</span>;
+              return <span  className="text-gray-500" key={artist.id}>{artist.name}</span>;
             })}
           </div>
         </div>

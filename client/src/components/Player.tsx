@@ -56,7 +56,7 @@ function Player() {
   return (
     <>
       {currentSong && (
-        <div className=" bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 ">
+        <div className=" bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 " style={{height: 'calc(100vh - 80vh)'}}>
           <div className="trackinfo flex col-span-3 items-center">
             <img
               className="h-[50px] w-[50px]"
