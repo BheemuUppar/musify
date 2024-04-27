@@ -5,6 +5,7 @@ import { searchModeAtom, searchTextAtom } from "../store/otherState";
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { audioStateAtom, currentSongAtom, currentSongsListAtom } from "../store/SongState";
+import Footer from './Footer'
 
 function Content() {
   return (
@@ -12,6 +13,7 @@ function Content() {
       <Navbar></Navbar>
       <div className="grow " style={{ overflowY: "auto" }}>
         <Outlet></Outlet>
+      <Footer/>
       </div>
     </div>
   );
@@ -75,6 +77,7 @@ function Navbar() {
             )}
           </ul>
         </div>
+
       </nav>
     </>
   );
