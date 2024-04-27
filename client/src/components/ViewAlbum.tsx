@@ -41,6 +41,13 @@ const ViewAlbum = React.memo(() => {
       setLibrary(data);
     });
   };
+    const setCurrentlist = async (index:number)=>{
+      await setCurrentSongList({
+        songs: album.songs,
+        currentSongIndex: index,
+      });
+    }
+
   return (
     <>
       <div>
@@ -62,8 +69,8 @@ const ViewAlbum = React.memo(() => {
         </div>
         {album &&
           album.songs &&
-          album.songs.map((song: any) => {
-            return <AlbumSongCard key={song.id} song={song} />;
+          album.songs.map((song: any, index:number) => {
+            return <AlbumSongCard index={index} setCurrentlist={setCurrentlist} key={song.id} song={song} />;
           })}
       </div>
     </>

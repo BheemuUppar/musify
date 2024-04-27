@@ -6,7 +6,7 @@ import BasicMenu from "./shared/BasicMenu";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import equilizerImage from "../assets/images/equaliser-animated-green.gif";
 
-const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
+const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; song: any; setCurrentlist:any }) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingAtom);
@@ -27,7 +27,8 @@ const SongCard = React.memo(({ index, song }: { index: number; song: any }) => {
               <div
                 className=" invisible group-hover:visible absolute left-0 w-[25px]"
                 onClick={async () => {
-                  await setCurrentSong(song);
+                  setCurrentlist(index-1)
+                  // await setCurrentSong(song);
                 }}
               >
                 <PlayArrowIcon />

@@ -28,6 +28,7 @@ const ViewPlaylist = React.memo(() => {
         console.error("Error fetching playlist:", error);
       });
   }, []);
+
   const addToMyPlaylist = async () => {
     let arrOfId = playlist.songs.map((song: any) => {
       return song.id;
@@ -44,13 +45,18 @@ const ViewPlaylist = React.memo(() => {
       setLibrary(data);
     });
   };
+
+const setCurrentlist = async (index:number)=>{
+  await setSongsList({ songs: playlist.songs, currentSongIndex: index });
+}
+
   return (
     <>
       <ListHeader list={playlist} />
       <div className="h-[20%] my-2 flex items-center gap-4">
         <PlayButton
-          clickHandler={async () => {
-            await setSongsList({ songs: playlist.songs, currentSongIndex: 0 });
+          clickHandler={ () => {
+            setCurrentlist(0)
           }}
         />
         <Tooltip title="add to your playlist">
@@ -61,7 +67,7 @@ const ViewPlaylist = React.memo(() => {
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {
-          return <SongCard key={Math.random()} index={index + 1} song={song} />;
+          return <SongCard key={Math.random()} index={index + 1} song={song} setCurrentlist={setCurrentlist} />;
         })}
     </>
   );

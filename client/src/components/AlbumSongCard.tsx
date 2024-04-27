@@ -5,7 +5,7 @@ import { secondsToMinutesSeconds } from "../utils/utils";
 import BasicMenu from "./shared/BasicMenu";
 import equilizerImage from "../assets/images/equaliser-animated-green.gif";
 
-const AlbumSongCard = React.memo(({ song }: any) => {
+const AlbumSongCard = React.memo(({ song , index, setCurrentlist}: any) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const isPlaying = useRecoilValue(isPlayingAtom)
   return (
@@ -18,13 +18,13 @@ const AlbumSongCard = React.memo(({ song }: any) => {
               src={equilizerImage}
               alt=""
             />
-          {/* // )  */}
           <img
             className="h-[50px] w-[50px] rounded m-1"
             src={song.image[1].url}
             alt=""
             onClick={() => {
-              setCurrentSong(song);
+              setCurrentlist(index)
+              // setCurrentSong(song);
             }}
           />
           <div>
