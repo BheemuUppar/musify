@@ -99,9 +99,9 @@ function Player() {
           <div className="elements col-span-3 flex items-center gap-4 right side-by-side">
             <VolumeSlider />
             <SongInfoButton />
-            <button type="button" onClick={toggleFullScreenMode}>
+            {/* <button type="button" onClick={toggleFullScreenMode}>
             <OpenInFullIcon  className="text-dark-600 dark:text-white"/>
-            </button>
+            </button> */}
           </div>
         </div>
       )}
