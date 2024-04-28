@@ -39,10 +39,7 @@ export async function createPlaylist(
       image,
       songs,
     })
-    .catch((err) => {
-      //alert error here
-      console.log(err);
-    });
+    
   return response;
 }
 
@@ -64,7 +61,7 @@ export async function saveToMyPlaylist(playlist: any) {
   let response = await axios.post(
     `${environment.userUrl}/collaboratePlaylist`,
     { email:email , playlistId: playlist._id }
-  );
+  )
   return response;
 }
 

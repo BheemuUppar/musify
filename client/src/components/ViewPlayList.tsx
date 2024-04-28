@@ -8,7 +8,7 @@ import ListHeader from "./ListHeader";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { audioStateAtom, currentSongsListAtom } from "../store/SongState";
 import { createPlaylist, getLibrary } from "../utils/apiutils";
-import { libraryAtom } from "../store/otherState";
+import { libraryAtom, snackbarAtom } from "../store/otherState";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -17,6 +17,11 @@ const ViewPlaylist = React.memo(() => {
   const params = useParams();
   const [songsList, setSongsList] = useRecoilState(currentSongsListAtom);
   const setLibrary = useSetRecoilState(libraryAtom);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
 
   useEffect(() => {
     axios
@@ -25,25 +30,29 @@ const ViewPlaylist = React.memo(() => {
         setPlaylist(response.data.data);
       })
       .catch((error) => {
-        console.error("Error fetching playlist:", error);
+        showNotification({severity:'error', message:error.response.data.message})
       });
   }, []);
 
   const addToMyPlaylist = async () => {
-    let arrOfId = playlist.songs.map((song: any) => {
-      return song.id;
-    });
-
-    let response: any = await createPlaylist(
-      playlist.name,
-      false,
-      playlist.image,
-      arrOfId
-    );
-    alert(response.data.message);
-    getLibrary().then((data: any) => {
-      setLibrary(data);
-    });
+    try{
+      let arrOfId = playlist.songs.map((song: any) => {
+        return song.id;
+      });
+  
+      let response: any = await createPlaylist(
+        playlist.name,
+        false,
+        playlist.image,
+        arrOfId
+      );
+      alert(response.data.message);
+      getLibrary().then((data: any) => {
+        setLibrary(data);
+      });
+    }catch(error:any){
+      showNotification({severity:'error', message:error.response.data.message})
+    }
   };
 
 const setCurrentlist = async (index:number)=>{

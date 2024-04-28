@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { createPlaylist, getLibrary, removePlaylist } from "../utils/apiutils";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { leftPanelWidthAtom, libraryAtom } from "../store/otherState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { leftPanelWidthAtom, libraryAtom, snackbarAtom } from "../store/otherState";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import playlistImage from "../assets/images/playlist.png";
 import DialogModal from "./shared/DialogModal";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Tooltip from "@mui/material/Tooltip";
+import { AxiosError } from "axios";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -15,34 +16,56 @@ const Library = React.memo(({ clickHandler }: any) => {
   const navigate = useNavigate();
   const leftWidth = useRecoilValue(leftPanelWidthAtom);
   const [inputPlaylistName, setPlaylistName] = useState("");
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
 
   useEffect(() => {
     fethcLibrary();
   }, []);
 
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
+
   function fethcLibrary() {
     getLibrary().then((data: any) => {
       setLibrary(data);
-    });
+    }).catch()
   }
 
   // confirm handler to create playlist with collaborative
   const confirmHandler = async () => {
-    let response: any = await createPlaylist(inputPlaylistName, true);
-    alert(response.data.message);
+  try{
+    let response : any = await createPlaylist(inputPlaylistName, true)
+    let severity = response.status >= 200 && response.status < 400 ? "success":"error"
+    // await setSnackbarState({severity:severity, message:response.data.message})
+    showNotification({severity:'success', message:response.data.message})
     fethcLibrary();
+  }
+  catch(error:any){
+    showNotification({severity:'error', message:error.response.data.message})
+  }
+   
+   
   };
   // create a playlist without collaboration
   const noClickHandler = async () => {
+   try{
     let response: any = await createPlaylist(inputPlaylistName, false);
-    alert(response.data.message);
+    showNotification({severity:'success', message:response.data.message})
     fethcLibrary();
+   }catch(error:any){
+    showNotification({severity:'error', message:error.response.data.message})
+   }
   };
 
   const onDeleteConfirm = async (playlistId: string) => {
-    let response: any = await removePlaylist(playlistId);
-    alert(response.data.message);
-    fethcLibrary();
+    try{
+      let response: any = await removePlaylist(playlistId);
+      showNotification({severity:'success', message:response.data.message})
+      fethcLibrary();
+    }catch(error:any){
+      showNotification({severity:'error', message:error.response.data.message})
+    }
   };
 
   return (
@@ -183,7 +206,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                             title="Detele Playlist"
                             confirmHandler={onDeleteConfirm}
                             NoClickHandler={() => {
-                              alert("delete cancled");
+                              showNotification({severity:"error", message:"terminated"})
                             }}
                           >
                             Are You Sure want to delete This playlist

@@ -1,3 +1,7 @@
+import { useSetRecoilState } from "recoil";
+import { snackbarAtom } from "../store/otherState";
+import { useEffect, useState } from "react";
+
 function secondsToMinutesSeconds(seconds:number) {
   // Calculate minutes and remaining seconds
   const minutes = Math.floor(seconds / 60);
@@ -18,6 +22,19 @@ function groupDataByArtist(data:any[]) {
     }
     return acc;
   }, {});
+
 }
 
-export  {secondsToMinutesSeconds, groupDataByArtist};
+export function useSnackbar(){
+  const [snackbarState, setSnackbarState]:any = useSetRecoilState(snackbarAtom);
+      let openWithSuccess = (message:string)=>{
+        setSnackbarState({severity:"success", message:message})
+      }
+      let openWithError = (message:string)=>{
+        setSnackbarState({severity:"error", message:message})
+      }
+  return {openWithSuccess , openWithError}
+  }
+ 
+
+export  {secondsToMinutesSeconds, groupDataByArtist}

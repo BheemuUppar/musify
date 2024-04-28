@@ -5,28 +5,35 @@ import { environment } from "../assets/environment";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
+import { snackbarAtom } from "../store/otherState";
 
 function Signin() {
   const {
     register,  handleSubmit, watch,  formState: { errors, isDirty, isValid, isSubmitting }, } = useForm();
   const setAuthState = useSetRecoilState(isAuthenticatedAtom);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
 
   const onSubmit: SubmitHandler<any> = (data) => {
     login(data);
   };
-
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
   async function login(payload: any) {
-    axios.post(`${environment.baseUrl}/auth/signin`, payload).then((res) => {
-      alert(res.data.message);
-      if(res.data.message == 'success'){
-        setAuthState(true);
+    axios.post(`${environment.baseUrl}/auth/signin`, payload).then( (res) => {
+      if(res.data.message == 'login successfull'){
+         setAuthState(true);
         localStorage.setItem("username", res.data.username)
         localStorage.setItem("email", res.data.email)
         localStorage.setItem("token", res.data.token)
+         showNotification({severity:'success', message:res.data.message})
         navigate('/home');
       }
     
+    }).catch((error:any)=>{
+      console.log(error)
+      showNotification({severity:'error', message:error.response.data.message})
     });
   }
 

@@ -15,6 +15,7 @@ import PlaylistCard from "./PlaylistCard";
 import { getCollaborationPlaylist } from "../utils/apiutils";
 import playlistImage from "../assets/images/playlist.png";
 import { currentSongsListAtom } from "../store/SongState";
+import Snackbar from "./shared/Snackbar";
 
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);
@@ -82,7 +83,7 @@ function SearchPage() {
         )}
       </div>
 
-      <CollaborationWrapper />
+      {/* <CollaborationWrapper /> */}
     </>
   );
 }
@@ -107,6 +108,7 @@ function TopResultCard({ album, className, setCurrentlist }: any) {
           </div>
         </Link>
       </div>
+     
     </>
   );
 }

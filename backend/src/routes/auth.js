@@ -53,6 +53,7 @@ router.post("/signup", async (req, res) => {
 router.post("/signin", async (req, res) => {
   let body = req.body;
   let validate = signInSchema.safeParse(body);
+  
   if (!validate.success) {
     res.status(409).json({ message: "Invalid Payload" });
     return;
@@ -66,7 +67,7 @@ router.post("/signin", async (req, res) => {
       async (error, result) => {
         if(result){
          let token = await jwt.sign({email:dbResponse.email}, process.env.jwtSecretekey, {expiresIn:"30m"} )
-         res.status(200).json({message:"success", username:dbResponse.username, email:dbResponse.email ,token:token})
+         res.status(200).json({message:"login successfull", username:dbResponse.username, email:dbResponse.email ,token:token})
         }
         else{
           res.status(401).json({message:"Invalid username and password"})

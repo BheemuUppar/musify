@@ -3,22 +3,32 @@ import logo from "../assets/images/icon.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { environment } from "../assets/environment";
 import { useNavigate , Link } from "react-router-dom";
+import { snackbarAtom } from "../store/otherState";
+import { useSetRecoilState } from "recoil";
 
 
 function Signup() {
   const navigate = useNavigate();
   const { register,  handleSubmit, watch, formState: { errors, isDirty, isValid },} = useForm();
- 
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
   const onSubmit: SubmitHandler<any> = (data) => {
     delete data["cnf-password"];
     registerUser(data);
   };
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
+
   function registerUser(payload: any) {
     axios.post(`${environment.baseUrl}/auth/signup`, payload).then((res) => {
-      alert(res.data.message);
+      showNotification({severity:'success', message:res.data.message+', login to continue'})
       if (res.data.message === "user registered successfully") {
         navigate('/signin')
       }
+    }).catch((error:any)=>{
+      showNotification({severity:'error', message:error.response.data.message})
     });
   }
 

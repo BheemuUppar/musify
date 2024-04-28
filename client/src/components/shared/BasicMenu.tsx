@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { libraryAtom } from "../../store/otherState";
+import { libraryAtom, snackbarAtom } from "../../store/otherState";
 import { addSongtoLibrary, getLibrary } from "../../utils/apiutils";
 
 export default function BasicMenu({ songId }: any) {
@@ -12,6 +12,11 @@ export default function BasicMenu({ songId }: any) {
   const library = useRecoilValue(libraryAtom);
   const setLibrary = useSetRecoilState(libraryAtom);
   const open = Boolean(anchorEl);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -21,10 +26,15 @@ export default function BasicMenu({ songId }: any) {
   };
 
   async function addSongtoLibraryHandler(id: string, songId: any) {
-   await  addSongtoLibrary(id , songId);
-   getLibrary().then((data: any) => {
-    setLibrary(data);
-  });
+  try{
+    await  addSongtoLibrary(id , songId);
+    getLibrary().then((data: any) => {
+      showNotification({severity:'success', message:"song added to your playlist"})
+     setLibrary(data);
+   });
+  }catch(error:any){
+    showNotification({severity:'error', message:error.response.data.message})
+  }
 
   }
   return (

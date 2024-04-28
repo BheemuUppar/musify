@@ -1,11 +1,12 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
-import { searchModeAtom, searchTextAtom } from "../store/otherState";
+import { searchModeAtom, searchTextAtom, snackbarAtom } from "../store/otherState";
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { audioStateAtom, currentSongAtom, currentSongsListAtom } from "../store/SongState";
-import Footer from './Footer'
+import Footer from './Footer';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 function Content() {
   return (
@@ -27,6 +28,12 @@ function Navbar() {
   const resetCurrentSong = useResetRecoilState(currentSongAtom);
   const resetAuth = useResetRecoilState(isAuthenticatedAtom);
   const resetAudio = useResetRecoilState(audioStateAtom);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
+
   return (
     <>
       <nav className="w-full flex justify-between">
@@ -62,6 +69,7 @@ function Navbar() {
               <li>
                 <button
                   onClick={async function () {
+                    showNotification({severity:'success', message:"logged out successfully"})
                     localStorage.clear();
                     await  resetPlaylist()
                     await resetCurrentSong() 
@@ -71,7 +79,7 @@ function Navbar() {
                   }}
                   type="button"
                 >
-                  Signout
+                <PowerSettingsNewIcon/>
                 </button>
               </li>
             )}

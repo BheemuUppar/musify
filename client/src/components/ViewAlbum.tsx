@@ -8,7 +8,7 @@ import AlbumSongCard from "./AlbumSongCard";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { currentSongsListAtom } from "../store/SongState";
 import { createPlaylist, getLibrary } from "../utils/apiutils";
-import { libraryAtom } from "../store/otherState";
+import { libraryAtom, snackbarAtom } from "../store/otherState";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -17,15 +17,22 @@ const ViewAlbum = React.memo(() => {
   const params = useParams();
   const [currentSongList, setCurrentSongList] = useRecoilState(currentSongsListAtom);
   const setLibrary = useSetRecoilState(libraryAtom);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
   useEffect(() => {
     axios
       .get(`${environment.searchUrl}/albumsById/${params.id}`)
       .then((data: any) => {
-        console.log(data.data.data);
         setAlbum(data.data.data);
       });
   }, []);
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
+
   const addToMyPlaylist = async () => {
+   try{
     let arrOfId = album.songs.map((song: any) => {
       return song.id;
     });
@@ -35,10 +42,14 @@ const ViewAlbum = React.memo(() => {
       album.image,
       arrOfId
     );
-    alert(response.data.message);
+    
+    showNotification({severity:'success', message:response.data.message})
     getLibrary().then((data: any) => {
       setLibrary(data);
     });
+   }catch(error:any){
+    showNotification({severity:'error', message:error.response.data.message})
+   }
   };
     const setCurrentlist = async (index:number)=>{
       await setCurrentSongList({

@@ -29,3 +29,12 @@ export const songInfoOpenAtom = atom({
   key: "songInfoOpenAtom",
   default: false,
 });
+
+export const snackbarAtom= atom<any>({
+  key:"snackbarAtom",
+  default:{
+    severity:null,
+    message:null
+  },
+
+})
