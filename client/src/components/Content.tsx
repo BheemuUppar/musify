@@ -42,7 +42,7 @@ const toggleTheme = ()=>{
 
   return (
     <>
-      <nav className="w-full flex justify-between">
+      <nav className="w-full flex justify-between py-2">
         <div className="flex">
           {/* <Link to="/home">
             <img className=" w-[20%]" src={logo} alt="musify" />
