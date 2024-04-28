@@ -4,10 +4,11 @@ import { currentSongAtom, isPlayingAtom } from "../store/SongState";
 import { secondsToMinutesSeconds } from "../utils/utils";
 import BasicMenu from "./shared/BasicMenu";
 import equilizerImage from "../assets/images/equaliser-animated-green.gif";
+import playlist from './../assets/images/playlist.png'
 
-const AlbumSongCard = React.memo(({ song , index, setCurrentlist}: any) => {
+const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
-  const isPlaying = useRecoilValue(isPlayingAtom)
+  const isPlaying = useRecoilValue(isPlayingAtom);
   return (
     <>
       <div className="group flex justify-between p-2 hover:bg-dark-600 rounded">
@@ -18,15 +19,17 @@ const AlbumSongCard = React.memo(({ song , index, setCurrentlist}: any) => {
               src={equilizerImage}
               alt=""
             />
-          <img
-            className="h-[50px] w-[50px] rounded m-1"
-            src={song.image[1].url}
+          { song && song.image && song.image[1].url &&
+            <img
+            className="h-[50px] w-[50px] rounded m-1 cursor-pointer"
+            src={song.image[1].url ? song.image[1].url : playlist}
             alt=""
-            onClick={() => {
-              setCurrentlist(index)
+            onClick={ () => {
+               setCurrentlist(index)
               // setCurrentSong(song);
             }}
           />
+          }
           <div>
             <p>{song.name}</p>
             {song.artists.primary.map((artist: any) => {
@@ -48,6 +51,6 @@ const AlbumSongCard = React.memo(({ song , index, setCurrentlist}: any) => {
       </div>
     </>
   );
-});
+};
 
 export default AlbumSongCard;

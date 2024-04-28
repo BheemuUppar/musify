@@ -76,7 +76,7 @@ function SearchPage() {
           <div className="col-span-2 overflow-y-auto">
             {searchResults.songs.map((song: any, index: number) => {
               if (index < 4) {
-                return <AlbumSongCard setCurrentlist={setCurrentlist} key={song.id} song={song} />;
+                return <AlbumSongCard index={index} setCurrentlist={setCurrentlist} key={song.id} song={song} />;
               }
             })}
           </div>
