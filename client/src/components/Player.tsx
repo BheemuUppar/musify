@@ -200,19 +200,25 @@ function NextButton() {
 function PreviousButton() {
   const [currentSongList, setCurrentList] =
     useRecoilState(currentSongsListAtom);
+
   function getPreviousSongIndex() {
+    debugger
     let index = currentSongList.currentSongIndex;
-    return index > currentSongList.songs.length ? --index : 0;
+    if(index == 0){
+      return 0
+    }
+    return --index;
   }
   return (
     <>
       <button
         className="h-[20px] w-[20px]"
         onClick={function () {
-          setCurrentList({
+          console.log(getPreviousSongIndex())
+          setCurrentList(JSON.parse(JSON.stringify({
             songs: currentSongList.songs,
             currentSongIndex: getPreviousSongIndex(),
-          });
+          })));
         }}
       >
         <svg
