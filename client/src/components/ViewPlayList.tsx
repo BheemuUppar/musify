@@ -25,7 +25,11 @@ const ViewPlaylist = React.memo(() => {
 
   useEffect(() => {
     axios
-      .get(`${environment.searchUrl}/playlistById/${params.id}`)
+      .get(`${environment.searchUrl}/playlistById/${params.id}`,{
+        headers:{
+          Authorization:localStorage.getItem('token')
+        }
+      })
       .then((response) => {
         setPlaylist(response.data.data);
       })

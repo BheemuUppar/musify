@@ -36,22 +36,38 @@ function SearchPage() {
   }
 
   async function fetchAlbums() {
-    let data = await axios.get(`${environment.searchUrl}/albums/${searchText}`);
+    let data = await axios.get(`${environment.searchUrl}/albums/${searchText}`,{
+      headers:{
+        Authorization:localStorage.getItem('token')
+      }
+    });
     return data.data;
   }
   async function fetchSongs() {
-    let data = await axios.get(`${environment.searchUrl}/songs/${searchText}`);
+    let data = await axios.get(`${environment.searchUrl}/songs/${searchText}`,{
+      headers:{
+        Authorization:localStorage.getItem('token')
+      }
+    });
     return data.data;
   }
   async function fetchPlaylist() {
     let data = await axios.get(
-      `${environment.searchUrl}/playlist/${searchText}`
+      `${environment.searchUrl}/playlist/${searchText}`,{
+        headers:{
+          Authorization:localStorage.getItem('token')
+        }
+      }
     );
     return data.data;
   }
   async function fetchArtists() {
     let data = await axios.get(
-      `${environment.searchUrl}/artists/${searchText}`
+      `${environment.searchUrl}/artists/${searchText}`,{
+        headers:{
+          Authorization:localStorage.getItem('token')
+        }
+      }
     );
     return data.data;
   }
