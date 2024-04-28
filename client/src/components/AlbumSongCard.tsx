@@ -9,11 +9,11 @@ import playlist from './../assets/images/playlist.png'
 const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const isPlaying = useRecoilValue(isPlayingAtom);
+console.log(song)
   return (
     <>
-      <div className="group flex justify-between p-2 dark:hover:bg-dark-600 hover:bg-slate-400 rounded">
+     {song &&  <div className="group flex justify-between p-2 dark:hover:bg-dark-600 hover:bg-slate-400 rounded">
         <div className="left flex items-center">
-        {/* {isPlaying && currentSong && song.id == currentSong.id ? ( */}
             <img
               className={`${isPlaying && currentSong && song.id == currentSong.id ? "visible":"invisible"} h-[20px] w-[20px] group-hover:block` }
               src={equilizerImage}
@@ -45,10 +45,10 @@ const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
               e.preventDefault();
               e.stopPropagation()
           }}>
-            <BasicMenu   songId={song.id}/>
+            <BasicMenu songId={song.id}/>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   );
 };

@@ -56,7 +56,8 @@ const ViewPlaylist = React.memo(() => {
   };
 
 const setCurrentlist = async (index:number)=>{
-  await setSongsList({ songs: playlist.songs, currentSongIndex: index });
+  console.log(index , playlist.songs)
+  await setSongsList(JSON.parse(JSON.stringify({ songs: playlist.songs, currentSongIndex: index })));
 }
 
   return (
@@ -76,7 +77,7 @@ const setCurrentlist = async (index:number)=>{
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {
-          return <SongCard key={Math.random()} index={index + 1} song={song} setCurrentlist={setCurrentlist} />;
+          return <SongCard key={Math.random()} index={index} song={song} setCurrentlist={setCurrentlist} />;
         })}
     </>
   );

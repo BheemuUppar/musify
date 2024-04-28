@@ -8,7 +8,6 @@ import equilizerImage from "../assets/images/equaliser-animated-green.gif";
 
 const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; song: any; setCurrentlist:any }) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
-  
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingAtom);
 
   return (
@@ -23,11 +22,12 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
             />
           ) : (
             <div className="relative w-[25px] " style={{marginBottom:"15px"}}>
-              <div className="group-hover:invisible absolute left-2 w-[25px] text-dark-500 dark:text-gray-300" > {index}</div>
+              <div className="group-hover:invisible absolute left-2 w-[25px] text-dark-500 dark:text-gray-300" > {index + 1}</div>
               <div
                 className=" invisible group-hover:visible absolute left-0 w-[25px]"
                 onClick={async () => {
-                  setCurrentlist(index-1)
+                  console.log('index ', index , song)
+                  await setCurrentlist(index)
                 }}
               >
                 <PlayArrowIcon className="text-dark-600 dark:text-white"/>
