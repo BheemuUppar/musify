@@ -81,15 +81,15 @@ const Library = React.memo(({ clickHandler }: any) => {
           >
             <svg
               role="img"
-              fill="#fff"
+              
               viewBox="0 0 24 24"
-              className="w-[30px] h-[30px] "
+              className="w-[30px] h-[30px]  dark:fill-white"
             >
               <path d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zm6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1z"></path>
             </svg>
           </button>
           {leftWidth.size == "large" && (
-            <span className="text-nowrap hidden sm:inline-block">
+            <span className="text-nowrap hidden sm:inline-block text-dark-600 dark:text-white">
               Your Library
             </span>
           )}
@@ -98,7 +98,7 @@ const Library = React.memo(({ clickHandler }: any) => {
           <div>
             <span className="flex">
               <input
-                className="text-dark rounded bg-transparent border border-dark-600 p-1"
+                className="dark:text-white text-dark-600  rounded bg-transparent border border-dark-600 p-1"
                 onInput={async (e: any) => {
                   // need to optimize using debouncing
                   await setPlaylistName(e.target.value);
@@ -115,7 +115,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                 <DialogModal
                   icon={
                     <Tooltip title="create playlist">
-                      <AddIcon />
+                      <AddIcon className="text-dark-600 dark:text-white" />
                     </Tooltip>
                   }
                   title="make this library to collaborative"
@@ -139,18 +139,18 @@ const Library = React.memo(({ clickHandler }: any) => {
               return (
                 <li
                   key={playlist.name}
-                  className=" my-4 cursor-pointer bg-dark-600 hover:bg-transparent px-2 py-1 border border-gray-800 rounded transition-300 group"
+                  className=" my-4 cursor-pointer dark:bg-dark-600  hover:bg-transparent px-2 py-1 border border-gray-400 dark:border-gray-800 rounded transition-300 group"
                   onClick={() => {
                     navigate("myPlaylist", { state: playlist });
                   }}
                 >
                   <div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 ">
                       <div className="flex items-center">
                         {leftWidth.size == "small" && (
                           <Tooltip title={playlist.name} placement="right" arrow >
                             <img
-                              className="h-[50px] w-[50px]"
+                              className="h-[50px] w-[50px] "
                               src={
                                 playlist.image[0].url
                                   ? playlist.image[0].url
@@ -179,12 +179,12 @@ const Library = React.memo(({ clickHandler }: any) => {
                       {leftWidth.size == "large" && (
                         <div className="flex grow justify-between">
                           <div>
-                            <h3 className="sm:inline-block text-xl ">
+                            <h3 className="sm:inline-block text-xl text-dark-600 dark:text-white">
                               {playlist.name}
                             </h3>
                             <br />
-                            <span className="text-gray-400">{playlist.type} :</span>
-                            <span className="text-gray-400"> &nbsp;{playlist.songs.length} songs</span>
+                            <span className="text-dark-600 dark:text-white">{playlist.type} :</span>
+                            <span className="text-dark-600 dark:text-white"> &nbsp;{playlist.songs.length} songs</span>
                           </div>
                           {/* <button onClick={(e)=>{
                             e.preventDefault();

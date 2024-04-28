@@ -6,8 +6,7 @@
 
 
 body{
-    background-color: #000;
-    color: rgb(226, 213, 213);
+   
     font-size: 12px;
     /* font-family: Helvetica Neue, helvetica, arial, Hiragino Kaku Gothic ProN, Meiryo, MS Gothic; */
     font-family: cursive;
@@ -16,6 +15,14 @@ body{
     font-style: normal;
     font-variation-settings:
       "wdth" 100;
+}
+body{
+  background-color: rgb(226, 213, 213);
+  color: #000;
+}
+.dark body{
+  background-color: #000;
+  color: rgb(226, 213, 213);
 }
 
 .left-playlist{

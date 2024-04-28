@@ -1,0 +1,29 @@
+ .MuiSlider-track{
+    border: none;
+    background-color: #06f058 !important;
+    /* filled bar */
+}
+
+ .MuiSlider-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: #09a640 !important; 
+    /* circle */
+}
+.MuiSlider-rail{
+    background-color: rgb(0, 250, 0) !important;
+}
+
+/* for dark theme */
+.dark .MuiSlider-track{
+    border: none;
+    background-color: white !important;
+    /* filled bar */
+}
+
+.dark .MuiSlider-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: white !important; 
+    /* circle */
+}

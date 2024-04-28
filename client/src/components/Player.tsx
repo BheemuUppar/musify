@@ -16,6 +16,7 @@ import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import { songInfoOpenAtom } from "../store/otherState";
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
 function Player() {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
@@ -56,7 +57,7 @@ function Player() {
   return (
     <>
       {currentSong && (
-        <div className=" bg-black-900 p-2 mx-2 rounded  text-white grid grid-cols-12 gap-x-2 " style={{height: 'calc(100vh - 80vh)'}}>
+        <div className="p-2 mx-2    grid grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0" style={{height: 'calc(100vh - 80vh)'}}>
           <div className="trackinfo flex col-span-3 items-center">
             <img
               className="h-[50px] w-[50px]"
@@ -64,11 +65,11 @@ function Player() {
               alt=""
             />
             <div className="ps-2">
-              <p>{currentSong.name}</p>
+              <p className="text-dark dark:text-white text-lg">{currentSong.name}</p>
               <p>
                 {currentSong.artists.primary.map((artist: any) => {
                   return (
-                    <span key={artist.id} className="text-gray-400">
+                    <span key={artist.id} className="dark:text-gray-400 text-gray-700">
                       {artist.name}
                     </span>
                   );
@@ -89,6 +90,7 @@ function Player() {
           <div className="elements col-span-3 flex items-center">
             <VolumeSlider />
             <SongInfoButton />
+            <OpenInFullIcon className="text-dark-600 dark:text-white"/>
           </div>
         </div>
       )}
@@ -128,7 +130,7 @@ const PlayPauseButton = React.memo(() => {
           }
         }}
         type="button"
-        className="rounded-full border border-white h-[40px] w-[40px] p-2"
+        className="rounded-full border border-dark-600 dark:border-white h-[40px] w-[40px] p-2 text-gray-500 dark:text-white"
       >
         {!isPlaying ? <PlayingButton /> : <PauseButton />}
       </button>
@@ -144,7 +146,7 @@ function PlayingButton() {
         role="img"
         aria-hidden="true"
         viewBox="0 0 16 16"
-        className="Svg-sc-ytk21e-0 dYnaPI fill-white"
+        className="Svg-sc-ytk21e-0 dYnaPI fill-dark-500 dark:fill-white"
       >
         <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
       </svg>
@@ -160,7 +162,7 @@ function PauseButton() {
         role="img"
         aria-hidden="true"
         viewBox="0 0 16 16"
-        className="Svg-sc-ytk21e-0 dYnaPI fill-white"
+        className="Svg-sc-ytk21e-0 dYnaPI fill-dark-500 dark:fill-white"
       >
         <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
       </svg>
@@ -190,7 +192,7 @@ function NextButton() {
           role="img"
           aria-hidden="true"
           viewBox="0 0 16 16"
-          className="Svg-sc-ytk21e-0 dYnaPI fill-white" >
+          className="Svg-sc-ytk21e-0 dYnaPI fill-dark-500 dark:fill-white" >
           <path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"></path>
         </svg>
       </button>
@@ -202,7 +204,6 @@ function PreviousButton() {
     useRecoilState(currentSongsListAtom);
 
   function getPreviousSongIndex() {
-    debugger
     let index = currentSongList.currentSongIndex;
     if(index == 0){
       return 0
@@ -226,7 +227,7 @@ function PreviousButton() {
           role="img"
           aria-hidden="true"
           viewBox="0 0 16 16"
-          className="Svg-sc-ytk21e-0 dYnaPI fill-white"
+          className="Svg-sc-ytk21e-0 dYnaPI fill-dark-500 dark:fill-white"
         >
           <path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"></path>
         </svg>
@@ -277,23 +278,25 @@ function SneekBar() {
             max={maxDuration}
             value={currentTime}
             onChange={handleChange}
-            sx={{
-              color: "#fff",
-              "& .MuiSlider-track": {
-                border: "none",
-              },
-              "& .MuiSlider-thumb": {
-                width: 15,
-                height: 15,
-                backgroundColor: "#fff",
-                "&::before": {
-                  boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
-                },
-                "&:hover, &.Mui-focusVisible, &.Mui-active": {
-                  boxShadow: "none",
-                },
-              },
-            }}
+            // className="dark:text-white text-green-400"
+            // sx={{
+            //   // color: "#fff",
+            //   "& .MuiSlider-track": {
+            //     border: "none",
+            //     backgroundColor:"green"
+            //   },
+            //   "& .MuiSlider-thumb": {
+            //     width: 15,
+            //     height: 15,
+            //     backgroundColor: "#fff",
+            //     "&::before": {
+            //       boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
+            //     },
+            //     "&:hover, &.Mui-focusVisible, &.Mui-active": {
+            //       boxShadow: "none",
+            //     },
+            //   },
+            // }}
           />
         </Box>
         <span className="text-nowrap pb-[4px]">

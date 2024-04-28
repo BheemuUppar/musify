@@ -36,5 +36,9 @@ export const snackbarAtom= atom<any>({
     severity:null,
     message:null
   },
+})
 
+export const themeAtom = atom({
+  key:"themeAtom",
+  default:"white"
 })

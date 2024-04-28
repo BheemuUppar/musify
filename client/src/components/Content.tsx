@@ -7,7 +7,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { audioStateAtom, currentSongAtom, currentSongsListAtom } from "../store/SongState";
 import Footer from './Footer';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-
+import LightModeIcon from '@mui/icons-material/LightMode';
+import Tooltip from '@mui/material/Tooltip'
 function Content() {
   return (
     <div className="flex flex-col h-full rounded">
@@ -34,6 +35,11 @@ function Navbar() {
     setSnackbarState(props)
   }
 
+const toggleTheme = ()=>{
+  document.documentElement.classList.toggle('dark');
+  // document.documentElement.classList.toggle('white');
+}
+
   return (
     <>
       <nav className="w-full flex justify-between">
@@ -41,15 +47,15 @@ function Navbar() {
           {/* <Link to="/home">
             <img className=" w-[20%]" src={logo} alt="musify" />
           </Link> */}
-          <span  className="p-1 mx-1 rounded-full bg-black-900 h-[35px] w-[35]">
-            <button disabled={history.state.idx == 0} className="disabled:opacity-75 disabled:cursor-not-allowed"  onClick={() => {
+          <span  className="p-1 mx-1 rounded-full dark:bg-black-900 bg-gray-400 h-[35px] w-[35]">
+            <button disabled={history.state.idx == 0} className="disabled:opacity-75 disabled:cursor-not-allowed "  onClick={() => {
               history.back();
-            }}><ArrowBackIosNewOutlinedIcon/></button>
+            }}><ArrowBackIosNewOutlinedIcon className="text-dark-600 dark:text-white"/></button>
           </span>
-          <span className="p-1 mx-1 rounded-full bg-black-900 h-[35px] w-[35]"  >
+          <span className="p-1 mx-1 rounded-full dark:bg-black-900 bg-gray-400  h-[35px] w-[35]"  >
             <button disabled={history.length == history.state.idx} className="disabled:opacity-75 disabled:cursor-not-allowed" onClick={() => {
               history.forward();  
-            }}><ArrowForwardIosIcon/></button>
+            }}><ArrowForwardIosIcon className="text-dark-600 dark:text-white"/></button>
           </span>
           {currentRoute.pathname == "/home/search" && <SearchBox />}
         </div>
@@ -67,6 +73,7 @@ function Navbar() {
             )}
             {isAuthenticated == true && (
               <li>
+                <Tooltip title="logout">
                 <button
                   onClick={async function () {
                     showNotification({severity:'success', message:"logged out successfully"})
@@ -79,11 +86,17 @@ function Navbar() {
                   }}
                   type="button"
                 >
-                <PowerSettingsNewIcon/>
+                <PowerSettingsNewIcon className="text-dark-600 dark:text-white"/>
                 </button>
+                </Tooltip>
               </li>
             )}
           </ul>
+          <button type="button" className="text-dark-500 dark:text-white pb-3 mx-3" onClick={toggleTheme}>
+           <Tooltip title="change theme">
+             <LightModeIcon />
+           </Tooltip>
+          </button>
         </div>
 
       </nav>
@@ -99,7 +112,7 @@ function SearchBox() {
     <>
       <div>
         <input
-          className="p-2 bg-transparent border border-dark-600 rounded-[30px] w-full"
+          className="p-2 bg-transparent border border-dark-600 text-dark-600 dark:text-white rounded-[30px] w-full"
           type="text"
           placeholder="What do you want to play? "
           onInput={(e: any) => {

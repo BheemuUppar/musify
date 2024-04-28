@@ -4,7 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode:"class",
   theme: {
+   
     extend: {
       colors:{
         dark:{
@@ -17,7 +19,13 @@ export default {
         },
         green:{
           400:"#1ed760",
-        }
+        },
+        customWhite:{
+          // 600:"#FFFFFF",
+          // 900:"#fff"
+          400:"#e5dfdf;"
+        },
+        lightHover:"#e4e5f1"
       }
     },
   },

@@ -11,7 +11,7 @@ const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
   const isPlaying = useRecoilValue(isPlayingAtom);
   return (
     <>
-      <div className="group flex justify-between p-2 hover:bg-dark-600 rounded">
+      <div className="group flex justify-between p-2 dark:hover:bg-dark-600 hover:bg-slate-400 rounded">
         <div className="left flex items-center">
         {/* {isPlaying && currentSong && song.id == currentSong.id ? ( */}
             <img
@@ -31,7 +31,7 @@ const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
           />
           }
           <div>
-            <p>{song.name}</p>
+            <p className="text-dark-600 dark:text-white"> {song.name}</p>
             {song.artists.primary.map((artist: any) => {
               return <span  className="text-gray-500" key={artist.id}>{artist.name}</span>;
             })}
@@ -39,7 +39,7 @@ const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
         </div>
         <div className="flex items-center">
           <div className="right flex items-center">
-            <span>{secondsToMinutesSeconds(song.duration)}</span>
+            <span className="text-dark-600 dark:text-white">{secondsToMinutesSeconds(song.duration)}</span>
           </div>
           <div className="invisible group-hover:visible" onClick={(e)=>{
               e.preventDefault();
