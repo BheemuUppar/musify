@@ -102,8 +102,8 @@ function NextSong(){
   useEffect(()=>{
     console.log(currentList.songs[currentList.currentSongIndex + 1])
   }, [currentList])
-  return <div>
-    
+  return <div className="min-h-[fit-content]">
+    <h3 className="text-lg"> Next song</h3>
   {currentList.songs.length>0 && <AlbumSongCard clickHandler={()=>{
       setCurrentList({
         songs: currentList.songs,
