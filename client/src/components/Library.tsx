@@ -22,14 +22,16 @@ const Library = React.memo(({ clickHandler }: any) => {
     fethcLibrary();
   }, []);
 
-  const  showNotification = function (props:{severity:string, message:string}){
-    setSnackbarState(props)
+  const  showNotification :any = function (props:{severity:string, message:string}){
+    setSnackbarState(props);
   }
 
   function fethcLibrary() {
     getLibrary().then((data: any) => {
       setLibrary(data);
-    }).catch()
+    }).catch(error=>{
+      showNotification({severity:'error', message:error.response.data.message})
+    })
   }
 
   // confirm handler to create playlist with collaborative

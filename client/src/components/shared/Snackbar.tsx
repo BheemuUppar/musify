@@ -1,24 +1,28 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRecoilState } from "recoil";
 import { snackbarAtom } from "../../store/otherState";
-import { useSnackbar } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
-interface CustomizedSnackbarsProps {
-  severity: "error" | "warning" | "info" | "success";
-  message: string;
-}
+// interface CustomizedSnackbarsProps {
+//   severity: "error" | "warning" | "info" | "success";
+//   message: string;
+// }
 
 export default function CustomizedSnackbars() {
   const [open, setOpen] = React.useState(false);
   const [snackbarState, setSnackbarState] = useRecoilState(snackbarAtom);
+  const navigate = useNavigate()
   
 
   React.useEffect(() => {
     if (snackbarState.severity) {
       setOpen(true);
+    }
+    if(snackbarState.message == 'token missign' || snackbarState.message == 'Token has expired' || snackbarState.message == 'Invalid token' ){
+      localStorage.clear();
+      navigate('/signup')
     }
   }, [snackbarState]);
 

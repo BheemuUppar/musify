@@ -9,6 +9,7 @@ import ViewAlbum from "./ViewAlbum";
 import ViewPlaylist from "./ViewPlayList";
 import SearchPage from "./SearchPage";
 import ViewMyPlaylist from "./ViewMyPlaylist";
+import CustomizedSnackbars from "./shared/Snackbar";
 
 const routes = [
   {
@@ -52,6 +53,7 @@ function Routehandler() {
             );
           })}
         </Routes>
+        <CustomizedSnackbars />
       </BrowserRouter>
     </>
   );

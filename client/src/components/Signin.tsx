@@ -23,10 +23,10 @@ function Signin() {
   async function login(payload: any) {
     axios.post(`${environment.baseUrl}/auth/signin`, payload).then( (res) => {
       if(res.data.message == 'login successfull'){
-         setAuthState(true);
-        localStorage.setItem("username", res.data.username)
+         localStorage.setItem("username", res.data.username)
         localStorage.setItem("email", res.data.email)
         localStorage.setItem("token", res.data.token)
+         setAuthState(true);
          showNotification({severity:'success', message:res.data.message})
         navigate('/home');
       }

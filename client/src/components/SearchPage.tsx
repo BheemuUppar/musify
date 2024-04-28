@@ -4,6 +4,7 @@ import {
   searchModeAtom,
   searchResultsAtom,
   searchTextAtom,
+  snackbarAtom,
 } from "../store/otherState";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -113,9 +114,16 @@ function TopResultCard({ album, className, setCurrentlist }: any) {
 
 function CollaborationWrapper() {
   const [collaborationPlaylist, setCollaborationPlaylist] = useState<any>([]);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
+  const  showNotification :any = function (props:{severity:string, message:string}){
+    setSnackbarState(props);
+  }
   useEffect(()=>{ 
     getCollaborationPlaylist().then((res:any)=>{
       setCollaborationPlaylist(res.data)
+    }).catch((error:any)=>{
+      showNotification({severity:'error', message:error.response.data.message})
     })
   }, [])
   return (

@@ -51,7 +51,11 @@ export function HomePage() {
 
   function fetchPlaylist() {
     axios
-      .get(`${environment.searchUrl}/playlist/${"top"}`)
+      .get(`${environment.searchUrl}/playlist/${"top"}`, {
+        headers:{
+          Authorization:localStorage.getItem("token")
+        }
+      })
       .then(async (data) => {
         console.log(data);
         await setPlaylist(data.data);
