@@ -33,7 +33,7 @@ const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
           <div>
             <p className="text-dark-600 dark:text-white"> {song.name}</p>
             {song.artists.primary.map((artist: any) => {
-              return <span  className="text-gray-500" key={artist.id}>{artist.name}</span>;
+              return <span  className="text-gray-500 mr-2" key={artist.id}>{artist.name}</span>;
             })}
           </div>
         </div>
@@ -45,7 +45,7 @@ const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
               e.preventDefault();
               e.stopPropagation()
           }}>
-            <BasicMenu  songId={song.id}/>
+            <BasicMenu   songId={song.id}/>
           </div>
         </div>
       </div>

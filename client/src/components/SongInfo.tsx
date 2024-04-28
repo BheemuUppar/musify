@@ -72,16 +72,16 @@ function ArtistList({ data }: any) {
   console.log(groupedObject);
   let arr = Object.keys(groupedObject);
   return (
-    <div className="bg-dark-600 p-2 rounded ">
+    <div className="dark:bg-dark-600 bg-slate-400 p-2 rounded ">
       {arr.map((artist) => {
         return (
             <div className="my-3 "  key={artist}>
-              <h2 className="text-lg">
+              <h2 className="text-lg  text-dark-600 dark:text-white">
                 {artist}
               </h2>
               {groupedObject[artist].map((obj: any) => {
                 return (
-                  <span className="text-md text-gray-400 mr-3" key={obj.name+obj.role}>
+                  <span className="text-md  mr-3 text-dark-600 dark:text-white " key={obj.name+obj.role}>
                     {obj.role}
                   </span>
                 );
@@ -103,8 +103,8 @@ function NextSong(){
     console.log(currentList.songs[currentList.currentSongIndex + 1])
   }, [currentList])
   return <div className="min-h-[fit-content]">
-    <h3 className="text-lg"> Next song</h3>
-  {currentList.songs.length>0 && <AlbumSongCard clickHandler={()=>{
+    <h3 className="text-lg text-dark-600 dark:text-white"> Next song</h3>
+  {currentList.songs.length>0 && <AlbumSongCard className="p-2" clickHandler={()=>{
       setCurrentList({
         songs: currentList.songs,
         currentSongIndex: currentList.currentSongIndex + 1,

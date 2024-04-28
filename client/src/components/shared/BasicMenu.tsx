@@ -45,7 +45,7 @@ export default function BasicMenu({ songId }: any) {
     >
       <Tooltip title="Add to Your Playlist">
         <button
-          className="hover:bg-transparent text-dark-600 dark:text-white"
+          className="hover:bg-transparent text-dark-600 dark:text-white mx-2"
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
