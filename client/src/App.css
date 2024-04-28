@@ -1,29 +1,77 @@
- .MuiSlider-track{
-    border: none;
-    background-color: #06f058 !important;
-    /* filled bar */
+.MuiSlider-track {
+  border: none;
+  background-color: #06f058 !important;
+  /* filled bar */
 }
 
- .MuiSlider-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: #09a640 !important; 
-    /* circle */
+.MuiSlider-thumb {
+  height: 15px;
+  width: 15px;
+  background-color: #09a640 !important;
+  /* circle */
 }
-.MuiSlider-rail{
-    background-color: rgb(0, 250, 0) !important;
+.MuiSlider-rail {
+  background-color: rgb(0, 250, 0) !important;
 }
 
 /* for dark theme */
-.dark .MuiSlider-track{
-    border: none;
-    background-color: white !important;
-    /* filled bar */
+.dark .MuiSlider-track {
+  border: none;
+  background-color: white !important;
+  /* filled bar */
 }
 
 .dark .MuiSlider-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: white !important; 
-    /* circle */
+  height: 15px;
+  width: 15px;
+  background-color: white !important;
+  /* circle */
+}
+
+#player.fullMode {
+  position: fixed;
+  height: 100vh !important;
+  width: 100vw;
+  background-color: #000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+}
+
+.fullMode .full-width {
+    position: inherit;
+
+}
+.fullMode .full-width img {
+    position: fixed;
+    height: 85vh;
+    width: 80vh;
+    width: -webkit-fill-available;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.6;
+
+}
+
+.fullMode .left {
+    position: inherit;
+    width: 40%;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+  /* By default, these divs will occupy the auto width columns */
+}
+.fullMode .right {
+    position: inherit;
+    width: 30%;
+    z-index: 2;
+    bottom: 0;
+    right: 0;
+
+  /* By default, these divs will occupy the auto width columns */
 }

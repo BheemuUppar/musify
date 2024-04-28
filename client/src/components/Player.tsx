@@ -8,7 +8,7 @@ import {
   volumeAtom,
 } from "../store/SongState";
 import InfoIcon from '@mui/icons-material/Info';
-import React, { useEffect, useState } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { secondsToMinutesSeconds } from "../utils/utils";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -17,6 +17,7 @@ import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import { songInfoOpenAtom } from "../store/otherState";
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+// import '../App.css'
 
 function Player() {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
@@ -24,7 +25,8 @@ function Player() {
   const audioState = useRecoilValue(audioStateAtom);
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
-  const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
+  // const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
+  const playerRef :any = useRef()
 
   useEffect(() => {
     if (currentList.songs.length > 0) {
@@ -54,11 +56,18 @@ function Player() {
     }
   }
 
+  let toggleFullScreenMode = ()=>{
+    playerRef.current.classList.toggle('fullMode')
+    ;
+  }
+
+ 
+
   return (
     <>
       {currentSong && (
-        <div className="p-2 mx-2    grid grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0" style={{height: 'calc(100vh - 80vh)'}}>
-          <div className="trackinfo flex col-span-3 items-center">
+        <div id="player" ref={playerRef} className="p-2 mx-2  grid grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0" style={{height: 'calc(100vh - 80vh)'}}>
+          <div className="trackinfo flex col-span-3 items-center full-width">
             <img
               className="h-[50px] w-[50px]"
               src={currentSong.image[2].url}
@@ -77,7 +86,7 @@ function Player() {
               </p>
             </div>
           </div>
-          <div className="controls grow mx-10 flex flex-col  col-span-6 justify-center">
+          <div className="controls grow mx-10 flex flex-col left col-span-6 justify-center side-by-side">
             <div className="top flex justify-center gap-4 items-center my-2">
               <PreviousButton />
               <PlayPauseButton />
@@ -87,10 +96,12 @@ function Player() {
               <SneekBar />
             </div>
           </div>
-          <div className="elements col-span-3 flex items-center">
+          <div className="elements col-span-3 flex items-center gap-4 right side-by-side">
             <VolumeSlider />
             <SongInfoButton />
-            <OpenInFullIcon className="text-dark-600 dark:text-white"/>
+            <button type="button" onClick={toggleFullScreenMode}>
+            <OpenInFullIcon  className="text-dark-600 dark:text-white"/>
+            </button>
           </div>
         </div>
       )}
