@@ -1,5 +1,4 @@
-import React from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { currentSongAtom, isPlayingAtom } from "../../store/SongState";
 import { secondsToMinutesSeconds } from "../../utils/utils";
 import BasicMenu from "./BasicMenu";
@@ -31,7 +30,7 @@ console.log(song)
           />
           }
           <div>
-            <p className={` ${currentSong && song.id == currentSong.id?"text-green-400":"text-dark-600 dark:text-white"} `} >{song.name}</p>
+            <p className={` ${currentSong && song.id == currentSong.id?"text-green-600 dark:text-green ":"text-dark-600 dark:text-white"} `} >{song.name}</p>
             {song.artists.primary.map((artist: any) => {
               return <span  className="text-gray-500 mr-2" key={artist.id}>{artist.name}</span>;
             })}

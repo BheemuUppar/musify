@@ -1,4 +1,3 @@
-import logo from "../assets/images/icon.png";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { environment } from "../../assets/environment";
@@ -41,8 +40,6 @@ function Signin() {
     <div className="w-full h-[100vh] flex justify-center items-center">
       <div className="form-container w-[20%] min-w-[300px] h-[60%] bg-[#e3e5eb] dark:bg-dark-500 flex justify-center items-center flex-col gap-2 rounded   py-5 ">
         <div className="flex items-center justify-between ">
-          {/* <h2 className="text-gray-400">Log in</h2> */}
-          {/* <img src={logo} className="h-[50px] w-[50px]" alt="logo" /> */}
           <h1 className="text-dark-600 dark:text-white text-lg">Sign In</h1>
         </div>
         <form

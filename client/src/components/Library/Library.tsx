@@ -11,7 +11,6 @@ import Tooltip from "@mui/material/Tooltip";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
-  // const setCurrentSongList = useSetRecoilState(currentSongsListAtom);
   const navigate = useNavigate();
   const leftWidth = useRecoilValue(leftPanelWidthAtom);
   const [inputPlaylistName, setPlaylistName] = useState("");
@@ -101,7 +100,6 @@ const Library = React.memo(({ clickHandler }: any) => {
               <input
                 className="dark:text-white text-dark-600  rounded bg-transparent border border-dark-600 p-1"
                 onInput={async (e: any) => {
-                  // need to optimize using debouncing
                   await setPlaylistName(e.target.value);
                 }}
                 type="text"
@@ -187,12 +185,6 @@ const Library = React.memo(({ clickHandler }: any) => {
                             <span className="text-dark-600 dark:text-white">{playlist.type} :</span>
                             <span className="text-dark-600 dark:text-white"> &nbsp;{playlist.songs.length} songs</span>
                           </div>
-                          {/* <button onClick={(e)=>{
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }} >
-                        <RemoveCircleOutlineIcon style={{ color: '#e75858' }}></RemoveCircleOutlineIcon>
-                        </button> */}
 
                           <DialogModal
                             className="invisible group-hover:visible  "

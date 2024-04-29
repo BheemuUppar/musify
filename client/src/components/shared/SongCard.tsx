@@ -26,7 +26,6 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
               <div
                 className=" invisible group-hover:visible absolute left-0 w-[25px]"
                 onClick={async () => {
-                  console.log('index ', index , song)
                   await setCurrentlist(index)
                 }}
               >
@@ -45,7 +44,7 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
           <div className="ps-2">
             {/* Display song name */}
             <p
-              className={` ${currentSong && song.id == currentSong.id?"text-green-400":"text-dark-600 dark:text-white"} `}
+              className={` ${currentSong && song.id == currentSong.id?"text-green-600 dark:text-green ":"text-dark-600 dark:text-white"} `}
             >
               {song.name}
             </p>

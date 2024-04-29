@@ -1,7 +1,7 @@
 import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { snackbarAtom } from "../../store/otherState";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticatedAtom } from "../../store/authState";
@@ -41,9 +41,6 @@ export default function CustomizedSnackbars() {
     return true
   }
 
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
 
   const handleClose = function (event: any, reason?: string) {
     if (reason === "clickaway") {
