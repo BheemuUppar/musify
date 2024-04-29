@@ -20,15 +20,15 @@ function SongInfo() {
             setSongInfoOpen(false);
           }}
         >
-          <CloseIcon />
+          <CloseIcon className="text-dark-600 dark:text-white" />
         </button>
       </div>
 
       <div
         className="flex flex-col justify-start overflow-auto"
-        style={{ maxHeight: "400px" }}
+        style={{ maxHeight: "100%" }}
       >
-        <h2 className="text-2xl ms-5">
+        <h2 className="text-2xl ms-5 text-dark-600 dark:text-white py-4">
           {currentSong && currentSong.album.name}
         </h2>
         <div
@@ -40,13 +40,13 @@ function SongInfo() {
             src={currentSong && currentSong.image[2]?.url}
             alt="song image"
           />
-          <h3 className="text-xl">{currentSong && currentSong.name}</h3>
+          <h3 className="text-xl text-dark-600 dark:text-white">{currentSong && currentSong.name}</h3>
           {currentSong &&
             currentSong.artists.primary.map((artist: any) => {
               return (
                 <span
                   key={artist.id}
-                  className="text-lg text-nowrap text-gray-400 mr-2"
+                  className="text-lg text-nowrap text-dark-500 dark:text-gray-400 mr-2"
                 >
                   {artist.name}
                 </span>
@@ -55,7 +55,7 @@ function SongInfo() {
 
           <div >
             <CardContent>
-              <h4 className="text-xl">Artists</h4>
+              <h4 className="text-xl text-dark-600 dark:text-white">Artists</h4>
               {currentSong && <ArtistList data={currentSong.artists.all} />}
             </CardContent>
           </div>
