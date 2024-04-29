@@ -10,6 +10,7 @@ import ViewPlaylist from "./Main/ViewPlayList";
 import SearchPage from "./Main/SearchPage";
 import ViewMyPlaylist from "./Main/ViewMyPlaylist";
 import CustomizedSnackbars from "./shared/Snackbar";
+import ViewCollaborationPlaylist from "./shared/ViewCollaborationPlaylist";
 
 const routes = [
   {
@@ -29,6 +30,7 @@ const routes = [
       <Route key={3}  path="album/:id" element={<ViewAlbum />}></Route>,
       <Route  key={4} path="playlist/:id" element={<ViewPlaylist />}></Route>,
       <Route  key={5} path="myPlaylist" element={<ViewMyPlaylist />}></Route>,
+      <Route  key={6} path="collabPlaylist" element={<ViewCollaborationPlaylist />}></Route>,
     ],
   },
   {

@@ -6,6 +6,7 @@ import { environment } from "../../assets/environment";
 import AlbumSongCard from "../shared/AlbumSongCard";
 import { currentSongsListAtom } from "../../store/SongState";
 import TopResultCard from "./TopResultCard";
+import CollaborationWrapper from "../shared/CollaborationWrapper";
 
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);
@@ -89,7 +90,7 @@ function SearchPage() {
         )}
       </div>
 
-      {/* <CollaborationWrapper /> */}
+      <CollaborationWrapper />
     </>
   );
 }

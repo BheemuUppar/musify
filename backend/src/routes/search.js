@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const {searchById} = require("../controller/saavnApi");
+const {searchById, getSongsById} = require("../controller/saavnApi");
 const Playlist = require("../db/Playlist");
 
 // for playlist
@@ -102,11 +102,27 @@ router.get("/albumsById/:id", async (req, res) => {
  searchById("albums", req, res);
 });
 
+
 router.post('/collaborationPlaylists', async (req, res)=>{
-  const {email} = req.body;
+  const { email } = req.body;
   const playlists = await Playlist.find({ email: { $ne: email }, collaborative:true });
-   res.status(200).json(playlists)
-})
+
+  if(playlists.length > 0){
+    for(let playlist of playlists ){
+      let songs = []; 
+      // Use Promise.all to wait for all async operations to complete
+      await Promise.all(playlist.songs.map(async (songId) => {
+        const song = await getSongsById(songId);
+        songs.push(JSON.parse(JSON.stringify(song[0])));
+      }));
+
+      playlist.songs = JSON.parse(JSON.stringify(songs));
+    }
+  }
+
+  res.status(200).json(playlists);
+});
+
 
 
 module.exports = router;

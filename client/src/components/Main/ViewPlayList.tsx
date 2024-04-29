@@ -50,7 +50,7 @@ const ViewPlaylist = React.memo(() => {
         playlist.image,
         arrOfId
       );
-      alert(response.data.message);
+      showNotification({severity:'success', message:response.data.message})
       getLibrary().then((data: any) => {
         setLibrary(data);
       });
