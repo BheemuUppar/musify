@@ -21,7 +21,7 @@ function CollaborationPlaylistCard({ playlist }: {playlist : CollabPlaylist}) {
   const navigate = useNavigate();
   let image =
     playlist.image[0].url != null
-      ? playlist.image[0].url:  playlistImage;
+      ? playlist.image[0].url: playlist.songs.length>0?playlist.songs[0].image[2].url: playlistImage;
   function getImage() {
     return image;
   }
