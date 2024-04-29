@@ -1,13 +1,13 @@
 import { useLocation } from "react-router-dom";
-import ListHeader from "./ListHeader";
-import PlayButton from "./shared/PlayButton";
+import ListHeader from "../shared/ListHeader";
+import PlayButton from "../shared/PlayButton";
 import { useSetRecoilState } from "recoil";
-import { currentSongsListAtom } from "../store/SongState";
-import SongCard from "./SongCard";
+import { currentSongsListAtom } from "../../store/SongState";
+import SongCard from "../shared/SongCard";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
-import { getLibrary, saveToMyPlaylist } from "../utils/apiutils";
-import { libraryAtom, snackbarAtom } from "../store/otherState";
+import { getLibrary, saveToMyPlaylist } from "../../utils/apiutils";
+import { libraryAtom, snackbarAtom } from "../../store/otherState";
 
 function ViewMyPlaylist() {
   const { state } = useLocation();

@@ -7,11 +7,11 @@ import Content from "./Content";
 import NavContent from "./NavContent";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PlaylistCard from "./PlaylistCard";
+import PlaylistCard from "./shared/PlaylistCard";
 import Player from "./Player/Player";
 import { environment } from "../assets/environment";
 import { leftPanelWidthAtom, songInfoOpenAtom } from "../store/otherState";
-import SongInfo from "./SongInfo";
+import SongInfo from "./shared/SongInfo";
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);

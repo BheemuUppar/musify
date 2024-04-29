@@ -5,7 +5,7 @@ import { searchModeAtom, searchTextAtom, snackbarAtom } from "../store/otherStat
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { audioStateAtom, currentSongAtom, currentSongsListAtom } from "../store/SongState";
-import Footer from './Footer';
+import Footer from './Main/Footer';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import Tooltip from '@mui/material/Tooltip'

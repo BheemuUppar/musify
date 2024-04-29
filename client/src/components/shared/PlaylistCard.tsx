@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import PlayButton from "./shared/PlayButton";
-import { getPlaylistDetailsById } from "../utils/apiutils";
+import PlayButton from "./PlayButton";
+import { getPlaylistDetailsById } from "../../utils/apiutils";
 import { useRecoilState } from "recoil";
-import { currentSongsListAtom } from "../store/SongState";
+import { currentSongsListAtom } from "../../store/SongState";
 function PlaylistCard({ playlist }: any) {
   const [currentSongsList , setCurrentPlayList] = useRecoilState(currentSongsListAtom)
 

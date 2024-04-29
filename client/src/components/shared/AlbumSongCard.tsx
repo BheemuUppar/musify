@@ -1,10 +1,10 @@
 import React from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { currentSongAtom, isPlayingAtom } from "../store/SongState";
-import { secondsToMinutesSeconds } from "../utils/utils";
-import BasicMenu from "./shared/BasicMenu";
-import equilizerImage from "../assets/images/equaliser-animated-green.gif";
-import playlist from './../assets/images/playlist.png'
+import { currentSongAtom, isPlayingAtom } from "../../store/SongState";
+import { secondsToMinutesSeconds } from "../../utils/utils";
+import BasicMenu from "./BasicMenu";
+import equilizerImage from "../../assets/images/equaliser-animated-green.gif";
+import playlist from '../../assets/images/playlist.png'
 
 const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);

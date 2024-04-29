@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SongCard from "./SongCard";
-import { environment } from "../assets/environment";
-import PlayButton from "./shared/PlayButton";
-import ListHeader from "./ListHeader";
+import SongCard from "../shared/SongCard";
+import { environment } from "../../assets/environment";
+import PlayButton from "../shared/PlayButton";
+import ListHeader from "../shared/ListHeader";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { audioStateAtom, currentSongsListAtom } from "../store/SongState";
-import { createPlaylist, getLibrary } from "../utils/apiutils";
-import { libraryAtom, snackbarAtom } from "../store/otherState";
+import { audioStateAtom, currentSongsListAtom } from "../../store/SongState";
+import { createPlaylist, getLibrary } from "../../utils/apiutils";
+import { libraryAtom, snackbarAtom } from "../../store/otherState";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
 

@@ -1,20 +1,14 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  libraryAtom,
-  searchModeAtom,
-  searchResultsAtom,
-  searchTextAtom,
-  snackbarAtom,
-} from "../store/otherState";
+import {searchResultsAtom, searchTextAtom,snackbarAtom} from "../../store/otherState";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { environment } from "../assets/environment";
-import PlayButton from "./shared/PlayButton";
-import AlbumSongCard from "./AlbumSongCard";
+import { environment } from "../../assets/environment";
+import PlayButton from "../shared/PlayButton";
+import AlbumSongCard from "../shared/AlbumSongCard";
 import { Link, useNavigate } from "react-router-dom";
-import { getCollaborationPlaylist } from "../utils/apiutils";
-import playlistImage from "../assets/images/playlist.png";
-import { currentSongsListAtom } from "../store/SongState";
+import { getCollaborationPlaylist } from "../../utils/apiutils";
+import playlistImage from "../../assets/images/playlist.png";
+import { currentSongsListAtom } from "../../store/SongState";
 
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);

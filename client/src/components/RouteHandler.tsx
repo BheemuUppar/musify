@@ -1,14 +1,14 @@
 import Home from "./Home";
 import NotFound from "./NotFound";
-import Signin from "./Signin";
-import Signup from "./Signup";
+import Signin from "./auth/Signin";
+import Signup from "./auth/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { HomePage } from "./Home";
-import ViewAlbum from "./ViewAlbum";
-import ViewPlaylist from "./ViewPlayList";
-import SearchPage from "./SearchPage";
-import ViewMyPlaylist from "./ViewMyPlaylist";
+import ViewAlbum from "./Main/ViewAlbum";
+import ViewPlaylist from "./Main/ViewPlayList";
+import SearchPage from "./Main/SearchPage";
+import ViewMyPlaylist from "./Main/ViewMyPlaylist";
 import CustomizedSnackbars from "./shared/Snackbar";
 
 const routes = [

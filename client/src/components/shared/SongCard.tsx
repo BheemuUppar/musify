@@ -1,10 +1,10 @@
 import React from "react";
-import { secondsToMinutesSeconds } from "../utils/utils";
+import { secondsToMinutesSeconds } from "../../utils/utils";
 import { useRecoilState } from "recoil";
-import { currentSongAtom, isPlayingAtom } from "../store/SongState";
-import BasicMenu from "./shared/BasicMenu";
+import { currentSongAtom, isPlayingAtom } from "../../store/SongState";
+import BasicMenu from "./BasicMenu";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import equilizerImage from "../assets/images/equaliser-animated-green.gif";
+import equilizerImage from "../../assets/images/equaliser-animated-green.gif";
 
 const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; song: any; setCurrentlist:any }) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
