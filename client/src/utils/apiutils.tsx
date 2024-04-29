@@ -12,6 +12,17 @@ export async function getPlaylistDetailsById(id: any) {
   );
   return res.data.data;
 }
+export async function getPAlbumDetailsById(id: any) {
+  let token =localStorage.getItem('token')
+  const res = await axios.get(`${environment.searchUrl}/albumsById/${id}`,
+  {
+    headers:{
+      Authorization:token
+    }
+  }
+  );
+  return res.data.data;
+}
 
 export async function getLibrary() {
   let email = localStorage.getItem("email");

@@ -66,7 +66,7 @@ export function HomePage() {
     <>
       <div className="flex gap-3 flex-wrap">
         {playlists.map((playlist: any) => {
-          return <PlaylistCard key={playlist.id} playlist={playlist} />;
+          return <PlaylistCard key={playlist.id} playlist={playlist} path={'playlist/' + playlist.id} />;
         })}
       </div>
     </>

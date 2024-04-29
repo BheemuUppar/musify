@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function TopResultCard({ album, className, setCurrentlist }: any) {
     return (
       <>
-        <h1 className="text-2xl text-dark-600 dark:text-white">Top Results</h1>
+        <h1 className="text-2xl text-dark-600 dark:text-white  my-3">Top Results</h1>
         <div className="buttonParent   rounded relative group p-6 border border-gray-200 dark:border-0  h-[200px]  bg-[#e3e5eb] dark:bg-dark-500 dark:hover:bg-dark-600 hover:bg-[#e1e2e7] transition ease-in duration-200">
           <Link to={"/home/album/" + album.id}>
             <img className="h-[70px] w-[70px]" src={album.image[1].url} alt="" />

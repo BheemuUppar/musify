@@ -108,26 +108,25 @@ function SearchPage() {
         )}
       </div>
 
-      <div>
-        <h2 className="text-xl ">Playlists</h2>
+      <div className="my-2">
+        <h2 className="text-xl  my-3">Playlists</h2>
         <div className="flex flex-wrap gap-4">
           {searchResults.playlists &&
             searchResults.playlists.map((playlist: any) => {
-              return <PlaylistCard playlist={playlist} key={playlist.id} />;
+              return <PlaylistCard playlist={playlist} key={playlist.id} path={'/home/playlist/' + playlist.id}/>;
             })}
         </div>
       </div>
       {/* Albums  */}
-      {/* <div>
-        <h2 className="text-xl ">Albums</h2>
+      <div className="my-6">
+        <h2 className="text-xl my-3">Albums</h2>
         <div className="flex flex-wrap gap-4">
           {searchResults.albums &&
-            searchResults.albums.map((song: any, index: number) => {
-              console.log(song);
-              // return <AlbumSongCard  index={index} setCurrentlist={setCurrentlist} key={song.id} song={song} />;
+            searchResults.albums.map((album:any) => {
+              return <PlaylistCard playlist={album} path={'/home/album/'+album.id}/>
             })}
         </div>
-      </div> */}
+      </div>
 
       <CollaborationWrapper />
     </>
