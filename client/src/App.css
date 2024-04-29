@@ -11,13 +11,16 @@
   /* circle */
 }
 .MuiSlider-rail {
-  background-color: rgb(0, 250, 0) !important;
+  background-color: rgb(1, 92, 238) ;
+}
+.dark .MuiSlider-rail {
+  background-color: rgb(119, 213, 76) ;
 }
 
 /* for dark theme */
 .dark .MuiSlider-track {
   border: none;
-  background-color: white !important;
+  background-color: rgb(30, 198, 72) !important;
   /* filled bar */
 }
 

@@ -1,14 +1,14 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
 import { useNavigate } from "react-router-dom";
-import CardContent from "./CardContent";
-import Library from "./Library";
+import CardContent from "./shared/CardContent";
+import Library from "./Library/Library";
 import Content from "./Content";
 import NavContent from "./NavContent";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PlaylistCard from "./PlaylistCard";
-import Player from "./Player";
+import Player from "./Player/Player";
 import { environment } from "../assets/environment";
 import { leftPanelWidthAtom, songInfoOpenAtom } from "../store/otherState";
 import SongInfo from "./SongInfo";

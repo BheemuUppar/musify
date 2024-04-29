@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { currentSongAtom, currentSongsListAtom } from "../store/SongState";
 import { songInfoOpenAtom } from "../store/otherState";
 import CloseIcon from "@mui/icons-material/Close";
-import CardContent from "./CardContent";
+import CardContent from "./shared/CardContent";
 import { groupDataByArtist } from "../utils/utils";
 import { useEffect } from "react";
 import AlbumSongCard from "./AlbumSongCard";

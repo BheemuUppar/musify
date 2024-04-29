@@ -6,16 +6,16 @@ import {
   currentTimeAtom,
   isPlayingAtom,
   volumeAtom,
-} from "../store/SongState";
+} from "../../store/SongState";
 import InfoIcon from '@mui/icons-material/Info';
 import React, { LegacyRef, useEffect, useRef, useState } from "react";
-import { secondsToMinutesSeconds } from "../utils/utils";
+import { secondsToMinutesSeconds } from "../../utils/utils";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
-import { songInfoOpenAtom } from "../store/otherState";
+import { songInfoOpenAtom } from "../../store/otherState";
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 // import '../App.css'
 

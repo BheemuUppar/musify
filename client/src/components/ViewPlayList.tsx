@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SongCard from "./SongCard";
 import { environment } from "../assets/environment";
-import PlayButton from "./PlayButton";
+import PlayButton from "./shared/PlayButton";
 import ListHeader from "./ListHeader";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { audioStateAtom, currentSongsListAtom } from "../store/SongState";

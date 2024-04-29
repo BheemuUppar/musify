@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { createPlaylist, getLibrary, removePlaylist } from "../utils/apiutils";
+import { createPlaylist, getLibrary, removePlaylist } from "../../utils/apiutils";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { leftPanelWidthAtom, libraryAtom, snackbarAtom } from "../store/otherState";
+import { leftPanelWidthAtom, libraryAtom, snackbarAtom } from "../../store/otherState";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import playlistImage from "../assets/images/playlist.png";
-import DialogModal from "./shared/DialogModal";
+import playlistImage from "../../assets/images/playlist.png";
+import DialogModal from "../shared/DialogModal";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Tooltip from "@mui/material/Tooltip";
-import { AxiosError } from "axios";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);

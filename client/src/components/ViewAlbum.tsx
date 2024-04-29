@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { environment } from "../assets/environment";
 import ListHeader from "./ListHeader";
-import PlayButton from "./PlayButton";
+import PlayButton from "./shared/PlayButton";
 import AlbumSongCard from "./AlbumSongCard";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { currentSongsListAtom } from "../store/SongState";
@@ -21,9 +21,15 @@ const ViewAlbum = React.memo(() => {
 
   useEffect(() => {
     axios
-      .get(`${environment.searchUrl}/albumsById/${params.id}`)
+      .get(`${environment.searchUrl}/albumsById/${params.id}`, {
+        headers:{
+          Authorization:localStorage.getItem('token')
+        }
+      })
       .then((data: any) => {
         setAlbum(data.data.data);
+      }).catch((error:any)=>{
+        showNotification({severity:'error', message:error.response.data.message})
       });
   }, []);
 
@@ -73,7 +79,7 @@ const ViewAlbum = React.memo(() => {
           />
           <Tooltip title="add to your playlist">
             <button onClick={addToMyPlaylist}>
-              <ControlPointIcon />
+              <ControlPointIcon className="text-gray-600 dark:text-white "/>
             </button>
           </Tooltip>
         </div>

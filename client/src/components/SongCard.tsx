@@ -45,9 +45,7 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
           <div className="ps-2">
             {/* Display song name */}
             <p
-              className={` text-dark-700 dark:text-white ${
-                currentSong && song.id == currentSong.id ? "text-green-400" : ""
-              }`}
+              className={` ${currentSong && song.id == currentSong.id?"text-green-400":"text-dark-600 dark:text-white"} `}
             >
               {song.name}
             </p>
@@ -70,7 +68,7 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
           <p className="text-dark-500 dark:text-gray-300" >{secondsToMinutesSeconds(song.duration)}</p>
         </div>
         <div className="invisible group-hover:visible">
-          <BasicMenu songId={song.id} />
+          <BasicMenu className="text-gray-600 dark:text-white " songId={song.id} />
         </div>
       </div>
     </div>

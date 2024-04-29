@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { environment } from "../assets/environment";
-import PlayButton from "./PlayButton";
+import PlayButton from "./shared/PlayButton";
 import AlbumSongCard from "./AlbumSongCard";
 import { Link, useNavigate } from "react-router-dom";
 import { getCollaborationPlaylist } from "../utils/apiutils";

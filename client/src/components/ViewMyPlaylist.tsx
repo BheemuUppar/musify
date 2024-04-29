@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import ListHeader from "./ListHeader";
-import PlayButton from "./PlayButton";
+import PlayButton from "./shared/PlayButton";
 import { useSetRecoilState } from "recoil";
 import { currentSongsListAtom } from "../store/SongState";
 import SongCard from "./SongCard";
@@ -51,7 +51,7 @@ function ViewMyPlaylist() {
         ></PlayButton>
         <Tooltip title="add to your playlist">
           <button onClick={addToMyPlaylist}>
-            <ControlPointIcon />
+            <ControlPointIcon className="text-gray-600 dark:text-white "/>
           </button>
         </Tooltip>
       </div>
@@ -60,7 +60,7 @@ function ViewMyPlaylist() {
         <div></div>
         {state.songs.length > 0 &&
           state.songs.map((song: any, index: number) => {
-            return <SongCard setCurrentlist={setCurrentlist} key={song.id} index={index+1} song={song} />;
+            return <SongCard setCurrentlist={setCurrentlist} key={song.id} index={index} song={song} />;
           })}
         {state.songs.length == 0 && <h4>No songs available</h4>}
       </div>
