@@ -111,20 +111,22 @@ function SearchPage() {
       <div className="my-2">
         <h2 className="text-xl  my-3">Playlists</h2>
         <div className="flex flex-wrap gap-4">
-          {searchResults.playlists &&
+          { searchResults && searchResults.playlists &&
             searchResults.playlists.map((playlist: any) => {
               return <PlaylistCard playlist={playlist} key={playlist.id} path={'/home/playlist/' + playlist.id}/>;
             })}
+              {!searchResults && <h1>No playlist Available</h1>}
         </div>
       </div>
       {/* Albums  */}
       <div className="my-6">
         <h2 className="text-xl my-3">Albums</h2>
         <div className="flex flex-wrap gap-4">
-          {searchResults.albums &&
+          {searchResults && searchResults.albums &&
             searchResults.albums.map((album:any) => {
               return <PlaylistCard playlist={album} path={'/home/album/'+album.id}/>
             })}
+            {!searchResults && <h1>No Albums Available</h1>}
         </div>
       </div>
 
