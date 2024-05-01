@@ -1,6 +1,6 @@
 import axios from "axios";
 const searchUrl = import.meta.env.VITE_SEARCH_URL
-const userUrl = import.meta.env.USER_URL
+const userUrl = import.meta.env.VITE_USER_URL
 
 export async function getPlaylistDetailsById(id: any) {
   let token =localStorage.getItem('token')

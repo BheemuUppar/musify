@@ -110,7 +110,7 @@ function SearchPage() {
         )}
       </div>
 
-      <div className="my-2">
+      <div className="my-2 text-dark-600 dark:text-white">
         <h2 className="text-xl  my-3">Playlists</h2>
         <div className="flex flex-wrap gap-4">
           { searchResults && searchResults.playlists &&
@@ -121,7 +121,7 @@ function SearchPage() {
         </div>
       </div>
       {/* Albums  */}
-      <div className="my-6">
+      <div className="my-6 text-dark-600 dark:text-white">
         <h2 className="text-xl my-3">Albums</h2>
         <div className="flex flex-wrap gap-4">
           {searchResults && searchResults.albums &&

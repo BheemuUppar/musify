@@ -36,7 +36,7 @@ function CollaborationPlaylistCard({ playlist }: {playlist : CollabPlaylist}) {
     <>
       {/* <Link to={"/home/myPlaylist"}> */}
       <div
-        className="card p-2 rounded w-[204px] h-[258px] drop-shadow-md hover:bg-dark-600 ease-in-out group relative"
+        className="card p-2 rounded w-[204px] h-[258px] drop-shadow-md hover:bg-[#e1e2e7] ease-in-out group relative text-dark-600 dark:text-white"
         onClick={() => {
           navigate("/home/collabPlaylist", { state: playlist });
         }}
