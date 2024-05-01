@@ -1,21 +1,31 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
-import { searchModeAtom, searchTextAtom, snackbarAtom } from "../store/otherState";
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { audioStateAtom, currentSongAtom, currentSongsListAtom } from "../store/SongState";
-import Footer from './Main/Footer';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import Tooltip from '@mui/material/Tooltip'
+import {
+  searchModeAtom,
+  searchTextAtom,
+  snackbarAtom,
+} from "../store/otherState";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import {
+  audioStateAtom,
+  currentSongAtom,
+  currentSongsListAtom,
+} from "../store/SongState";
+import Footer from "./Main/Footer";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import Tooltip from "@mui/material/Tooltip";
+import PersonIcon from "@mui/icons-material/Person";
+
 function Content() {
   return (
     <div className="flex flex-col h-full rounded">
       <Navbar></Navbar>
       <div className="grow " style={{ overflowY: "auto" }}>
         <Outlet></Outlet>
-      <Footer/>
+        <Footer />
       </div>
     </div>
   );
@@ -30,15 +40,19 @@ function Navbar() {
   const resetAuth = useResetRecoilState(isAuthenticatedAtom);
   const resetAudio = useResetRecoilState(audioStateAtom);
   const setSnackbarState = useSetRecoilState(snackbarAtom);
+  const userName = localStorage.getItem("username")
 
-  const  showNotification = function (props:{severity:string, message:string}){
-    setSnackbarState(props)
-  }
+  const showNotification = function (props: {
+    severity: string;
+    message: string;
+  }) {
+    setSnackbarState(props);
+  };
 
-const toggleTheme = ()=>{
-  document.documentElement.classList.toggle('dark');
-  // document.documentElement.classList.toggle('white');
-}
+  const toggleTheme = () => {
+    document.documentElement.classList.toggle("dark");
+    // document.documentElement.classList.toggle('white');
+  };
 
   return (
     <>
@@ -47,15 +61,27 @@ const toggleTheme = ()=>{
           {/* <Link to="/home">
             <img className=" w-[20%]" src={logo} alt="musify" />
           </Link> */}
-          <span  className="p-1 mx-1 rounded-full dark:bg-black-900 bg-gray-400 h-[35px] w-[35]">
-            <button disabled={history.state.idx == 0} className="disabled:opacity-75 disabled:cursor-not-allowed "  onClick={() => {
-              history.back();
-            }}><ArrowBackIosNewOutlinedIcon className="text-dark-600 dark:text-white"/></button>
+          <span className="p-1 mx-1 rounded-full dark:bg-black-900 bg-gray-400 h-[35px] w-[35]">
+            <button
+              disabled={history.state.idx == 0}
+              className="disabled:opacity-75 disabled:cursor-not-allowed "
+              onClick={() => {
+                history.back();
+              }}
+            >
+              <ArrowBackIosNewOutlinedIcon className="text-dark-600 dark:text-white" />
+            </button>
           </span>
-          <span className="p-1 mx-1 rounded-full dark:bg-black-900 bg-gray-400  h-[35px] w-[35]"  >
-            <button disabled={history.length == history.state.idx} className="disabled:opacity-75 disabled:cursor-not-allowed" onClick={() => {
-              history.forward();  
-            }}><ArrowForwardIosIcon className="text-dark-600 dark:text-white"/></button>
+          <span className="p-1 mx-1 rounded-full dark:bg-black-900 bg-gray-400  h-[35px] w-[35]">
+            <button
+              disabled={history.length == history.state.idx}
+              className="disabled:opacity-75 disabled:cursor-not-allowed"
+              onClick={() => {
+                history.forward();
+              }}
+            >
+              <ArrowForwardIosIcon className="text-dark-600 dark:text-white" />
+            </button>
           </span>
           {currentRoute.pathname == "/home/search" && <SearchBox />}
         </div>
@@ -72,33 +98,46 @@ const toggleTheme = ()=>{
               </li>
             )}
             {isAuthenticated == true && (
-              <li>
-                <Tooltip title="logout">
-                <button
-                  onClick={async function () {
-                    showNotification({severity:'success', message:"logged out successfully"})
-                    localStorage.clear();
-                    await  resetPlaylist()
-                    await resetCurrentSong() 
-                    await  resetAuth() 
-                    await resetAudio() 
-                    navigate("/signin");
-                  }}
-                  type="button"
-                >
-                <PowerSettingsNewIcon className="text-dark-600 dark:text-white"/>
-                </button>
-                </Tooltip>
-              </li>
+              <>
+                <li>
+                  <button type="button" className="text-dark-600 dark:text-white text-lg">  <PersonIcon /><span>{userName}</span></button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    className="text-dark-500 dark:text-white pb-3 mx-2"
+                    onClick={toggleTheme}
+                  >
+                    <Tooltip title="change theme">
+                      <LightModeIcon />
+                    </Tooltip>
+                  </button>
+                </li>
+                <li className="mr-5">
+                  <Tooltip title="logout">
+                    <button
+                      onClick={async function () {
+                        showNotification({
+                          severity: "success",
+                          message: "logged out successfully",
+                        });
+                        localStorage.clear();
+                        await resetPlaylist();
+                        await resetCurrentSong();
+                        await resetAuth();
+                        await resetAudio();
+                        navigate("/signin");
+                      }}
+                      type="button"
+                    >
+                      <PowerSettingsNewIcon className="text-dark-600 dark:text-white" />
+                    </button>
+                  </Tooltip>
+                </li>
+              </>
             )}
           </ul>
-          <button type="button" className="text-dark-500 dark:text-white pb-3 mx-3" onClick={toggleTheme}>
-           <Tooltip title="change theme">
-             <LightModeIcon />
-           </Tooltip>
-          </button>
         </div>
-
       </nav>
     </>
   );
