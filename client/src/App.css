@@ -11,10 +11,10 @@
   /* circle */
 }
 .MuiSlider-rail {
-  background-color: rgb(1, 92, 238) ;
+  background-color: rgb(1, 92, 238);
 }
 .dark .MuiSlider-rail {
-  background-color: rgb(119, 213, 76) ;
+  background-color: rgb(119, 213, 76);
 }
 
 /* for dark theme */
@@ -44,7 +44,7 @@
   z-index: 2;
   /* background: url(./assets/music-background.mp4); */
 }
-#player.fullMode .video-background{
+#player.fullMode .video-background {
   position: fixed;
   height: 100vh !important;
   width: 100vw;
@@ -54,11 +54,11 @@
   left: 0;
   right: 0;
   display: block;
+  opacity: 1;
 }
 
 .fullMode .full-width {
-    position: inherit;
-
+  position: inherit;
 }
 .fullMode .full-width img {
   position: fixed;
@@ -72,32 +72,41 @@
   z-index: 1;
   opacity: 1;
   border-radius: 20px;
-
 }
-.fullMode .trackinfo div{
+.fullMode .trackinfo div {
   position: fixed;
-    bottom: 171px;
-    left: 299px;
+  bottom: 171px;
+  left: 299px;
 }
-.fullMode .song-info{
+.fullMode .trackinfo div p span {
+  color: white;
+}
+.fullMode .song-info {
   display: none;
 }
-
-.fullMode .left .top{
-  position: inherit;
-    width: 90vw;
-    z-index: 2;
-    position: fixed;
-    bottom: 28px;
-    left: 60px;
+#player.fullMode .previous-btn,
+#player.fullMode .next-btn,
+#player.fullMode .play-pause-btn,
+#player.fullMode .open-full-icon {
+  color: white;
+  fill: white;
 }
-.fullMode .left .sneekbar{
+
+.fullMode .left .top {
+  position: inherit;
+  width: 90vw;
+  z-index: 2;
+  position: fixed;
+  bottom: 28px;
+  left: 60px;
+}
+.fullMode .left .sneekbar {
   position: inherit;
   position: fixed;
   width: 90vw;
   z-index: 2;
   bottom: 84px;
-  left: 60px; 
+  left: 60px;
 }
 
 .fullMode .right {
@@ -109,4 +118,8 @@
   right: 75px;
 
   /* By default, these divs will occupy the auto width columns */
+}
+
+#player.fullMode {
+  color: white;
 }
