@@ -1,7 +1,20 @@
+import { useEffect } from "react";
 import PlayButton from "../shared/PlayButton";
 import { Link } from "react-router-dom";
+import { getPAlbumDetailsById } from "../../utils/apiutils";
+import { useSetRecoilState } from "recoil";
+import { currentSongsListAtom } from "../../store/SongState";
 
 function TopResultCard({ album, className, setCurrentlist }: any) {
+  const setCurrentPlayList = useSetRecoilState(currentSongsListAtom)
+  useEffect(()=>{
+  })
+  const handleButtonClick = async (e:any)=>{
+    e.preventDefault()
+      let playlistData = await  getPAlbumDetailsById(album.id);
+       setCurrentPlayList({songs:playlistData.songs, currentSongIndex:0})
+  }
+
     return (
       <>
         <h1 className="text-2xl text-dark-600 dark:text-white  my-3">Top Results</h1>
@@ -13,11 +26,7 @@ function TopResultCard({ album, className, setCurrentlist }: any) {
               <p>{album.type}</p>
             </span>
             <div className="hidden absolute bottom-0 right-4 group-hover:block opacity-25 group-hover:-translate-y-[30px] group-hover:opacity-100 transition ease-in duration-500 ">
-              {/* <PlayButton clickHandler={async (e:any)=>{
-              e.stopPropagation();
-              e.preventDefault();
-             await setCurrentlist(0);
-              }}/> */}
+              <PlayButton clickHandler={handleButtonClick}/>
             </div>
           </Link>
         </div>
