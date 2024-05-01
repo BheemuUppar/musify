@@ -2,7 +2,7 @@ import Home from "./Home";
 import NotFound from "./NotFound";
 import Signin from "./auth/Signin";
 import Signup from "./auth/Signup";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, redirect, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { HomePage } from "./Home";
 import ViewAlbum from "./Main/ViewAlbum";
@@ -21,6 +21,8 @@ const routes = [
     path: "/signin",
     element: <Signin />,
   },
+ 
+
   {
     path: "/home",
     element: <PrivateRoute element={<Home key={"home"}/>} />,
@@ -35,7 +37,7 @@ const routes = [
   },
   {
     path: "*",
-    element: <NotFound />,
+    element: <Navigate to="/home" replace />,
   },
 ];
 
