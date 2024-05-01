@@ -149,7 +149,7 @@ function SearchBox() {
   let timer: any;
   return (
     <>
-      <div>
+      <div className="min-w-[250px]">
         <input
           className="p-2 bg-transparent border border-dark-600 text-dark-600 dark:text-white rounded-[30px] w-full"
           type="text"
