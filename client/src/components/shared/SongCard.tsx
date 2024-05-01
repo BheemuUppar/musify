@@ -5,8 +5,9 @@ import { currentSongAtom, isPlayingAtom } from "../../store/SongState";
 import BasicMenu from "./BasicMenu";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import equilizerImage from "../../assets/images/equaliser-animated-green.gif";
+import { Song } from "../../types/song";
 
-const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; song: any; setCurrentlist:any }) => {
+const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; song: Song; setCurrentlist:any }) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingAtom);
 

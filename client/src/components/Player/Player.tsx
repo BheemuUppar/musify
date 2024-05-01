@@ -16,8 +16,6 @@ import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import { songInfoOpenAtom } from "../../store/otherState";
-import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-// import '../App.css'
 
 function Player() {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
@@ -25,7 +23,6 @@ function Player() {
   const audioState = useRecoilValue(audioStateAtom);
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
-  // const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
   const playerRef :any = useRef()
 
   useEffect(() => {
