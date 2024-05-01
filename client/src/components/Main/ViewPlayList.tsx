@@ -61,7 +61,6 @@ const ViewPlaylist = React.memo(() => {
   };
 
 const setCurrentlist = async (index:number)=>{
-  console.log(index , playlist.songs)
   await setSongsList(JSON.parse(JSON.stringify({ songs: playlist.songs, currentSongIndex: index })));
 }
 

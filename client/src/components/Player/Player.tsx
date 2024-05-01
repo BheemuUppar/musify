@@ -159,7 +159,6 @@ const PlayPauseButton = React.memo(() => {
     if (audio != undefined && audio != null) {
       await audio.play();
       await setIsPlaying(true);
-      console.log(currentSong);
       // audio.play();
       // setIsPlaying(true)
     }

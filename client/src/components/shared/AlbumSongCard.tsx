@@ -8,7 +8,6 @@ import playlist from '../../assets/images/playlist.png'
 const AlbumSongCard = ({ song , index, setCurrentlist}: any) => {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const isPlaying = useRecoilValue(isPlayingAtom);
-console.log(song)
   return (
     <>
      {song &&  <div className="group flex justify-between p-2 dark:hover:bg-dark-600 hover:bg-slate-400 rounded">

@@ -69,7 +69,6 @@ function SongInfo() {
 
 function ArtistList({ data }: any) {
   let groupedObject = groupDataByArtist(data);
-  console.log(groupedObject);
   let arr = Object.keys(groupedObject);
   return (
     <div className="dark:bg-dark-600 bg-slate-400 p-2 rounded ">

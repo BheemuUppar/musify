@@ -39,10 +39,8 @@ router.post("/getLibrary", async (req, res) => {
     let email = req.body.email;
     let playList = await UserDb.findOne({ email: email }).select("playList");
     let list = playList.playList;
-    //  console.log('list', list)
     if (playList) {
       let results = await Playlist.find({ _id: { $in: list } });
-      // console.log(results)
       let data = await formatePlayList(results);
       res.status(200).json(data);
       return;

@@ -37,7 +37,6 @@ function Signin() {
       }
     
     }).catch((error:any)=>{
-      console.log(error)
       showNotification({severity:'error', message:error.response.data.message})
     });
   }

@@ -28,7 +28,6 @@ export async function getPAlbumDetailsById(id: any) {
 export async function getLibrary() {
   let email = localStorage.getItem("email");
   let token = localStorage.getItem("token");
-  console.log(token)
   let res = await axios.post(`${userUrl}/getLibrary`, {
     email: email,
   }, {
@@ -92,7 +91,6 @@ export async function removePlaylist(playlistId: string) {
     })
     .catch((err) => {
       //alert error here
-      console.log(err);
     });
   return response;
 }

@@ -22,7 +22,6 @@ function ViewCollaborationPlaylist() {
     setSnackbarState(props);
   };
   
-console.log(state)
  
 
   const addToMyPlaylist = async () => {
