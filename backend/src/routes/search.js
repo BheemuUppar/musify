@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const {searchById, getSongsById} = require("../controller/saavnApi");
+const { searchById, getSongsById } = require("../controller/saavnApi");
 const Playlist = require("../db/Playlist");
 
 // for playlist
@@ -86,43 +86,61 @@ router.get("/artists/:query", async (req, res) => {
 
     //   });
   } catch (error) {
-    res.status(500).json({ message: "failed" });
+    res.status(500).json({message:"Internal Server Error"})
   }
 });
 
-
 router.get("/songsById/:id", async (req, res) => {
- searchById("songs", req, res);
+  try{
+
+    searchById("songs", req, res);
+  }catch(err){
+    res.status(500).json({message:"Internal Server Error"})
+  }
 });
 
 router.get("/playlistById/:id", async (req, res) => {
- searchById("playlists", req, res);
+  try{
+    searchById("playlists", req, res);
+  }catch(err){
+    res.status(500).json({message:"Internal Server Error"})
+  }
 });
 router.get("/albumsById/:id", async (req, res) => {
- searchById("albums", req, res);
+  try{
+    searchById("albums", req, res);
+  }catch(err){
+    res.status(500).json({message:"Internal Server Error"})
+  }
 });
 
-
-router.post('/collaborationPlaylists', async (req, res)=>{
+router.post("/collaborationPlaylists", async (req, res) => {
+ try{
   const { email } = req.body;
-  const playlists = await Playlist.find({ email: { $ne: email }, collaborative:true });
+  const playlists = await Playlist.find({
+    email: { $ne: email },
+    collaborative: true,
+  });
 
-  if(playlists.length > 0){
-    for(let playlist of playlists ){
-      let songs = []; 
+  if (playlists.length > 0) {
+    for (let playlist of playlists) {
+      let songs = [];
       // Use Promise.all to wait for all async operations to complete
-      await Promise.all(playlist.songs.map(async (songId) => {
-        const song = await getSongsById(songId);
-        songs.push(JSON.parse(JSON.stringify(song[0])));
-      }));
+      await Promise.all(
+        playlist.songs.map(async (songId) => {
+          const song = await getSongsById(songId);
+          songs.push(JSON.parse(JSON.stringify(song[0])));
+        })
+      );
 
       playlist.songs = JSON.parse(JSON.stringify(songs));
     }
   }
 
   res.status(200).json(playlists);
+ }catch(err){
+  res.status(500).json({message:"Internal Server Error"})
+ }
 });
-
-
 
 module.exports = router;

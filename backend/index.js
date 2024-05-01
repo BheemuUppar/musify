@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+  
 app.use("/auth", AuthRouter );
 app.use("/search", authMiddleware, SearchRouter)
 app.use("/user",authMiddleware, UserRouter)
@@ -20,14 +21,17 @@ app.get("**" , (req ,res)=>{
   res.end()
 })
 
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Internal Server Error");
+  }
+  
+});
+
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log("Application Running on " + port);
 });
 
-app.use((err, req, res, next) => {
-  if (err) {
-    res.status(500).send("Internal Server Error");
-  }
-});

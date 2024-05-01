@@ -1,5 +1,4 @@
 import axios from "axios";
-import logo from "../assets/images/icon.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { environment } from "../../assets/environment";
 import { useNavigate , Link } from "react-router-dom";
@@ -39,7 +38,6 @@ function Signup() {
     });
   }
 
-console.log(errors, isDirty, isValid)
   return (
     <div className="w-full h-[100vh] flex justify-center items-center">
       <div className="form-container w-[20%] min-w-[300px] h-[60%] min-h-[300px] bg-[#e3e5eb] dark:bg-dark-500 flex justify-center items-center flex-col gap-2 rounded   py-5 ">
@@ -52,7 +50,7 @@ console.log(errors, isDirty, isValid)
         >
           <div className="flex flex-col">
           <input
-            className="pl-2 py-2"
+            className="pl-2 py-2 bg-transparent text-dark-600 dark:text-white border border-gary-500 rounded border-blue-950"
             placeholder="Username"
             {...register("username", { required: true ,})}
           />
@@ -61,8 +59,8 @@ console.log(errors, isDirty, isValid)
           <div className="flex flex-col">
 
           <input
-            className="pl-2 py-2"
-            placeholder="Email"
+            className="pl-2 py-2  bg-transparent text-dark-600 dark:text-white border border-gary-500 rounded border-blue-950"
+            placeholder="Email" type="email"
             {...register("email", { required: "Email is Required" ,pattern:{value:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, message:"Enter Valid Email Address"} })}
           />
   { errors.email && <span className="text-red-500"> {errors.email.message}</span> }
@@ -71,17 +69,17 @@ console.log(errors, isDirty, isValid)
           <div className="flex flex-col">
 
           <input
-            className="pl-2 py-2"
-            placeholder="Password"
+            className="pl-2 py-2  bg-transparent text-dark-600 dark:text-white border border-gary-500 rounded border-blue-950"
+            placeholder="Password" type="password"
             {...register("password", { required: "password is Required", minLength: {value:6, message:"password should contain atleast 6 letters"} })}
           />
           { errors.password && <span className="text-red-500"> {errors.password.message}</span> }
           </div>
           <div className="flex flex-col">
 
-          <input
-            className="pl-2 py-2"
-            placeholder="confirm Password"
+          <input 
+            className="pl-2 py-2  bg-transparent text-dark-600 dark:text-white border border-gary-500 rounded border-blue-950"
+            placeholder="confirm Password" type="password"
             {...register("cnf_password", { required: "confirm password is required",
             validate: value => value == watch('password') || "Passwords do not match"
              })}

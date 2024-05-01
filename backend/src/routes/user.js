@@ -77,6 +77,7 @@ router.post("/addSongtoPlayList", async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    res.status(500).json({message:"Internal Server Error"})
   }
 
   // try {
@@ -150,11 +151,13 @@ async function formatePlayList(playlists) {
       return result;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    
   }
 }
 
 router.post('/collaboratePlaylist', async (req, res)=>{
+ try{
   let {email, playlistId} = req.body;
 
   let result = await UserDb.findOneAndUpdate(
@@ -162,6 +165,10 @@ router.post('/collaboratePlaylist', async (req, res)=>{
     { $push: { playList: playlistId} }
   );
   res.status(201).json({ message: "playlist added to your library" });
+ }
+ catch(err){
+res.status(500).json({message:"Internal Server Error"})
+ }
 
 
 })

@@ -45,12 +45,13 @@ router.post("/signup", async (req, res) => {
       }
     );
   } else {
-    res.json({ message: "user already exist" });
+    res.status(409).json({ message: "user already exist" });
   }
 });
 
 // for signin
 router.post("/signin", async (req, res) => {
+  
   let body = req.body;
   let validate = signInSchema.safeParse(body);
   
