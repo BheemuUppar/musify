@@ -1,12 +1,13 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import { environment } from "../../assets/environment";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../../store/authState";
 import { snackbarAtom } from "../../store/otherState";
 
+
 function Signin() {
+  const baseUrl = import.meta.env.VITE_API_URL;
   const {
     register,  handleSubmit, watch,  formState: { errors, isDirty, isValid, isSubmitting }, } = useForm();
   const setAuthState = useSetRecoilState(isAuthenticatedAtom);
@@ -22,7 +23,7 @@ function Signin() {
   }
 
   async function login(payload: any) {
-    axios.post(`${environment.baseUrl}/auth/signin`, payload).then( (res) => {
+    axios.post(`${baseUrl}/auth/signin`, payload).then( (res) => {
       if(res.data.message == 'login successfull'){
          localStorage.setItem("username", res.data.username)
         localStorage.setItem("email", res.data.email)

@@ -9,14 +9,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PlaylistCard from "./shared/PlaylistCard";
 import Player from "./Player/Player";
-import { environment } from "../assets/environment";
 import { leftPanelWidthAtom, snackbarAtom, songInfoOpenAtom } from "../store/otherState";
 import SongInfo from "./shared/SongInfo";
+
+const searchUrl = import.meta.env.VITE_SEARCH_URL;
 
 function Home() {
   const isAuthenticated = useRecoilValue(isAuthenticatedAtom);
   const navigate = useNavigate();
   const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
+
 
   if (isAuthenticated == false) {
     navigate("/auth/signin");
@@ -64,7 +66,7 @@ export function HomePage() {
 
   function fetchPlaylist(searchKeyword: string) {
     axios
-      .get(`${environment.searchUrl}/playlist/${searchKeyword}`, {
+      .get(`${searchUrl}/playlist/${searchKeyword}`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },

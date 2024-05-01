@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { environment } from "../../assets/environment";
 import ListHeader from "../shared/ListHeader";
 import PlayButton from "../shared/PlayButton";
 import AlbumSongCard from "../shared/AlbumSongCard";
@@ -12,6 +11,8 @@ import { libraryAtom, snackbarAtom } from "../../store/otherState";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
 
+const searchUrl = import.meta.env.VITE_SEARCH_URL
+
 const ViewAlbum = React.memo(() => {
   const [album, setAlbum]: any = useState({});
   const params = useParams();
@@ -21,7 +22,7 @@ const ViewAlbum = React.memo(() => {
 
   useEffect(() => {
     axios
-      .get(`${environment.searchUrl}/albumsById/${params.id}`, {
+      .get(`${searchUrl}/albumsById/${params.id}`, {
         headers:{
           Authorization:localStorage.getItem('token')
         }

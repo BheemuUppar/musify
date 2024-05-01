@@ -2,12 +2,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { searchResultsAtom, searchTextAtom } from "../../store/otherState";
 import { useEffect } from "react";
 import axios from "axios";
-import { environment } from "../../assets/environment";
 import AlbumSongCard from "../shared/AlbumSongCard";
 import { currentSongsListAtom } from "../../store/SongState";
 import TopResultCard from "./TopResultCard";
 import CollaborationWrapper from "../shared/CollaborationWrapper";
 import PlaylistCard from "../shared/PlaylistCard";
+
+const searchUrl = import.meta.env.VITE_SEARCH_URL
 
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);
@@ -33,7 +34,7 @@ function SearchPage() {
 
   async function fetchAlbums() {
     let data = await axios.get(
-      `${environment.searchUrl}/albums/${searchText}`,
+      `${searchUrl}/albums/${searchText}`,
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -44,7 +45,7 @@ function SearchPage() {
   }
   
   async function fetchSongs() {
-    let data = await axios.get(`${environment.searchUrl}/songs/${searchText}`, {
+    let data = await axios.get(`${searchUrl}/songs/${searchText}`, {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
@@ -53,7 +54,7 @@ function SearchPage() {
   }
   async function fetchPlaylist() {
     let data = await axios.get(
-      `${environment.searchUrl}/playlist/${searchText}`,
+      `${searchUrl}/playlist/${searchText}`,
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -64,7 +65,7 @@ function SearchPage() {
   }
   async function fetchArtists() {
     let data = await axios.get(
-      `${environment.searchUrl}/artists/${searchText}`,
+      `${searchUrl}/artists/${searchText}`,
       {
         headers: {
           Authorization: localStorage.getItem("token"),

@@ -1,9 +1,10 @@
 import axios from "axios";
-import { environment } from "../assets/environment";
+const searchUrl = import.meta.env.VITE_SEARCH_URL
+const userUrl = import.meta.env.USER_URL
 
 export async function getPlaylistDetailsById(id: any) {
   let token =localStorage.getItem('token')
-  const res = await axios.get(`${environment.searchUrl}/playlistById/${id}`,
+  const res = await axios.get(`${searchUrl}/playlistById/${id}`,
   {
     headers:{
       Authorization:token
@@ -14,7 +15,7 @@ export async function getPlaylistDetailsById(id: any) {
 }
 export async function getPAlbumDetailsById(id: any) {
   let token =localStorage.getItem('token')
-  const res = await axios.get(`${environment.searchUrl}/albumsById/${id}`,
+  const res = await axios.get(`${searchUrl}/albumsById/${id}`,
   {
     headers:{
       Authorization:token
@@ -28,7 +29,7 @@ export async function getLibrary() {
   let email = localStorage.getItem("email");
   let token = localStorage.getItem("token");
   console.log(token)
-  let res = await axios.post(`${environment.userUrl}/getLibrary`, {
+  let res = await axios.post(`${userUrl}/getLibrary`, {
     email: email,
   }, {
     headers:{
@@ -42,7 +43,7 @@ export async function getLibrary() {
 export async function addSongtoLibrary(id: string, songId: string) {
   let token = localStorage.getItem('token');
 
-  let response = await axios.post(`${environment.userUrl}/addSongtoPlayList`, {
+  let response = await axios.post(`${userUrl}/addSongtoPlayList`, {
     email: localStorage.getItem("email"),
     playlistId: id,
     songId: songId,
@@ -61,7 +62,7 @@ export async function createPlaylist(
 ) {
   let token = localStorage.getItem('token');
   let response = await axios
-    .post(`${environment.userUrl}/createPlaylist`, {
+    .post(`${userUrl}/createPlaylist`, {
       email: localStorage.getItem("email"),
       name: name,
       username: localStorage.getItem("username"),
@@ -81,7 +82,7 @@ export async function removePlaylist(playlistId: string) {
   let token = localStorage.getItem('token');
 
   let response = await axios
-    .post(`${environment.userUrl}/deletePlaylist`, {
+    .post(`${userUrl}/deletePlaylist`, {
       email: localStorage.getItem("email"),
       playlistId: playlistId,
     }, {
@@ -101,7 +102,7 @@ export async function saveToMyPlaylist(playlist: any) {
   let token = localStorage.getItem('token');
 
   let response = await axios.post(
-    `${environment.userUrl}/collaboratePlaylist`,
+    `${userUrl}/collaboratePlaylist`,
     { email:email , playlistId: playlist._id }, {
       headers:{
         Authorization:token
@@ -115,7 +116,7 @@ export async function getCollaborationPlaylist() {
   let token = localStorage.getItem('token')
   let email = localStorage.getItem("email");
   let response = await axios.post(
-    `${environment.searchUrl}/collaborationPlaylists`,
+    `${searchUrl}/collaborationPlaylists`,
     { email: email }, {
       headers:{
         Authorization:token

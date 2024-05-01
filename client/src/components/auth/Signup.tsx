@@ -1,9 +1,10 @@
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { environment } from "../../assets/environment";
 import { useNavigate , Link } from "react-router-dom";
 import { snackbarAtom } from "../../store/otherState";
 import { useSetRecoilState } from "recoil";
+
+const baseUrl = import.meta.env.VITE_API_URL
 
 type Inputs = {
   username: string
@@ -28,7 +29,7 @@ function Signup() {
   }
 
   function registerUser(payload: any) {
-    axios.post(`${environment.baseUrl}/auth/signup`, payload).then((res) => {
+    axios.post(`${baseUrl}/auth/signup`, payload).then((res) => {
       showNotification({severity:'success', message:res.data.message+', login to continue'})
       if (res.data.message === "user registered successfully") {
         navigate('/signin')

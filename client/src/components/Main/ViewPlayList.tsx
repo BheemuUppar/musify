@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SongCard from "../shared/SongCard";
-import { environment } from "../../assets/environment";
 import PlayButton from "../shared/PlayButton";
 import ListHeader from "../shared/ListHeader";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -11,6 +10,8 @@ import { createPlaylist, getLibrary } from "../../utils/apiutils";
 import { libraryAtom, snackbarAtom } from "../../store/otherState";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
+
+const searchUrl = import.meta.env.VITE_SEARCH_URL
 
 const ViewPlaylist = React.memo(() => {
   const [playlist, setPlaylist]: any = useState({});
@@ -25,7 +26,7 @@ const ViewPlaylist = React.memo(() => {
 
   useEffect(() => {
     axios
-      .get(`${environment.searchUrl}/playlistById/${params.id}`,{
+      .get(`${searchUrl}/playlistById/${params.id}`,{
         headers:{
           Authorization:localStorage.getItem('token')
         }
