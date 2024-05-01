@@ -35,12 +35,25 @@
   position: fixed;
   height: 100vh !important;
   width: 100vw;
-  background-color: #000;
+  /* background-color: #000; */
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  
+  background: transparent;
+  z-index: 2;
+  /* background: url(./assets/music-background.mp4); */
+}
+#player.fullMode .video-background{
+  position: fixed;
+  height: 100vh !important;
+  width: 100vw;
+  /* background-color: #000; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
 }
 
 .fullMode .full-width {
@@ -48,33 +61,52 @@
 
 }
 .fullMode .full-width img {
+  position: fixed;
+  height: 38vh;
+  width: 80vh;
+  width: 17vw;
+  /* top: 0; */
+  bottom: 158px;
+  right: 0;
+  left: 58px;
+  z-index: 1;
+  opacity: 1;
+  border-radius: 20px;
+
+}
+.fullMode .trackinfo div{
+  position: fixed;
+    bottom: 171px;
+    left: 299px;
+}
+.fullMode .song-info{
+  display: none;
+}
+
+.fullMode .left .top{
+  position: inherit;
+    width: 90vw;
+    z-index: 2;
     position: fixed;
-    height: 85vh;
-    width: 80vh;
-    width: -webkit-fill-available;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 1;
-    opacity: 0.6;
-
+    bottom: 28px;
+    left: 60px;
+}
+.fullMode .left .sneekbar{
+  position: inherit;
+  position: fixed;
+  width: 90vw;
+  z-index: 2;
+  bottom: 84px;
+  left: 60px; 
 }
 
-.fullMode .left {
-    position: inherit;
-    width: 40%;
-    z-index: 2;
-    bottom: 0;
-    left: 0;
-  /* By default, these divs will occupy the auto width columns */
-}
 .fullMode .right {
-    position: inherit;
-    width: 30%;
-    z-index: 2;
-    bottom: 0;
-    right: 0;
+  position: inherit;
+  width: fit-content;
+  width: -moz-fit-content;
+  z-index: 2;
+  bottom: 30px;
+  right: 75px;
 
   /* By default, these divs will occupy the auto width columns */
 }

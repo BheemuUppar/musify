@@ -70,7 +70,7 @@ const setCurrentlist = async (index:number)=>{
       <div className=" my-2 flex items-center gap-4 px-2" style={{height:'100px'}}>
         <PlayButton
           clickHandler={ () => {
-            setCurrentlist(0)
+            setCurrentlist(0);
           }}
         />
         <Tooltip title="add to your playlist">
@@ -78,6 +78,9 @@ const setCurrentlist = async (index:number)=>{
             <ControlPointIcon />
           </button>
         </Tooltip>
+      </div>
+      <div className="grid grid-cols-12">
+
       </div>
       {playlist.songs &&
         playlist.songs.map((song: any, index: number) => {

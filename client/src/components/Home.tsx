@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../store/authState";
 import { useNavigate } from "react-router-dom";
 import CardContent from "./shared/CardContent";
@@ -10,7 +10,7 @@ import axios from "axios";
 import PlaylistCard from "./shared/PlaylistCard";
 import Player from "./Player/Player";
 import { environment } from "../assets/environment";
-import { leftPanelWidthAtom, songInfoOpenAtom } from "../store/otherState";
+import { leftPanelWidthAtom, snackbarAtom, songInfoOpenAtom } from "../store/otherState";
 import SongInfo from "./shared/SongInfo";
 
 function Home() {
@@ -31,7 +31,12 @@ function Home() {
             <Content></Content>
           </CardContent>
         </div>
-        <div className={`${songInfoOpen?"songInfoOpen block":"songInfoClose hidden"} `} style={{maxHeight:"80vh"}} >
+        <div
+          className={`${
+            songInfoOpen ? "songInfoOpen block" : "songInfoClose hidden"
+          } `}
+          style={{ maxHeight: "80vh" }}
+        >
           <CardContent>
             <SongInfo />
           </CardContent>
@@ -45,32 +50,62 @@ function Home() {
 // default page
 export function HomePage() {
   const [playlists, setPlaylist] = useState([]);
+  const [sandlwood, setSandlwood] = useState([]);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
+  let arr = ["Most Trending", "Top of sandalwood"] 
   useEffect(() => {
-    fetchPlaylist();
+    fetchPlaylist(arr[0]);
+    fetchPlaylist(arr[1]);
   }, []);
 
-  function fetchPlaylist() {
+  function fetchPlaylist(searchKeyword: string) {
     axios
-      .get(`${environment.searchUrl}/playlist/${"top"}`, {
-        headers:{
-          Authorization:localStorage.getItem("token")
-        }
+      .get(`${environment.searchUrl}/playlist/${searchKeyword}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
       })
       .then(async (data) => {
-        console.log(data);
-        await setPlaylist(data.data);
+        if(searchKeyword == 'Most Trending'){
+          await setPlaylist(data.data);
+        }
+        if(searchKeyword == 'Top of sandalwood'){
+          await setSandlwood(data.data);
+        }
+      }).catch((error)=>{
+        showNotification({severity:'error', message:error.response.data.message})
       });
   }
 
   return (
     <>
-      <div className="flex gap-3 flex-wrap">
-        {playlists.map((playlist: any) => {
-          return <PlaylistCard key={playlist.id} playlist={playlist} path={'playlist/' + playlist.id} />;
-        })}
-      </div>
+    <DisplayCard  title={arr[0]} list= {playlists} path="playlist"/>
+    <DisplayCard  title={arr[1]} list= {sandlwood} path="playlist"/>
     </>
   );
+}
+
+function DisplayCard({title, list, path}:{title:string, list:any ,path:string}){
+return   <>
+<div>
+<h3 className="text-dark-600 dark:text-white text-xl my-4">{title}</h3>
+<div className="flex gap-3 flex-wrap">
+  {list &&  list.map((playlist: any) => {
+    return (
+      <PlaylistCard
+        key={playlist.id}
+        playlist={playlist}
+        path={path + '/'+ playlist.id}
+      />
+    );
+  })}
+</div>
+</div>
+</>
 }
 
 function LeftView() {

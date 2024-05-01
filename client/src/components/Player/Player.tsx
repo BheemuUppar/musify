@@ -8,7 +8,8 @@ import {
   volumeAtom,
 } from "../../store/SongState";
 import InfoIcon from '@mui/icons-material/Info';
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import React, {  useEffect, useRef } from "react";
 import { secondsToMinutesSeconds } from "../../utils/utils";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -16,7 +17,8 @@ import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import { songInfoOpenAtom } from "../../store/otherState";
-
+import BackgroundVideo from '../../assets/music-background.mp4'
+ 
 function Player() {
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const setAudioState = useSetRecoilState(audioStateAtom);
@@ -52,9 +54,17 @@ function Player() {
       });
     }
   }
-
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
   let toggleFullScreenMode = ()=>{
-    playerRef.current.classList.toggle('fullMode')
+    playerRef.current.classList.toggle('fullMode');
+    toggleFullScreen()
+    
     ;
   }
 
@@ -64,6 +74,13 @@ function Player() {
     <>
       {currentSong && (
         <div id="player" ref={playerRef} className="p-2 mx-2  grid grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0" style={{height: 'calc(100vh - 80vh)'}}>
+         <div className="hidden video-background" >
+         <video autoPlay loop muted>
+        <source src={BackgroundVideo} type="video/mp4" />
+        {/* Add more <source> tags for different video formats if necessary */}
+        Your browser does not support the video tag.
+      </video>
+         </div>
           <div className="trackinfo flex col-span-3 items-center full-width">
             <img
               className="h-[50px] w-[50px]"
@@ -95,10 +112,10 @@ function Player() {
           </div>
           <div className="elements col-span-3 flex items-center gap-4 right side-by-side">
             <VolumeSlider />
-            <SongInfoButton />
-            {/* <button type="button" onClick={toggleFullScreenMode}>
-            <OpenInFullIcon  className="text-dark-600 dark:text-white"/>
-            </button> */}
+            <SongInfoButton className="song-info" />
+            <button type="button" onClick={toggleFullScreenMode}>
+            <OpenInFullIcon  className="text-dark-600 dark:text-white open-full-icon" />
+            </button>
           </div>
         </div>
       )}
@@ -363,11 +380,11 @@ function VolumeSlider() {
   );
 }
 
-function SongInfoButton() {
+function SongInfoButton({className}:{className: string}) {
   const [songInfoOpen, setSongInfoOpen] = useRecoilState(songInfoOpenAtom);
   return (
     <>
-      <button onClick={async ()=>{
+      <button className={className} onClick={async ()=>{
         setSongInfoOpen(!songInfoOpen)
       }}>
         <InfoIcon/>
