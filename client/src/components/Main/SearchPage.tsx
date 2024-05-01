@@ -42,6 +42,7 @@ function SearchPage() {
     );
     return data.data;
   }
+  
   async function fetchSongs() {
     let data = await axios.get(`${environment.searchUrl}/songs/${searchText}`, {
       headers: {

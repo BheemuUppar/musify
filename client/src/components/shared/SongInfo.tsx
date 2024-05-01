@@ -59,7 +59,7 @@ function SongInfo() {
               {currentSong && <ArtistList data={currentSong.artists.all} />}
             </CardContent>
           </div>
-          <NextSong/>
+          <NextSong />
           
         </div>
       </div>
@@ -95,24 +95,31 @@ function ArtistList({ data }: any) {
   );
 }
 
-function NextSong(){
-  const [currentList, setCurrentList]  = useRecoilState(currentSongsListAtom);
-  
-  // let nextIndex = 0 ;
-  useEffect(()=>{
-    console.log(currentList.songs[currentList.currentSongIndex + 1])
-  }, [currentList])
-  return <div className="min-h-[fit-content]">
-    <h3 className="text-lg text-dark-600 dark:text-white"> Next song</h3>
-  {currentList.songs.length>0 && <AlbumSongCard className="p-2" clickHandler={()=>{
-      setCurrentList({
-        songs: currentList.songs,
-        currentSongIndex: currentList.currentSongIndex + 1,
-      });
-  }
+function NextSong() {
+  const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
 
-  } song={currentList.songs[currentList.currentSongIndex + 1]} index={currentList.currentSongIndex+1} />}
-  </div>
+  // let nextIndex = 0 ;
+  useEffect(() => {}, [currentList]);
+  return <>
+   { currentList.songs[currentList.currentSongIndex + 1] &&  <div className="min-h-[fit-content]">
+     <h3 className="text-lg text-dark-600 dark:text-white"> Next song</h3>
+     {currentList.songs.length > 0 && (
+       <AlbumSongCard
+         className="p-2"
+         clickHandler={() => {
+           setCurrentList({
+             songs: currentList.songs,
+             currentSongIndex: currentList.currentSongIndex + 1,
+           });
+         }}
+         song={currentList.songs[currentList.currentSongIndex + 1]}
+         index={currentList.currentSongIndex + 1}
+       />
+     )}
+   </div>
+
+   }
+   </>
 }
 
 export default SongInfo;
