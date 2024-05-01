@@ -13,11 +13,11 @@ function TopResultCard({ album, className, setCurrentlist }: any) {
               <p>{album.type}</p>
             </span>
             <div className="hidden absolute bottom-0 right-4 group-hover:block opacity-25 group-hover:-translate-y-[30px] group-hover:opacity-100 transition ease-in duration-500 ">
-              <PlayButton clickHandler={async (e:any)=>{
+              {/* <PlayButton clickHandler={async (e:any)=>{
               e.stopPropagation();
               e.preventDefault();
              await setCurrentlist(0);
-              }}/>
+              }}/> */}
             </div>
           </Link>
         </div>
