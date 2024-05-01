@@ -95,7 +95,7 @@ function Signup() {
             Sign in
           </button>
         </form>
-        <span><Link to='/signin' className="text-blue-500">click here</Link> to signin</span>
+        <span><Link to='/signin' className="text-blue-500">click here</Link> to sign up</span>
       </div>
     </div>
   );

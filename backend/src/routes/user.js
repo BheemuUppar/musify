@@ -149,9 +149,11 @@ async function formatePlayList(playlists) {
         result.push(playlist);
       }
       return result;
+    }else {
+      return result
     }
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     
   }
 }
