@@ -29,6 +29,9 @@ function Signin() {
          showNotification({severity:'success', message:res.data.message})
         navigate('/home');
       }
+      else{
+        showNotification({severity:'error', message:res.data.message})
+      }
     
     }).catch((error:any)=>{
       console.log(error)
