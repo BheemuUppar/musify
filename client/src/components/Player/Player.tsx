@@ -72,7 +72,7 @@ function Player() {
         <div
           id="player"
           ref={playerRef}
-          className="p-2 mx-2  grid grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0"
+          className="p-2 mx-2 w-full md:grid md:grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0 sm:flex sm:flex-wrap sm:justify-center"
           style={{ height: "calc(100vh - 80vh)" }}
         >
           <BgVideo />
@@ -110,7 +110,7 @@ function Player() {
               <SneekBar />
             </div>
           </div>
-          <div className="elements col-span-3 flex items-center gap-4 right side-by-side">
+          <div className="elements col-span-3 flex items-center gap-4 right side-by-side sm:justify-center ">
             <VolumeSlider />
             <SongInfoButton className="song-info" />
             <button type="button" onClick={toggleFullScreenMode}>
