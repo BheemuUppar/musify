@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
-import { songInfoOpenAtom } from "../../store/otherState";
+import { snackbarAtom, songInfoOpenAtom } from "../../store/otherState";
 import BackgroundVideo from "../../assets/music-background.mp4";
 
 function Player() {
@@ -26,6 +26,11 @@ function Player() {
   const setCurrentTime = useSetRecoilState(currentTimeAtom);
   const [currentList, setCurrentList] = useRecoilState(currentSongsListAtom);
   const playerRef: any = useRef();
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+
+  const  showNotification = function (props:{severity:string, message:string}){
+    setSnackbarState(props)
+  }
 
   useEffect(() => {
     if (currentList.songs.length > 0) {
@@ -62,8 +67,13 @@ function Player() {
     }
   }
   let toggleFullScreenMode = () => {
-    playerRef.current.classList.toggle("fullMode");
-    toggleFullScreen();
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      showNotification({severity:"error", message:"this feature is not available in mobile device"})
+      
+    }else{
+      playerRef.current.classList.toggle("fullMode");
+      toggleFullScreen();
+    }
   };
 
   return (
