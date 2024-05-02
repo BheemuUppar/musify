@@ -67,7 +67,7 @@ function Player() {
     }
   }
   let toggleFullScreenMode = () => {
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
+    if (/Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768) {
       showNotification({severity:"error", message:"this feature is not available in mobile device"})
       
     }else{
