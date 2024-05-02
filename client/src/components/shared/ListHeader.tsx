@@ -4,8 +4,8 @@ function ListHeader({ list }: any) {
   return (
     <>
  
-      <div className="h-[80%] max-h-[300px] min-h-[300px] p-2 grid grid-cols-3 gap-2">
-        <div className="dark:bg-dark-500 bg-slate-700  border border-dark-600 overflow-hidden  rounded col-span-1 p-4 ">
+      <div className="md:h-[80%] md:max-h-[300px] sm:min-h-[fit-content]] p-2 md:flex md:flex-row gap-2 sm:flex sm:flex-col">
+        <div className="dark:bg-dark-500 bg-slate-700   border border-dark-600 overflow-hidden  rounded  p-4 md:grow ">
           {list.image && list.image.length > 0 && (
             <img 
               className="rounded" style={{maxHeight:'300px', width: '-webkit-fill-available'}}
@@ -15,8 +15,8 @@ function ListHeader({ list }: any) {
             />
           )}
         </div>
-        <div className="dark:bg-dark-500 bg-slate-700   rounded  col-span-2">
-        <div className="info pl-2 pt-2 flex flex-col h-full justify-center items-start">
+        <div className="dark:bg-dark-500 bg-slate-700   rounded md:grow">
+        <div className="info pl-2 pt-2 flex flex-col h-full justify-center items-start ">
               <p className="text-lg">{list.type}</p>
               <h1 className="text-[327%]">{list.name}</h1>
              <div>

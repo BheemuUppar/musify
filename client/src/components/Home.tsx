@@ -95,7 +95,7 @@ function DisplayCard({title, list, path}:{title:string, list:any ,path:string}){
 return   <>
 <div>
 <h3 className="text-dark-600 dark:text-white text-xl my-4">{title}</h3>
-<div className="flex gap-3 flex-wrap">
+<div className="flex gap-3 flex-wrap justify-center">
   {list &&  list.map((playlist: any) => {
     return (
       <PlaylistCard
