@@ -113,7 +113,7 @@ function Player() {
           <div className="elements col-span-3 flex items-center gap-4 right side-by-side sm:justify-center ">
             <VolumeSlider />
             <SongInfoButton className="song-info" />
-            <button type="button" onClick={toggleFullScreenMode}>
+            <button className="hidden md:block" type="button" onClick={toggleFullScreenMode}>
               <OpenInFullIcon className="text-dark-600 dark:text-white open-full-icon" />
             </button>
           </div>

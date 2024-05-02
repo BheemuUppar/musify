@@ -26,6 +26,7 @@ function Home() {
 
   return (
     <>
+    <div className="w-full h-full" style={{minWidth:"fit-content"}}>
       <div className="flex gap-4 text-red-50 p-2 h-[80vh] max-h-[80vh]">
         <LeftView />
         <div className="grow">
@@ -45,6 +46,7 @@ function Home() {
         </div>
       </div>
       <Player></Player>
+      </div>
     </>
   );
 }
