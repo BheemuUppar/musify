@@ -23,13 +23,13 @@ export const volumeAtom = atom<number>({
   default: 0.5,
 });
 // holds volume
-export const isPlayingAtom = atom<any>({
+export const isPlayingAtom = atom<boolean>({
   key: "isPlayingAtom",
   default: false,
 });
 
 // holds current playlist or album
-export const currentSongsListAtom = atom<any>({
+export const currentSongsListAtom =  atom<any>({
   key: "currentSongsListAtom",
   default: {
     songs: [],

@@ -1,6 +1,9 @@
 import playlistImage from "../../assets/images/playlist.png";
+import { Album } from "../../types/album";
+import { MyPlaylist } from "../../types/MyPlaylist";
+import { Playlist } from "../../types/Playlist";
 
-function ListHeader({ list }: any) {
+function ListHeader({ list }:any) {
   return (
     <>
  

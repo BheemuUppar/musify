@@ -8,6 +8,8 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
 import { getLibrary, saveToMyPlaylist } from "../../utils/apiutils";
 import { libraryAtom, snackbarAtom } from "../../store/otherState";
+import { AxiosResponse } from "axios";
+import { MyPlaylist } from "../../types/MyPlaylist";
 
 function ViewCollaborationPlaylist() {
   const { state } = useLocation();
@@ -26,9 +28,9 @@ function ViewCollaborationPlaylist() {
 
   const addToMyPlaylist = async () => {
     try {
-      let response: any = await saveToMyPlaylist(state);
+      let response: AxiosResponse = await saveToMyPlaylist(state);
       showNotification({ severity: "success", message: response.data.message });
-      getLibrary().then((data: any) => {
+      getLibrary().then((data: MyPlaylist[]) => {
         setLibrary(data);
       });
     } catch (error: any) {
