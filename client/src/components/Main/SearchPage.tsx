@@ -13,10 +13,9 @@ const searchUrl = import.meta.env.VITE_SEARCH_URL
 
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);
-  const [searchResults, setSearchResults]: any =
+  const [searchResults, setSearchResults] =
     useRecoilState(searchResultsAtom);
-  const [currentSongList, setCurrentSongList]: any =
-    useRecoilState(currentSongsListAtom);
+  const [currentSongList, setCurrentSongList] = useRecoilState(currentSongsListAtom);
 
   useEffect(() => {
     searchHandler();
