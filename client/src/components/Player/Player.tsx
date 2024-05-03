@@ -91,11 +91,11 @@ function Player() {
         <div
           id="player"
           ref={playerRef}
-          className="p-2 mx-2 w-full md:grid md:grid-cols-12 gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0 sm:flex sm:flex-wrap sm:justify-center"
+          className="p-2 mx-2  flex flex-nowrap gap-x-2 dark:bg-dark bg-white-50 border-t border-gray-400 dark:border-0 "
           style={{ height: "calc(100vh - 80vh)" }}
         >
           <BgVideo />
-          <div className="trackinfo flex col-span-3 items-center full-width">
+          <div className="trackinfo flex col-span-3 items-center full-width min-w-[300px]">
             <img
               className="h-[50px] w-[50px]"
               src={currentSong.image[2].url}
@@ -119,7 +119,7 @@ function Player() {
               </p>
             </div>
           </div>
-          <div className="controls grow mx-10 flex flex-col left col-span-6 justify-center side-by-side">
+          <div className="controls grow mx-10 flex flex-col left col-span-6 justify-center side-by-side min-w-[300px]">
             <div className="top flex justify-center gap-4 items-center my-2">
               <PreviousButton />
               <PlayPauseButton />
@@ -129,7 +129,7 @@ function Player() {
               <SneekBar />
             </div>
           </div>
-          <div className="elements col-span-3 flex items-center gap-4 right side-by-side sm:justify-center ">
+          <div className="elements col-span-3 flex items-center gap-4 right side-by-side sm:justify-center min-w-[300px] ">
             <VolumeSlider />
             <SongInfoButton className="song-info" />
             <button className="hidden md:block" type="button" onClick={toggleFullScreenMode}>

@@ -65,6 +65,8 @@
   height: 38vh;
   width: 80vh;
   width: 17vw;
+  min-width: 350px;
+  height: 400px;
   /* top: 0; */
   bottom: 158px;
   right: 0;
