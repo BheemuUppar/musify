@@ -1,36 +1,35 @@
 # Musify
 
-Musify is a music streaming web application creating  with React, Vite, TypeScript, Express, and MongoDB. It aims to provide users with a platform to discover and listen to their favorite music.
+Musify is a music streaming application inspired by Spotify. It allows users to stream music, create playlists, view albums, and collaborate on playlists with other users. The application is built using React, Vite, Node.js, and MongoDB.
 
 ## Features
 
-- Browse and search for songs, albums, and artists
-- Create and manage playlists
-- Follow favorite artists and receive updates
-- Personalized recommendations based on listening history
-- Seamless music playback with a user-friendly interface
+- **Search Music**: Users can search for their favorite songs.
+- **Playback Controls**: Users can play, pause, skip to the next song, and go back to the previous song.
+- **Song Info**: Displays information about the currently playing song.
+- **View Playlists and Albums**: Users can view their playlists and albums.
+- **Save Playlists and Albums**: Users can save playlists and albums to their library.
+- **Create Playlist**: Users can create their own playlists.
+- **Collaborative Playlists**: Users can choose to make their playlists collaborative, allowing other users to add songs to them.
+- **Playlist Collaboration**: Collaborative playlists are visible to other users in the search page, allowing them to save and contribute songs.
+- **Light and Dark Theme**: Supports both light and dark themes for user interface customization.
 
 ## Technologies Used
 
-- **Frontend**:
-  - React
-  - Vite
-  - TypeScript
-  - [Insert any additional frontend libraries or tools here]
-
-- **Backend**:
-  - Express
-  - MongoDB
-  - [Insert any additional backend libraries or tools here]
+- **Frontend**: React, Vite
+- **Backend**: Node.js
+- **Database**: MongoDB
 
 ## Getting Started
 
 ### Prerequisites
 
-Before running Musify, you need to have the following installed on your machine:
+- Node.js installed on your machine
+- MongoDB installed and running locally or remotely
 
-- Node.js
-- npm or yarn
-- MongoDB
+### Installation
 
-  
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/BheemuUppar/musify.git
