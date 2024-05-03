@@ -65,8 +65,8 @@
   height: 38vh;
   width: 80vh;
   width: 17vw;
-  min-width: 350px;
-  height: 400px;
+  min-width: 250px;
+  height: 300px;
   /* top: 0; */
   bottom: 158px;
   right: 0;
@@ -78,7 +78,7 @@
 .fullMode .trackinfo div {
   position: fixed;
   bottom: 171px;
-  left: 299px;
+  left: 350px;
 }
 .fullMode .trackinfo div p span {
   color: white;

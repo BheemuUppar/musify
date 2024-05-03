@@ -95,7 +95,7 @@ function Player() {
           style={{ height: "calc(100vh - 80vh)" }}
         >
           <BgVideo />
-          <div className="trackinfo flex col-span-3 items-center full-width min-w-[300px]">
+          <div className="trackinfo flex col-span-3 items-center full-width min-w-[300px] max-w-[350px]">
             <img
               className="h-[50px] w-[50px]"
               src={currentSong.image[2].url}
