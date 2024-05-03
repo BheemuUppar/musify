@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ListHeader from "../shared/ListHeader";
@@ -10,11 +10,14 @@ import { createPlaylist, getLibrary } from "../../utils/apiutils";
 import { libraryAtom, snackbarAtom } from "../../store/otherState";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Tooltip from "@mui/material/Tooltip";
+import { Album } from "../../types/album";
+import { Song } from "../../types/song";
+import { MyPlaylist } from "../../types/MyPlaylist";
 
 const searchUrl = import.meta.env.VITE_SEARCH_URL
 
 const ViewAlbum = React.memo(() => {
-  const [album, setAlbum]: any = useState({});
+  const [album, setAlbum]:any  = useState({});
   const params = useParams();
   const [currentSongList, setCurrentSongList] = useRecoilState(currentSongsListAtom);
   const setLibrary = useSetRecoilState(libraryAtom);
@@ -27,7 +30,7 @@ const ViewAlbum = React.memo(() => {
           Authorization:localStorage.getItem('token')
         }
       })
-      .then((data: any) => {
+      .then((data: AxiosResponse) => {
         setAlbum(data.data.data);
       }).catch((error:any)=>{
         showNotification({severity:'error', message:error.response.data.message})
@@ -40,10 +43,10 @@ const ViewAlbum = React.memo(() => {
 
   const addToMyPlaylist = async () => {
    try{
-    let arrOfId = album.songs.map((song: any) => {
+    let arrOfId = album.songs.map((song: Song) => {
       return song.id;
     });
-    let response: any = await createPlaylist(
+    let response: AxiosResponse = await createPlaylist(
       album.name,
       false,
       album.image,
@@ -51,7 +54,7 @@ const ViewAlbum = React.memo(() => {
     );
     
     showNotification({severity:'success', message:response.data.message})
-    getLibrary().then((data: any) => {
+    getLibrary().then((data: MyPlaylist[]) => {
       setLibrary(data);
     });
    }catch(error:any){

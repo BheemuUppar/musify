@@ -10,6 +10,7 @@ import PlaylistCard from "../shared/PlaylistCard";
 import { SearchResults } from "../../types/searchResults";
 import { Playlist } from "../../types/Playlist";
 import { Album } from "../../types/album";
+import { Song } from "../../types/song";
 
 const searchUrl = import.meta.env.VITE_SEARCH_URL
 
@@ -102,7 +103,7 @@ function SearchPage() {
         )}
         {searchResults && searchResults.songs.length > 0 && (
           <div className="col-span-2 overflow-y-auto">
-            {searchResults.songs.map((song: any, index: number) => {
+            {searchResults.songs.map((song: Song, index: number) => {
               if (index < 4) {
                 return (
                   <AlbumSongCard
