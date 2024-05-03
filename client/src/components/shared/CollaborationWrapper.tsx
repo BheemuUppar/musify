@@ -3,6 +3,7 @@ import { useSetRecoilState } from "recoil";
 import { snackbarAtom } from "../../store/otherState";
 import { getCollaborationPlaylist } from "../../utils/apiutils";
 import CollaborationPlaylistCard from "./CollaborationPlaylistCard";
+import { MyPlaylist } from "../../types/MyPlaylist";
 
 function CollaborationWrapper() {
     const [collaborationPlaylist, setCollaborationPlaylist] = useState<any>([]);
@@ -23,7 +24,7 @@ function CollaborationWrapper() {
         <h2 className="text-xl text-dark-600 dark:text-white">Collaboration Playlist</h2>
         {/* <PlaylistCard /> */}
         <div className="flex">
-        {collaborationPlaylist.map((playlist:any)=>{
+        {collaborationPlaylist.map((playlist:MyPlaylist)=>{
           return <CollaborationPlaylistCard key={playlist._id}  playlist={playlist} />
         })}
          

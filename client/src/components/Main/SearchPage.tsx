@@ -7,6 +7,9 @@ import { currentSongsListAtom } from "../../store/SongState";
 import TopResultCard from "./TopResultCard";
 import CollaborationWrapper from "../shared/CollaborationWrapper";
 import PlaylistCard from "../shared/PlaylistCard";
+import { SearchResults } from "../../types/searchResults";
+import { Playlist } from "../../types/Playlist";
+import { Album } from "../../types/album";
 
 const searchUrl = import.meta.env.VITE_SEARCH_URL
 
@@ -21,7 +24,12 @@ function SearchPage() {
     searchHandler();
   }, [searchText]);
   async function searchHandler() {
-    let obj: any= {};
+    let obj: SearchResults= {
+      albums: [],
+      playlists: [],
+      songs: [],
+      artists: []
+    };
     if (searchText) {
       obj["albums"] = await fetchAlbums();
       obj["songs"] = await fetchSongs();
@@ -87,8 +95,8 @@ function SearchPage() {
         {searchResults && searchResults.albums.length > 0 && (
           <div className="col-span-1 ">
             <TopResultCard
-              setCurrentlist={setCurrentlist}
-              album={searchResults ? searchResults.albums[0] : null}
+             
+              album={searchResults && searchResults.albums[0] }
             />
           </div>
         )}
@@ -114,7 +122,7 @@ function SearchPage() {
         <h2 className="text-xl  my-3">Playlists</h2>
         <div className="flex flex-wrap gap-4">
           { searchResults && searchResults.playlists &&
-            searchResults.playlists.map((playlist: any) => {
+            searchResults.playlists.map((playlist: Playlist) => {
               return <PlaylistCard playlist={playlist} key={playlist.id} path={'/home/playlist/' + playlist.id}/>;
             })}
               {!searchResults && <h1>No playlist Available</h1>}
@@ -125,7 +133,7 @@ function SearchPage() {
         <h2 className="text-xl my-3">Albums</h2>
         <div className="flex flex-wrap gap-4">
           {searchResults && searchResults.albums &&
-            searchResults.albums.map((album:any) => {
+            searchResults.albums.map((album:Album) => {
               return <PlaylistCard playlist={album} path={'/home/album/'+album.id}/>
             })}
             {!searchResults && <h1>No Albums Available</h1>}

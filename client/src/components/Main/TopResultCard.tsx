@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { getPAlbumDetailsById } from "../../utils/apiutils";
 import { useSetRecoilState } from "recoil";
 import { currentSongsListAtom } from "../../store/SongState";
+import { Album } from "../../types/album";
 
-function TopResultCard({ album, className, setCurrentlist }: any) {
+function TopResultCard({ album}: {album:Album}) {
   const setCurrentPlayList = useSetRecoilState(currentSongsListAtom)
   useEffect(()=>{
   })
