@@ -8,6 +8,8 @@ import playlistImage from "../../assets/images/playlist.png";
 import DialogModal from "../shared/DialogModal";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Tooltip from "@mui/material/Tooltip";
+import { MyPlaylist } from "../../types/MyPlaylist";
+import { AxiosResponse } from "axios";
 
 const Library = React.memo(({ clickHandler }: any) => {
   const [library, setLibrary] = useRecoilState(libraryAtom);
@@ -25,7 +27,7 @@ const Library = React.memo(({ clickHandler }: any) => {
   }
 
   function fethcLibrary() {
-    getLibrary().then((data: any) => {
+    getLibrary().then((data: MyPlaylist[]) => {
       setLibrary(data);
     }).catch(error=>{
       showNotification({severity:'error', message:error.response.data.message})
@@ -35,7 +37,7 @@ const Library = React.memo(({ clickHandler }: any) => {
   // confirm handler to create playlist with collaborative
   const confirmHandler = async () => {
   try{
-    let response : any = await createPlaylist(inputPlaylistName, true)
+    let response : AxiosResponse = await createPlaylist(inputPlaylistName, true)
     let severity = response.status >= 200 && response.status < 400 ? "success":"error"
     // await setSnackbarState({severity:severity, message:response.data.message})
     showNotification({severity:'success', message:response.data.message})
@@ -50,7 +52,7 @@ const Library = React.memo(({ clickHandler }: any) => {
   // create a playlist without collaboration
   const noClickHandler = async () => {
    try{
-    let response: any = await createPlaylist(inputPlaylistName, false);
+    let response: AxiosResponse = await createPlaylist(inputPlaylistName, false);
     showNotification({severity:'success', message:response.data.message})
     fethcLibrary();
    }catch(error:any){
@@ -60,7 +62,7 @@ const Library = React.memo(({ clickHandler }: any) => {
 
   const onDeleteConfirm = async (playlistId: string) => {
     try{
-      let response: any = await removePlaylist(playlistId);
+      let response: any= await removePlaylist(playlistId);
       showNotification({severity:'success', message:response.data.message})
       fethcLibrary();
     }catch(error:any){
@@ -134,7 +136,7 @@ const Library = React.memo(({ clickHandler }: any) => {
       <div className="left-playlist">
         <ul className="playlist-wrapper">
           {library &&
-            library.map((playlist: any) => {
+            library.map((playlist: MyPlaylist) => {
               return (
                 <li
                   key={playlist.name}

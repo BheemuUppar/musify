@@ -146,7 +146,7 @@ function Navbar() {
 function SearchBox() {
   const setSearchText = useSetRecoilState(searchTextAtom);
   const setSearchMode = useSetRecoilState(searchModeAtom);
-  let timer: any;
+  let timer: number;
   return (
     <>
       <div className="min-w-[250px]">

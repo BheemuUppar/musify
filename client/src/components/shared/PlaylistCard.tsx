@@ -3,9 +3,12 @@ import PlayButton from "./PlayButton";
 import { getPAlbumDetailsById, getPlaylistDetailsById } from "../../utils/apiutils";
 import { useRecoilState } from "recoil";
 import { currentSongsListAtom } from "../../store/SongState";
+import { Playlist } from "../../types/Playlist";
+import { Album } from "../../types/album";
+import { MyPlaylist } from "../../types/MyPlaylist";
 
 
-function PlaylistCard({ playlist, path }: any) {
+function PlaylistCard({ playlist, path }: {playlist:Playlist | Album  , path:string}) {
   const [currentSongsList , setCurrentPlayList] = useRecoilState(currentSongsListAtom);
 
   const handleButtonClick = async (e:any)=>{

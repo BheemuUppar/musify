@@ -18,9 +18,9 @@ export const searchResultsAtom = atom<SearchResults>({
   default: undefined,
 });
 
-export const libraryAtom = atom<MyPlaylist>({
+export const libraryAtom = atom<MyPlaylist[]>({
   key: "libraryAtom",
-  default: undefined,
+  default: undefined
 });
 
 export const leftPanelWidthAtom = atom<any>({

@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate , Link } from "react-router-dom";
 import { snackbarAtom } from "../../store/otherState";
 import { useSetRecoilState } from "recoil";
+import { SingUpForm } from "../../types/User";
 
 const baseUrl = import.meta.env.VITE_API_URL
 
@@ -28,7 +29,7 @@ function Signup() {
     setSnackbarState(props)
   }
 
-  function registerUser(payload: any) {
+  function registerUser(payload: SingUpForm) {
     axios.post(`${baseUrl}/auth/signup`, payload).then((res) => {
       showNotification({severity:'success', message:res.data.message+', login to continue'})
       if (res.data.message === "user registered successfully") {

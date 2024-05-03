@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../../store/authState";
@@ -37,7 +37,7 @@ function Signin() {
       }
     
     }).catch((error:any)=>{
-      showNotification({severity:'error', message:error.response.data.message})
+        showNotification({severity:'error', message:error.response.data.message})
     });
   }
 

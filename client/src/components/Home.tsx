@@ -11,6 +11,8 @@ import PlaylistCard from "./shared/PlaylistCard";
 import Player from "./Player/Player";
 import { leftPanelWidthAtom, snackbarAtom, songInfoOpenAtom } from "../store/otherState";
 import SongInfo from "./shared/SongInfo";
+import { Playlist } from "../types/Playlist";
+import { Album } from "../types/album";
 
 const searchUrl = import.meta.env.VITE_SEARCH_URL;
 
@@ -93,12 +95,12 @@ export function HomePage() {
   );
 }
 
-function DisplayCard({title, list, path}:{title:string, list:any ,path:string}){
+function DisplayCard({title, list, path}:{title:string, list:Playlist[] | Album[] ,path:string}){
 return   <>
 <div>
 <h3 className="text-dark-600 dark:text-white text-xl my-4">{title}</h3>
 <div className="flex gap-3 flex-wrap justify-center">
-  {list &&  list.map((playlist: any) => {
+  {list &&  list.map((playlist: Playlist | Album) => {
     return (
       <PlaylistCard
         key={playlist.id}
