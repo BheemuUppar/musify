@@ -33,12 +33,12 @@ export interface Song{
         image: Url[],
         downloadUrl:  Url[]
 }
-interface Url{
+export interface Url{
     quality:string,
     url:string
 }
 
-interface Artist{
+export interface Artist{
         "id":  string | null,
         "name":  string | null,
         "role": string |  null,

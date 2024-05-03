@@ -337,7 +337,7 @@ function SneekBar() {
     setCurrentTime(newValue);
   };
 
-  const maxDuration = audio && audio.duration ? parseInt(audio.duration) : 10;
+  const maxDuration = audio && audio.duration ? audio.duration : 10;
   return (
     <div className="sneekbar">
       <div className="w-full flex gap-4 items-center text-[10px]">
@@ -373,7 +373,7 @@ function SneekBar() {
         </Box>
         <span className="text-nowrap pb-[4px]">
           {audio && audio.duration
-            ? secondsToMinutesSeconds(Math.floor(parseInt(audio.duration)))
+            ? secondsToMinutesSeconds(Math.floor(audio.duration))
             : "--:--"}
         </span>
       </div>

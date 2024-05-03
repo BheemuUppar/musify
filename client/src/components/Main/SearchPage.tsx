@@ -10,6 +10,7 @@ import PlaylistCard from "../shared/PlaylistCard";
 
 const searchUrl = import.meta.env.VITE_SEARCH_URL
 
+
 function SearchPage() {
   const searchText = useRecoilValue(searchTextAtom);
   const [searchResults, setSearchResults]: any =
@@ -21,7 +22,7 @@ function SearchPage() {
     searchHandler();
   }, [searchText]);
   async function searchHandler() {
-    let obj: any = {};
+    let obj: any= {};
     if (searchText) {
       obj["albums"] = await fetchAlbums();
       obj["songs"] = await fetchSongs();

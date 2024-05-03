@@ -2,9 +2,9 @@ import { atom } from "recoil";
 import { Song } from "../types/song";
 
 // audio element <audio></audio>
-export const audioStateAtom = atom<any>({
+export const audioStateAtom = atom<HTMLAudioElement >({
   key: "audioStateAtom",
-  default: null,
+  default: undefined,
 });
 
 // holds current playing time
@@ -18,7 +18,7 @@ export const currentSongAtom = atom<Song >({
   default: undefined,
 });
 // holds volume
-export const volumeAtom = atom<any>({
+export const volumeAtom = atom<number>({
   key: "volumeAtom",
   default: 0.5,
 });

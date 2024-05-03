@@ -1,18 +1,20 @@
-import { atom, selector } from "recoil";
-import { getLibrary } from "../utils/apiutils";
+import { atom } from "recoil";
+import { SearchResults } from "../types/searchResults";
 
-export const searchTextAtom = atom({
+export const searchTextAtom = atom<string>({
   key: "searchTextAtom",
-  default: null,
+  default: undefined,
 });
-export const searchModeAtom = atom({
+export const searchModeAtom = atom<boolean>({
   key: "searchModeAtom",
   default: false,
 });
 
-export const searchResultsAtom = atom<any>({
+
+
+export const searchResultsAtom = atom<SearchResults>({
   key: "searchResultsAtom",
-  default: null,
+  default: undefined,
 });
 
 export const libraryAtom = atom<any>({
@@ -25,7 +27,7 @@ export const leftPanelWidthAtom = atom<any>({
   default: { width: "90px", size: "small" },
 });
 
-export const songInfoOpenAtom = atom({
+export const songInfoOpenAtom = atom<boolean>({
   key: "songInfoOpenAtom",
   default: false,
 });
@@ -38,7 +40,7 @@ export const snackbarAtom= atom<any>({
   },
 })
 
-export const themeAtom = atom({
+export const themeAtom = atom<string>({
   key:"themeAtom",
   default:"white"
 })
