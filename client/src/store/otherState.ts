@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { SearchResults } from "../types/searchResults";
+import { MyPlaylist } from "../types/MyPlaylist";
 
 export const searchTextAtom = atom<string>({
   key: "searchTextAtom",
@@ -17,9 +18,9 @@ export const searchResultsAtom = atom<SearchResults>({
   default: undefined,
 });
 
-export const libraryAtom = atom<any>({
+export const libraryAtom = atom<MyPlaylist>({
   key: "libraryAtom",
-  default: null,
+  default: undefined,
 });
 
 export const leftPanelWidthAtom = atom<any>({
