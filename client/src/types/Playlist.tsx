@@ -1,4 +1,4 @@
-import { Url } from "./song";
+import { Song, Url } from "./song";
 
 export interface Playlist {
   explicitContent: boolean;
@@ -9,4 +9,5 @@ export interface Playlist {
   songCount: number;
   type: string;
   url: string;
+  songs?:Song[]
 }

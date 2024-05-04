@@ -21,7 +21,7 @@ function CollaborationWrapper() {
     }, [])
     return (
       <div>
-        <h2 className="text-xl text-dark-600 dark:text-white">Collaboration Playlist</h2>
+        <h2 className="text-xl text-dark-600 dark:text-white ">Collaboration Playlist</h2>
         {/* <PlaylistCard /> */}
         <div className="flex">
         {collaborationPlaylist.map((playlist:MyPlaylist)=>{

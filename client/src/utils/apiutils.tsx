@@ -1,8 +1,11 @@
-import axios from "axios";
+import axios, { Axios, AxiosResponse } from "axios";
+import { Playlist } from "../types/Playlist";
+import { Album } from "../types/album";
+import { MyPlaylist } from "../types/MyPlaylist";
 const searchUrl = import.meta.env.VITE_SEARCH_URL
 const userUrl = import.meta.env.VITE_USER_URL
 
-export async function getPlaylistDetailsById(id: any) {
+export async function getPlaylistDetailsById(id: any):Promise<Playlist> {
   let token =localStorage.getItem('token')
   const res = await axios.get(`${searchUrl}/playlistById/${id}`,
   {
@@ -13,7 +16,7 @@ export async function getPlaylistDetailsById(id: any) {
   );
   return res.data.data;
 }
-export async function getPAlbumDetailsById(id: any) {
+export async function getPAlbumDetailsById(id: any):Promise<Album> {
   let token =localStorage.getItem('token')
   const res = await axios.get(`${searchUrl}/albumsById/${id}`,
   {
@@ -25,7 +28,7 @@ export async function getPAlbumDetailsById(id: any) {
   return res.data.data;
 }
 
-export async function getLibrary() {
+export async function getLibrary() :Promise<MyPlaylist[]> {
   let email = localStorage.getItem("email");
   let token = localStorage.getItem("token");
   let res = await axios.post(`${userUrl}/getLibrary`, {
@@ -39,7 +42,7 @@ export async function getLibrary() {
   return res.data;
 }
 
-export async function addSongtoLibrary(id: string, songId: string) {
+export async function addSongtoLibrary(id: string, songId: string):Promise<AxiosResponse> {
   let token = localStorage.getItem('token');
 
   let response = await axios.post(`${userUrl}/addSongtoPlayList`, {
@@ -58,7 +61,7 @@ export async function createPlaylist(
   isCollaborative: boolean,
   image?: any,
   songs?: string[]
-) {
+):Promise<AxiosResponse> {
   let token = localStorage.getItem('token');
   let response = await axios
     .post(`${userUrl}/createPlaylist`, {
@@ -77,10 +80,10 @@ export async function createPlaylist(
   return response;
 }
 
-export async function removePlaylist(playlistId: string) {
+export async function removePlaylist(playlistId: string):Promise<any> {
   let token = localStorage.getItem('token');
 
-  let response = await axios
+  let response  = await axios
     .post(`${userUrl}/deletePlaylist`, {
       email: localStorage.getItem("email"),
       playlistId: playlistId,
@@ -95,7 +98,7 @@ export async function removePlaylist(playlistId: string) {
   return response;
 }
 
-export async function saveToMyPlaylist(playlist: any) {
+export async function saveToMyPlaylist(playlist: MyPlaylist):Promise<AxiosResponse> {
   let email = localStorage.getItem('email');
   let token = localStorage.getItem('token');
 
@@ -110,7 +113,7 @@ export async function saveToMyPlaylist(playlist: any) {
   return response;
 }
 
-export async function getCollaborationPlaylist() {
+export async function getCollaborationPlaylist():Promise<AxiosResponse> {
   let token = localStorage.getItem('token')
   let email = localStorage.getItem("email");
   let response = await axios.post(

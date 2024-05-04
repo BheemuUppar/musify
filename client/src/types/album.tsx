@@ -1,4 +1,4 @@
-import { Url } from "./song";
+import { Song, Url } from "./song";
 
 export interface Album {
   artists: any;
@@ -11,4 +11,5 @@ export interface Album {
   type: string;
   url: string;
   year: number | undefined;
+  songs?:Song[]
 }

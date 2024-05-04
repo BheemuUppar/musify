@@ -1,6 +1,5 @@
 import { useSetRecoilState } from "recoil";
 import { snackbarAtom } from "../store/otherState";
-import { useEffect, useState } from "react";
 
 function secondsToMinutesSeconds(seconds:number) {
   // Calculate minutes and remaining seconds
@@ -26,7 +25,7 @@ function groupDataByArtist(data:any[]) {
 }
 
 export function useSnackbar(){
-  const [snackbarState, setSnackbarState]:any = useSetRecoilState(snackbarAtom);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
       let openWithSuccess = (message:string)=>{
         setSnackbarState({severity:"success", message:message})
       }

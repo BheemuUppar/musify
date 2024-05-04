@@ -107,16 +107,18 @@ const Library = React.memo(({ clickHandler }: any) => {
                 type="text"
                 placeholder="create new playlist"
               />
-              <button
+              {/* <button
                 disabled={inputPlaylistName == ""}
                 className="disabled:cursor-not-allowed"
                 type="button"
                 // onClick={createPlayList}
-              >
+              > */}
                 <DialogModal
                   icon={
                     <Tooltip title="create playlist">
+                      <button type="button" disabled={!inputPlaylistName && inputPlaylistName == ""} >
                       <AddIcon className="text-dark-600 dark:text-white" />
+                      </button>
                     </Tooltip>
                   }
                   title="make this library to collaborative"
@@ -127,7 +129,7 @@ const Library = React.memo(({ clickHandler }: any) => {
                   clicking on Agree others able to modify the playlist
                 </DialogModal>
                 {/* <AddIcon></AddIcon> */}
-              </button>
+              {/* </button> */}
             </span>
           </div>
         )}
