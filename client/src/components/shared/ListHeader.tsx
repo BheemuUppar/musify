@@ -1,7 +1,4 @@
 import playlistImage from "../../assets/images/playlist.png";
-import { Album } from "../../types/album";
-import { MyPlaylist } from "../../types/MyPlaylist";
-import { Playlist } from "../../types/Playlist";
 
 function ListHeader({ list }:any) {
   return (
@@ -12,8 +9,8 @@ function ListHeader({ list }:any) {
           {list.image && list.image.length > 0 && (
             <img 
               className="rounded" style={{maxHeight:'300px', width: '-webkit-fill-available'}}
-              src={  list.image[0].url != null
-                ? list.image[0].url: list.songs.length>0?list.songs[0].image[2].url: playlistImage}
+              src={  list.image[2].url != null
+                ? list.image[2].url: list.songs.length>0?list.songs[0].image[2].url: playlistImage}
               alt="No image"
             />
           )}
