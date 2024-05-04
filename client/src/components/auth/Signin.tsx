@@ -76,10 +76,14 @@ function Signin() {
         </form>
         <Link to="/signup" className="text-blue-700 underline">click here to register</Link>
       </div>
-      <div className="w-[20%]" style={{fontFamily:"monospace"}}>
-        if you want to test this project please use below credentials
-        <p>username : test@gmail.com</p>
+      <div className="w-[fit-content] max-w-[400px]" style={{fontFamily:"monospace"}}>
+       <pre>
+       if you want to test this project please
+       <br />
+         use below credentials
+        <p >username : test@gmail.com </p>
         <p>password : Test@123</p>
+       </pre>
       </div>
     </div>
    
