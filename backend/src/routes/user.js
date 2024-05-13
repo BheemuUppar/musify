@@ -77,42 +77,28 @@ router.post("/addSongtoPlayList", async (req, res) => {
     console.log(err);
     res.status(500).json({message:"Internal Server Error"})
   }
+});
 
-  // try {
-  //   if (isUserExistBool && isPlayListExistBool) {
-  //     let isSongExist = await isSongExistInPlaylist(
-  //       email,
-  //       playlistId,
-  //       songId
-  //     );
-  //     if (isSongExist) {
-  //       res
-  //         .status(409)
-  //         .json({ message: "song already exist in same playlist" });
-  //       return;
-  //     }
-  //     let response = await Playlist.findOneAndUpdate(
-  //       { email: email, "playList.name": playlistName },
-  //       { $push: { "playList.$.songs": songId } },
-  //       { new: true }
-  //     );
-
-  //     if (response) {
-  //       res
-  //         .status(201)
-  //         .json({ message: "Song added to playlist successfully" });
-  //     } else {
-  //       res.status(400).json({ message: "User not found with the email id" });
-  //     }
-  //   } else {
-  //     throw new Error();
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(500).json({
-  //     message: "something up with the server! please try again after some time",
-  //   });
-  // }
+// remove
+router.post("/removeSongFromPlayList", async (req, res) => {
+  let { songId, playlistId } = req.body;
+  
+  try {
+    let data = await Playlist.findOne({ _id: playlistId }).select("songs");
+    if (data.songs.includes(songId)) {
+      let response = await Playlist.findOneAndUpdate(
+        { _id: playlistId },
+        { $pull: { songs: songId } }
+      );
+      res.status(201).json({ message: "Song removed from the playlist" });
+    } else {
+      res.status(400).json({ message: "Bad request" });
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({message:"Internal Server Error"})
+  }
 });
 
 router.post("/deletePlaylist", async (req, res)=>{

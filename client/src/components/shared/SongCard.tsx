@@ -1,15 +1,42 @@
 import React from "react";
 import { secondsToMinutesSeconds } from "../../utils/utils";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { currentSongAtom, isPlayingAtom } from "../../store/SongState";
 import BasicMenu from "./BasicMenu";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import equilizerImage from "../../assets/images/equaliser-animated-green.gif";
 import { Song } from "../../types/song";
+import DialogModal from "./DialogModal";
+import Tooltip from "@mui/material/Tooltip";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { getLibrary, removeSongFromLibrary } from "../../utils/apiutils";
+import { libraryAtom, snackbarAtom } from "../../store/otherState";
+import {  AxiosResponse } from "axios";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
-const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; song: Song; setCurrentlist:any }) => {
+const SongCard = React.memo(({ index, song, setCurrentlist, playlistId }: { index: number; song: Song; setCurrentlist:any, playlistId?:string }) => {
+  
   const [currentSong, setCurrentSong] = useRecoilState(currentSongAtom);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingAtom);
+  const setSnackbarState = useSetRecoilState(snackbarAtom);
+  const setLibrary = useSetRecoilState(libraryAtom);
+
+  const  showNotification :any = function (props:{severity:string, message:string}){
+    setSnackbarState(props);
+  }
+
+  const confirmHandler = async ()=>{
+    if(playlistId){
+      removeSongFromLibrary(playlistId, song.id).then((response:AxiosResponse)=>{
+        getLibrary().then((data: any) => {
+          setLibrary(data);
+        });
+        showNotification({severity:'success', message:response.data.message})
+      }).catch((error:any)=>{
+        showNotification({severity:'error', message:error.response.data.message})
+      })
+    }
+  }
 
   return (
     <div className=" h-[100px] min-h-[fit-content] mx-1 border dark:border-gray-900 border-gray-400 px-2 py-3 rounded flex items-center my-1 text-sm group dark:hover:bg-dark-600 hover:bg-slate-400 " style={{minWidth:"fit-content"}}>
@@ -69,11 +96,30 @@ const SongCard = React.memo(({ index, song, setCurrentlist }: { index: number; s
           <p className="text-dark-500 dark:text-gray-300" >{secondsToMinutesSeconds(song.duration)}</p>
         </div>
         <div className="invisible group-hover:visible">
-          <BasicMenu className="text-gray-600 dark:text-white " songId={song.id} />
+          <BasicMenu className="text-gray-600 dark:text-white " title="Add to my Playlist" songId={song.id} />
         </div>
+       { playlistId &&
+         <div className="invisible group-hover:visible">
+         <DialogModal
+                   icon={
+                     <Tooltip title="remove">
+                       <RemoveCircleOutlineIcon
+                                  style={{ color: "#e75858" }}
+                                />
+                     </Tooltip>
+                   }
+                   title="Remove from playlist"
+                   confirmHandler={confirmHandler}
+                   NoClickHandler={()=>{}}
+                 >
+                   Are you sure?
+                 </DialogModal>
+         </div>
+       }
       </div>
     </div>
   );
 });
 
 export default SongCard;
+

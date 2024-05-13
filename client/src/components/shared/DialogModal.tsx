@@ -47,7 +47,7 @@ function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clic
           handleClose();
           NoClickHandler()
         }}
-        >Disagree</Button>
+        >No</Button>
         <Button
         onClick={()=>{
           handleClose();
@@ -58,7 +58,7 @@ function DialogModal({icon,title, children, confirmHandler, NoClickHandler, clic
           }
         }} autoFocus
         >
-          Agree
+          Yes
         </Button>
       </DialogActions>
     </Dialog>

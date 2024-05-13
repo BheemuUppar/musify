@@ -30,9 +30,7 @@ function ViewMyPlaylist() {
       showNotification({severity:'error', message:error.response.data.message})
     }
   };
-
-
-  const setCurrentlist = async (index:number)=>{
+   const setCurrentlist = async (index:number)=>{
      setCurrentPlayList({
       songs: state.songs,
       currentSongIndex: index,
@@ -60,7 +58,7 @@ function ViewMyPlaylist() {
         <div></div>
         {state.songs.length > 0 &&
           state.songs.map((song: any, index: number) => {
-            return <SongCard setCurrentlist={setCurrentlist} key={song.id} index={index} song={song} />;
+            return <SongCard setCurrentlist={setCurrentlist} key={song.id} index={index} song={song} playlistId={state?._id ? state._id : undefined} />;
           })}
         {state.songs.length == 0 && <h4>No songs available</h4>}
       </div>

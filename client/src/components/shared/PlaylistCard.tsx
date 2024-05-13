@@ -28,7 +28,7 @@ function PlaylistCard({ playlist, path }: {playlist:Playlist | Album  , path:str
       <Link to={path}>
         <div className="card p-2 rounded w-[204px] h-[258px] drop-shadow-md dark:hover:bg-dark-600 hover:bg-gray-300  ease-in-out group relative">
           <div className="image rounded overflow-hidden">
-            <img src={playlist.image[2].url} alt="" />
+            <img loading="lazy" src={playlist.image[2].url} alt="Thumbnail" />
           </div>
           <div className="text-dark-500 dark:text-white">
             <p className="text-sm ">{playlist.name}</p>

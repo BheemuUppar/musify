@@ -44,7 +44,6 @@ export async function getLibrary() :Promise<MyPlaylist[]> {
 
 export async function addSongtoLibrary(id: string, songId: string):Promise<AxiosResponse> {
   let token = localStorage.getItem('token');
-
   let response = await axios.post(`${userUrl}/addSongtoPlayList`, {
     email: localStorage.getItem("email"),
     playlistId: id,
@@ -56,6 +55,21 @@ export async function addSongtoLibrary(id: string, songId: string):Promise<Axios
   });
   return response;
 }
+// remove song from my playlists
+export async function removeSongFromLibrary(id: string, songId: string):Promise<AxiosResponse> {
+  let token = localStorage.getItem('token');
+  let response = await axios.post(`${userUrl}/removeSongFromPlayList`, {
+    email: localStorage.getItem("email"),
+    playlistId: id,
+    songId: songId,
+  }, {
+    headers:{
+      Authorization:token
+    }
+  });
+  return response;
+}
+
 export async function createPlaylist(
   name: string,
   isCollaborative: boolean,

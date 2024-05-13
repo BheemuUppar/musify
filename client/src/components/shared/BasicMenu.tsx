@@ -7,7 +7,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { libraryAtom, snackbarAtom } from "../../store/otherState";
 import { addSongtoLibrary, getLibrary } from "../../utils/apiutils";
 
-export default function BasicMenu({ songId }: any) {
+export default function BasicMenu({ songId , title}: any) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const library = useRecoilValue(libraryAtom);
   const setLibrary = useSetRecoilState(libraryAtom);
@@ -63,7 +63,8 @@ export default function BasicMenu({ songId }: any) {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
-      >
+      > 
+      <div className="header border-bottom text-lg px-2"> <h2 >{title}</h2></div>
         {library &&
           library.map((ele: any) => {
             return (
